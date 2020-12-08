@@ -19,5 +19,14 @@ function mulaiAPP() {
     liff.login();
   } else {
     body.classList.remove("d-none");
+    liff
+      .getProfile()
+      .then((profile) => {
+        nama.textContent = profile.displayName;
+        fotoProfil.src = pictureUrl;
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   }
 }
