@@ -1,3 +1,4 @@
+body.innerHTML = "";
 ambilApiLIFF("1655324717-zK2NJ5e3");
 
 function ambilApiLIFF(idLiff) {
@@ -16,7 +17,6 @@ function ambilApiLIFF(idLiff) {
 function mulaiAPP() {
   //cek apakah sudah login
   if (!liff.isLoggedIn()) {
-    body.innerHTML = "";
     liff.login();
   } else {
     body.innerHTML = mainHTML;
