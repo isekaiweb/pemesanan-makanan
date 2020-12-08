@@ -1,6 +1,4 @@
-window.onload = () => {
-  ambilApiLIFF("1655324717-zK2NJ5e3");
-};
+ambilApiLIFF("1655324717-zK2NJ5e3");
 
 function ambilApiLIFF(idLiff) {
   liff
