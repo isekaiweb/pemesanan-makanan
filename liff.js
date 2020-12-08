@@ -24,7 +24,7 @@ function mulaiAPP() {
         profilContainer.innerHTML += ` <img src=${profile.pictureUrl}
                                 class="img-fluid rounded-circle d-none"
                                 id="img-profil"
-                                alt="foto profil"
+                                alt=""
                                 />`;
         profilContainer.innerHTML += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
       })
