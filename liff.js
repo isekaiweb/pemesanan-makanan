@@ -21,14 +21,17 @@ function mulaiAPP() {
     liff
       .getProfile()
       .then((profile) => {
-        nama.innerHTML = `Hi, ${profile.displayName}`;
-        fotoProfil.src = profile.pictureUrl;
+        profilContainer += ` <img src = ${profile.pictureUrl}
+                                class="img-fluid rounded-circle d-none"
+                                id="img-profil"
+                                alt=""
+                                />`;
+        profilContainer += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
       })
       .catch((err) => {
         console.log("error", err);
       });
     removeClass(body, "d-none");
-    
   }
 }
 
