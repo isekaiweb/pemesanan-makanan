@@ -18,7 +18,7 @@ function ambilApiLIFF(idLiff) {
 function mulaiAPP() {
   //cek apakah sudah login
   if (!liff.isLoggedIn()) {
-    body.classList.add("d-none");
+    body.style.display = "none";
     liff.login();
   }
 }
