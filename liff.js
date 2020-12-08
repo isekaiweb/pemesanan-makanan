@@ -1,5 +1,4 @@
 window.onload = () => {
-  document.querySelector("body > .container").classList.add("d-none");
   ambilApiLIFF("1655324717-zK2NJ5e3");
 };
 
@@ -21,6 +20,6 @@ function mulaiAPP() {
   if (!liff.isLoggedIn()) {
     liff.login();
   } else {
-    document.querySelector("body > .container").classList.remove("d-none");
+    body.classList.remove("d-none");
   }
 }
