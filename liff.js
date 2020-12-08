@@ -21,10 +21,10 @@ function mulaiAPP() {
     liff
       .getProfile()
       .then((profile) => {
-        profilContainer.innerHTML += ` <img src = ${profile.pictureUrl}
+        profilContainer.innerHTML += ` <img src=${profile.pictureUrl}
                                 class="img-fluid rounded-circle d-none"
                                 id="img-profil"
-                                alt=""
+                                alt="foto profil"
                                 />`;
         profilContainer.innerHTML += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
       })
