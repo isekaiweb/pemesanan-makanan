@@ -18,21 +18,24 @@ function mulaiAPP() {
   if (!liff.isLoggedIn()) {
     liff.login();
   } else {
+    body.innerHTML = mainHTML;
+    const profilContainer = document.querySelector("#profil");
     liff
       .getProfile()
       .then((profile) => {
-        nama.innerHTML = `Hi, ${profile.displayName}`;
-        fotoProfil.src = profile.pictureUrl;
+        profilContainer += `<img src=${profile.pictureUrl}
+        class="img-fluid rounded-circle d-none"
+        id="img-profil"
+        alt=""
+        />`;
+        profilContainer += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
       })
       .catch((err) => {
         console.log("error", err);
       });
-    removeClass(body, "d-none");
-    removeClass(nama, "d-none");
-    removeClass(fotoProfil, "d-none");
   }
 }
 
-function removeClass(el, cls) {
-  el.classList.remove(cls);
-}
+// function removeClass(el, cls) {
+//   el.classList.remove(cls);
+// }

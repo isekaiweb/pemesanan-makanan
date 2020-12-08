@@ -1,3 +1,6 @@
+* {
+  user-select: none;
+}
 .box-makanan {
   border-bottom: #acacac solid 1px;
   height: 14rem;
@@ -69,7 +72,6 @@
   justify-content: start;
 
   bottom: 0;
-
 }
 
 #img-profil {
