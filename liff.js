@@ -21,12 +21,18 @@ function mulaiAPP() {
     liff
       .getProfile()
       .then((profile) => {
-        nama.innerHTML = profile.displayName;
+        nama.innerHTML = `Hi, ${profile.displayName}`;
         fotoProfil.src = profile.pictureUrl;
       })
       .catch((err) => {
         console.log("error", err);
       });
-    body.classList.remove("d-none");
+    removeClass(body, "d-none");
+    removeClass(nama, "d-none");
+    removeClass(fotoProfil, "d-none");
   }
+}
+
+function removeClass(el, cls) {
+  el.classList.remove(cls);
 }
