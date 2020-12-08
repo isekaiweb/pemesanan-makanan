@@ -16,10 +16,10 @@ function ambilApiLIFF(idLiff) {
 function mulaiAPP() {
   //cek apakah sudah login
   if (!liff.isLoggedIn()) {
+    body.innerHTML = "";
     liff.login();
   } else {
     body.innerHTML = mainHTML;
-    const profilContainer = document.querySelector("#profil");
     liff
       .getProfile()
       .then((profile) => {

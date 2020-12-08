@@ -62,5 +62,6 @@ const body = document.querySelector("body"),
   <script src="pesan-makanan.js"></script>
   <script src="liff.js"></script>`;
 
+body.innerHTML = mainHTML;
 
-
+const profilContainer = document.querySelector("#profil");
