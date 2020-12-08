@@ -18,7 +18,6 @@ function mulaiAPP() {
   if (!liff.isLoggedIn()) {
     liff.login();
   } else {
-    body.classList.remove("d-none");
     liff
       .getProfile()
       .then((profile) => {
@@ -28,5 +27,6 @@ function mulaiAPP() {
       .catch((err) => {
         console.log("error", err);
       });
+    body.classList.remove("d-none");
   }
 }
