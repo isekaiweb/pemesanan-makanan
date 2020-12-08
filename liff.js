@@ -1,4 +1,3 @@
-body.innerHTML = "";
 ambilApiLIFF("1655324717-zK2NJ5e3");
 
 function ambilApiLIFF(idLiff) {
@@ -19,23 +18,20 @@ function mulaiAPP() {
   if (!liff.isLoggedIn()) {
     liff.login();
   } else {
-    body.innerHTML = mainHTML;
     liff
       .getProfile()
       .then((profile) => {
-        profilContainer += `<img src=${profile.pictureUrl}
-        class="img-fluid rounded-circle d-none"
-        id="img-profil"
-        alt=""
-        />`;
-        profilContainer += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
+        nama.innerHTML = `Hi, ${profile.displayName}`;
+        fotoProfil.src = profile.pictureUrl;
       })
       .catch((err) => {
         console.log("error", err);
       });
+    removeClass(body, "d-none");
+    
   }
 }
 
-// function removeClass(el, cls) {
-//   el.classList.remove(cls);
-// }
+function removeClass(el, cls) {
+  el.classList.remove(cls);
+}
