@@ -23,7 +23,7 @@ function mulaiAPP() {
       .getProfile()
       .then((profile) => {
         nama.innerHTML = profile.displayName;
-        fotoProfil.src = profil.pictureUrl;
+        fotoProfil.src = profile.pictureUrl;
       })
       .catch((err) => {
         console.log("error", err);
