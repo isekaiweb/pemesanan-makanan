@@ -22,7 +22,7 @@ function mulaiAPP() {
       .getProfile()
       .then((profile) => {
         profilContainer.innerHTML += ` <img src=${profile.pictureUrl}
-                                class="img-fluid rounded-circle d-none"
+                                class="img-fluid rounded-circle"
                                 id="img-profil"
                                 alt="foto profil"
                                 />`;
