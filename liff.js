@@ -22,8 +22,8 @@ function mulaiAPP() {
     liff
       .getProfile()
       .then((profile) => {
-        nama.textContent = profile.displayName;
-        fotoProfil.src = pictureUrl;
+        nama.innerHTML = profile.displayName;
+        fotoProfil.src = profil.pictureUrl;
       })
       .catch((err) => {
         console.log("error", err);
