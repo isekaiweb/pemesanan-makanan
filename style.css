@@ -59,6 +59,7 @@
 .tombol-tambah {
   width: 100%;
   font-weight: bold;
+  box-shadow: 2px 2px 5px #7a7c7e4f;
 }
 
 .quantity {
@@ -193,11 +194,37 @@
     bottom: 0.7rem;
   }
 
+  .quantity {
+    margin: auto;
+    border-left: 0;
+    border-right: 0;
+    text-align: center;
+    padding: 0 0.3rem;
+    font-size: 0.8rem;
+  }
+
+  .tombol-inc,
+  .tombol-dec {
+    font-size: 0.7rem;
+    width: 1.5em;
+    height: 1.5em;
+    padding: 0;
+    margin: auto 0;
+  }
+
+  .tombol-inc:hover {
+    background-color: #62b146d2;
+  }
+
+  .tombol-dec:hover {
+    background-color: #ef3224d2;
+  }
+
   #bg-profil {
     height: 12rem;
   }
 
-  #tombol-tambah {
+  .tombol-tambah {
     width: 100%;
     font-size: 0.6rem;
     text-align: center;

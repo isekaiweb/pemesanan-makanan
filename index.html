@@ -32,7 +32,7 @@
         <div class="keterangan">
           <p class="nama-makanan">Burger Kampung Beef</p>
           <small class="deskripsi">Roti + Telur + Daging Sapi + Sayur</small>
-          <p class="harga">25.000</p>
+          <p class="harga text">25.000</p>
         </div>
         <div class="visual">
           <img
@@ -41,30 +41,61 @@
             class="img-fluid img-jenis text-dark"
           />
           <div class="tombol">
+            <button class="btn btn-outline-success tombol-tambah">
+              Tambah
+            </button>
+
             <button
-              class="tombol-dec font-weight-bolder text-light rounded-circle"
+              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
             >
               &minus;
             </button>
-            <span class="quantity text-dark">0</span>
+            <span class="quantity text-dark d-none"></span>
             <button
-              class="tombol-inc font-weight-bolder text-light rounded-circle"
+              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
             >
               &plus;
             </button>
-
-            <!-- <button class="btn btn-outline-primary tombol-tambah">
+          </div>
+        </div>
+      </div>
+      <div class="row box-makanan">
+        <div class="keterangan">
+          <p class="nama-makanan">Potato Chrunch</p>
+          <small class="deskripsi">Kentang + Mayones + Saus</small>
+          <p class="harga text">23.000</p>
+        </div>
+        <div class="visual">
+          <img
+            src="https://cdn0-production-images-kly.akamaized.net/oIN3wVed8tEnm39rmcJtHo7D0eA=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/970871/original/021248500_1440846143-header_chiantilvpa_com.jpg"
+            alt=""
+            class="img-fluid img-jenis text-dark"
+          />
+          <div class="tombol">
+            <button class="btn btn-outline-success tombol-tambah">
               Tambah
-            </button> -->
+            </button>
+
+            <button
+              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
+            >
+              &minus;
+            </button>
+            <span class="quantity text-dark d-none"></span>
+            <button
+              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
+            >
+              &plus;
+            </button>
           </div>
         </div>
       </div>
 
       <button
-        class="btn rounded btn-primary rounded-circle d-none"
+        class="btn rounded btn-info rounded-circle d-none"
         id="tombol-browser"
       >
-        <ion-icon name="browsers-outline"></ion-icon>
+        <ion-icon name="open-outline"></ion-icon>
       </button>
     </div>
 
