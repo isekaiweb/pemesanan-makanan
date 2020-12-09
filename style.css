@@ -11,10 +11,15 @@
   border-bottom: #e7e8e9 solid 1px;
   margin-bottom: 1rem;
   height: 10rem;
+  cursor: pointer;
+  position: relative;
+
+  overflow: hidden;
 }
 
 .keterangan {
   width: 80%;
+  padding-left: 0.3em;
 }
 
 .nama-makanan {
@@ -73,28 +78,12 @@
   font-weight: 500;
 }
 
-.tombol-inc {
+.tombol-inc,
+.tombol-dec {
   font-size: 1em;
   width: 2em;
   height: 2em;
-  background-color: #62b146d2;
   border: 0;
-}
-.tombol-inc:hover {
-  background-color: #62b146e0;
-}
-
-.tombol-dec {
-  font-size: 1rem;
-  width: 2em;
-  height: 2em;
-
-  background-color: #ef3224d2;
-  border: none;
-}
-
-.tombol-dec:hover {
-  background-color: #ef3224e5;
 }
 
 #tombol-browser {
@@ -261,4 +250,28 @@ input:focus,
   outline: none !important;
   outline-offset: none !important;
   box-shadow: none !important;
+}
+
+.effect {
+  background-color: #efefef;
+  border-radius: 50%;
+  pointer-events: none;
+
+  position: absolute;
+
+  z-index: -1;
+  top: 0;
+  width: 20px;
+  height: 20px;
+
+  transform: scale(0);
+
+  animation: ripple 1.9s;
+}
+
+@keyframes ripple {
+  100% {
+    transform: scale(550);
+    opacity: 0;
+  }
 }
