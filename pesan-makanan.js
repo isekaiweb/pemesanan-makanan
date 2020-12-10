@@ -3,6 +3,24 @@ const openBrowser = document.querySelector("#tombol-browser"),
   profilContainer = document.querySelector("#profil"),
   boxMakanan = document.querySelectorAll(".box-makanan");
 
+const modal = document.createElement("div");
+modal.classList = "close-modal d-none";
+modal.setAttribute("id", "container-modal");
+modal.innerHTML = `
+<div id="field-content" class="container close-modal d-none">
+<div class="bg-white modal-change-size" id="main-modal">
+  <div>
+    <hr class="close-modal" />
+    <img src="" class="img-fluid rounded" alt="" />
+    <p id="judul"></p>
+    <small id="deskripsi"></small>
+    <p id="harga"></p>
+  </div>
+  <button class="btn btn-success close-modal">Tambah pesanan</button>
+</div>
+</div>
+  `;
+
 // fungsi untuk penambahan quantity
 document.querySelectorAll(".tombol-tambah").forEach((e) =>
   e.addEventListener("click", function () {
@@ -38,7 +56,7 @@ function changeDisplay(children) {
 }
 
 // fungsi bagian modal
-const mainModal = document.querySelector("#main-modal");
+const mainModal = modal.children[0].children[0];
 let st, mv;
 
 mainModal.addEventListener("touchstart", function (start) {
@@ -50,35 +68,46 @@ mainModal.addEventListener("touchstart", function (start) {
 
 mainModal.addEventListener("touchend", () => {
   if (st + 50 < mv) {
-    toggleModal();
+    closeModal();
   }
 });
 
-function toggleModal() {
-  if (mainModal.parentElement.classList.contains("d-none")) {
-    mainModal.parentElement.classList.toggle("d-none");
-    mainModal.parentElement.parentElement.classList.toggle("d-none");
+let open = false;
+function openModal() {
+  mainModal.parentElement.classList.remove("d-none");
+  mainModal.parentElement.parentElement.classList.remove("d-none");
+
+  body.appendChild(modal);
+
+  setTimeout(() => {
+    mainModal.classList.remove("modal-change-size");
+    open = true;
+  }, 60);
+}
+
+function closeModal() {
+  if (
+    mainModal.clientHeight ==
+    Math.floor(mainModal.parentElement.clientHeight * 0.9)
+  ) {
+    mainModal.classList.add("modal-change-size");
     setTimeout(() => {
-      body.classList.toggle("overflow-hidden");
-      mainModal.classList.toggle("modal-change-size");
-    }, 0);
-  } else {
-    mainModal.classList.toggle("modal-change-size");
-    setTimeout(() => {
-      body.classList.toggle("overflow-hidden");
-      mainModal.parentElement.classList.toggle("d-none");
-      mainModal.parentElement.parentElement.classList.toggle("d-none");
+      body.classList.remove("overflow-hidden");
+      mainModal.parentElement.classList.add("d-none");
+      mainModal.parentElement.parentElement.classList.add("d-none");
+      body.removeChild(modal);
     }, 500);
   }
 }
 
 mainModal.parentElement.parentElement.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("dont-close")) toggleModal();
+  if (e.target.classList.contains("close-modal")) closeModal();
 });
 
 boxMakanan.forEach((box) => {
   box.addEventListener("click", function (e) {
     // animasi ketika box makanan diklik
+
     let effect = document.createElement("span"),
       pos = getPosition(this);
     effect.classList.add("effect");
@@ -115,6 +144,8 @@ boxMakanan.forEach((box) => {
     mainModal.children[0].children[3].textContent = this.children[0].children[1].textContent;
     mainModal.children[0].children[4].textContent = this.children[0].children[2].textContent;
 
-    toggleModal();
+    if (!e.target.parentElement.classList.contains("tombol")) {
+      openModal();
+    }
   });
 });
