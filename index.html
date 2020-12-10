@@ -21,14 +21,20 @@
   </head>
   <body>
     <div class="container px-4">
+      <!-- bagian profil -->
       <div
         class="row container-profil position-relative justify-content-center"
       >
         <div class="row" id="bg-profil"></div>
         <div class="d-flex" id="profil"></div>
       </div>
-      <p class="row jenis">Makanan</p>
-      <div class="row box-makanan">
+
+      <!-- bagian makanan -->
+      <p class="row jenis">
+        Makanan
+        <ion-icon name="pizza-outline"></ion-icon>
+      </p>
+      <div class="row box-makanan mb-2">
         <div class="keterangan">
           <p class="nama-makanan">Burger Kampung Beef</p>
           <small class="deskripsi">Roti + Telur + Daging Sapi + Sayur</small>
@@ -36,8 +42,8 @@
         </div>
         <div class="visual">
           <img
-            src="https://img-global.cpcdn.com/recipes/4bff3e772a0448ad/751x532cq70/burger-kampung-foto-resep-utama.jpg"
-            alt=""
+            src="https://mlrrylhwpejg.i.optimole.com/J80nZ28-Ycc-iAzP/w:auto/h:auto/q:90/https://grillongrillaction.com/wp-content/uploads/2020/06/bacon-brisket-burger.jpg"
+            alt="burger beef"
             class="img-fluid img-jenis text-dark"
           />
           <div class="tombol">
@@ -92,13 +98,93 @@
       </div>
 
       <button
-        class="btn rounded btn-info   rounded-circle d-none"
+        class="btn rounded btn-info rounded-circle d-none"
         id="tombol-browser"
       >
-        <ion-icon name="open-outline" ></ion-icon>
+        <ion-icon name="open-outline"></ion-icon>
+      </button>
+
+      <!-- bagian minuman -->
+      <p class="row jenis">Minuman<ion-icon name="beer-outline"></ion-icon></p>
+      <div class="row box-makanan mb-2">
+        <div class="keterangan">
+          <p class="nama-makanan">Milkshake</p>
+          <small class="deskripsi">Soda + es + Susu</small>
+          <p class="harga text">17.900</p>
+        </div>
+        <div class="visual">
+          <img
+            src="https://i2.wp.com/www.eatthis.com/wp-content/uploads/2020/01/how-to-make-a-milkshake-5.jpg?fit=1200%2C879&ssl=1"
+            alt="milk soda"
+            class="img-fluid img-jenis text-dark"
+          />
+          <div class="tombol">
+            <button class="btn btn-outline-success tombol-tambah">
+              Tambah
+            </button>
+
+            <button
+              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
+            >
+              &minus;
+            </button>
+            <span class="quantity text-dark d-none"></span>
+            <button
+              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
+            >
+              &plus;
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row box-makanan">
+        <div class="keterangan">
+          <p class="nama-makanan">Ice Cream and Hot Chocolate Powder</p>
+          <small class="deskripsi">Ice Cream + Coklat </small>
+          <p class="harga text">22.500</p>
+        </div>
+        <div class="visual">
+          <img
+            src="https://www.melskitchencafe.com/wp-content/uploads/frozen-hot-chocolate3.jpg"
+            alt="ice chocolate"
+            class="img-fluid img-jenis text-dark"
+          />
+          <div class="tombol">
+            <button class="btn btn-outline-success tombol-tambah">
+              Tambah
+            </button>
+
+            <button
+              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
+            >
+              &minus;
+            </button>
+            <span class="quantity text-dark d-none"></span>
+            <button
+              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
+            >
+              &plus;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="btn rounded btn-success d-none rounded-circle"
+        id="tombol-browser"
+      >
+        <ion-icon name="open-outline"></ion-icon>
       </button>
     </div>
 
+    <!-- bgaian modal -->
+    <div id="container-modal">
+      <div id="field-content" class="container">
+        <div class="bg-white" id="main-modal">
+          <hr />
+        </div>
+      </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script

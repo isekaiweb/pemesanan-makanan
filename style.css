@@ -5,12 +5,18 @@
   font-size: 3rem;
   font-weight: 700;
   border-bottom: #e7e8e9 dotted 2px;
+  text-indent: -0.06em;
+  color: #28a745;
+}
+
+.jenis ion-icon {
+  margin: auto 0;
 }
 
 .box-makanan {
   border-bottom: #e7e8e9 solid 1px;
   margin-bottom: 1rem;
-  height: 10rem;
+  height: 10em;
   cursor: pointer;
   position: relative;
 
@@ -19,7 +25,9 @@
 
 .keterangan {
   width: 80%;
-  padding-left: 0.3em;
+  padding-left: 0.4em;
+
+  transition: box-shadow 200ms ease-in;
 }
 
 .nama-makanan {
@@ -72,7 +80,7 @@
   border-left: 0;
   border-right: 0;
   text-align: center;
-  padding: 0 0.3rem;
+  padding: 0 0.3em;
   font-size: 1.3rem;
 
   font-weight: 500;
@@ -80,21 +88,25 @@
 
 .tombol-inc,
 .tombol-dec {
-  font-size: 1em;
+  font-size: 1rem;
   width: 2em;
   height: 2em;
   border: 0;
+  padding: 0;
+
+  line-height: 2em;
 }
 
 #tombol-browser {
-  width: 4rem;
-  height: 4rem;
-  font-size: 2.2rem;
+  width: 2em;
+  height: 2em;
+  font-size: 2rem;
   position: fixed;
 
-  padding: 0.5rem;
-  right: 1em;
-  bottom: 1em;
+  line-height: 1.8em;
+
+  right: 0.8rem;
+  bottom: 1.5rem;
 }
 
 /* bagian profil */
@@ -139,13 +151,58 @@
   word-break: break-all;
 }
 
+/* bagian modal */
+#container-modal {
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  position: fixed;
+  background-color: #21232586;
+
+  transition: 100ms ease-out;
+}
+
+#field-content {
+  height: 100%;
+  margin: 0 auto;
+  bottom: 0;
+  position: relative;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+#main-modal {
+  position: absolute;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 1em;
+  bottom: 0;
+  height: 70%;
+  width: 100%;
+
+  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
+}
+
+#main-modal > hr {
+  height: 0.6vmax;
+  border: none;
+  background: #d8d7d7;
+  border-radius: 0.3em;
+  width: 9vmin;
+}
+
+.modal-change-size {
+  height: 0 !important;
+}
+
 @media (max-width: 599px) {
   .jenis {
     font-size: 1.8rem;
   }
 
   .box-makanan {
-    height: 6.5rem;
+    height: 7.2rem;
   }
 
   .keterangan {
@@ -157,7 +214,7 @@
   }
 
   .deskripsi {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 
   .harga {
@@ -210,13 +267,13 @@
   }
 
   #tombol-browser {
-    width: 2.8rem;
-    height: 2.8rem;
+    width: 2em;
+    height: 2em;
     font-size: 1.5rem;
 
-    padding: 0.3rem;
-    right: 0.2em;
-    bottom: 1em;
+    line-height: 1.6em;
+    right: 0.05em;
+    bottom: 2em;
   }
 
   /* bagian profil */

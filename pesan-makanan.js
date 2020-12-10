@@ -3,12 +3,13 @@ const openBrowser = document.querySelector("#tombol-browser"),
   profilContainer = document.querySelector("#profil"),
   boxMakanan = document.querySelectorAll(".box-makanan");
 
+// fungsi untuk penambahan quantity
 document.querySelectorAll(".tombol-tambah").forEach((e) =>
   e.addEventListener("click", function () {
     changeDisplay(this.parentElement.children);
     this.parentElement.children[2].textContent = 1;
     this.parentElement.parentElement.previousElementSibling.style.boxShadow =
-      "-0.2em 0  #28a745";
+      "inset 0.2em 0  #28a745";
   })
 );
 
@@ -36,6 +37,7 @@ function changeDisplay(children) {
   Array.from(children).forEach((e) => e.classList.toggle("d-none"));
 }
 
+// animasi ketika box makanan diklik
 boxMakanan.forEach((box) => {
   box.addEventListener("click", function (e) {
     let effect = document.createElement("span"),
@@ -70,3 +72,28 @@ boxMakanan.forEach((box) => {
     }
   });
 });
+
+// fungsi bagian modal
+const mainModal = document.querySelector("#main-modal");
+let st, mv;
+
+mainModal.addEventListener("touchstart", function (start) {
+  st = start.touches[0].clientY;
+  this.addEventListener("touchmove", (mvs) => {
+    mv = mvs.touches[0].clientY;
+  });
+});
+
+mainModal.addEventListener("touchend", () => {
+  if (st + 10 < mv) {
+    console.log("down");
+    closeModal();
+  }
+});
+
+function closeModal() {
+  mainModal.classList.add("modal-change-size");
+  setTimeout(() => {
+    mainModal.parentElement.parentElement.style.cssText = "display:none";
+  }, 500);
+}
