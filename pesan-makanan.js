@@ -49,7 +49,7 @@ mainModal.addEventListener("touchstart", function (start) {
 });
 
 mainModal.addEventListener("touchend", () => {
-  if (st + 10 < mv) {
+  if (st + 50 < mv) {
     toggleModal();
   }
 });
