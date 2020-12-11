@@ -6,20 +6,28 @@ const openBrowser = document.querySelector("#tombol-browser"),
 const modal = document.createElement("div");
 modal.classList = "close-modal d-none";
 modal.setAttribute("id", "container-modal");
-modal.innerHTML = `
-<div id="field-content" class="container close-modal d-none">
-<div class="bg-white modal-change-size" id="main-modal">
-  <div>
-    <hr class="close-modal" />
-    <img src="" class="img-fluid rounded" alt="" />
-    <p id="judul"></p>
-    <small id="deskripsi"></small>
-    <p id="harga"></p>
-  </div>
-  <button class="btn btn-success close-modal">Tambah pesanan</button>
-</div>
-</div>
-  `;
+modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
+                    <div class="bg-white modal-change-size" id="main-modal">
+
+                      <div class="rounded">
+                        <hr class="close-modal" />
+                        <img src="" class="img-fluid rounded" alt="" />
+                      </div>
+
+                      <div>
+                        <p id="judul"></p>
+                        <div>
+                          <small id="deskripsi"></small>  
+                          <p id="harga"></p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <button class="btn btn-success close-modal">Tambah pesanan</button>
+                      </div>
+                      
+                    </div>
+                  </div>`;
 
 // fungsi untuk penambahan quantity
 document.querySelectorAll(".tombol-tambah").forEach((e) =>
@@ -77,12 +85,14 @@ function openModal() {
   mainModal.parentElement.classList.remove("d-none");
   mainModal.parentElement.parentElement.classList.remove("d-none");
 
-  body.appendChild(modal);
+  setTimeout(() => {
+    body.appendChild(modal);
+  }, 100);
 
   setTimeout(() => {
     mainModal.classList.remove("modal-change-size");
     open = true;
-  }, 60);
+  }, 160);
 }
 
 function closeModal() {
@@ -140,9 +150,9 @@ boxMakanan.forEach((box) => {
     }
 
     mainModal.children[0].children[1].src = this.children[1].children[0].src;
-    mainModal.children[0].children[2].textContent = this.children[0].children[0].textContent;
-    mainModal.children[0].children[3].textContent = this.children[0].children[1].textContent;
-    mainModal.children[0].children[4].textContent = this.children[0].children[2].textContent;
+    mainModal.children[1].children[0].textContent = this.children[0].children[0].textContent;
+    mainModal.children[1].children[1].children[0].textContent = this.children[0].children[1].textContent;
+    mainModal.children[1].children[1].children[1].textContent = this.children[0].children[2].textContent;
 
     if (!e.target.parentElement.classList.contains("tombol")) {
       openModal();
