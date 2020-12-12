@@ -13,6 +13,10 @@
   margin: auto 0;
 }
 
+body > .container {
+  padding-bottom: 5em;
+}
+
 .box-makanan {
   border-bottom: #e7e8e9 solid 1px;
   margin-bottom: 1rem;
@@ -37,6 +41,7 @@
 }
 
 .deskripsi {
+  font-size: 1rem;
   font-style: italic;
   color: #acacac;
 }
@@ -185,6 +190,7 @@
   padding: 0 5vmin;
   transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 
+ 
   display: flex;
   flex-direction: column;
 }
@@ -270,7 +276,59 @@
   font-weight: bold;
 }
 
+/* bagian pesanan */
+#float-btn-pesanan {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
+}
+
+#float-btn-pesanan > div > button {
+  font-size: 3.4vmin;
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  margin: 0 auto 1rem auto;
+}
+
+#float-btn-pesanan > div > button > p {
+  font-size: 1.2em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  padding: 0.2em 0;
+
+  justify-content: flex-end;
+}
+
+#float-btn-pesanan > div > button > p > span:nth-of-type(1) {
+  width: 40%;
+  text-align-last: left;
+
+  padding: 0 0.5em;
+}
+
+#float-btn-pesanan > div > button > p > span:nth-of-type(2) {
+  width: 65%;
+  text-align: right;
+  margin-right: 0.2em;
+}
+
+#float-btn-pesanan > div > button svg {
+  margin: auto;
+  display: block;
+  width: 1.3em;
+}
+
 @media (max-width: 599px) {
+  body > .container {
+    padding-bottom: 2em;
+  }
   .jenis {
     font-size: 1.8rem;
   }
@@ -372,8 +430,13 @@
 
     font-size: 1rem;
   }
-}
 
+  /* pesanan */
+  #float-btn-pesanan > div > button {
+    width: 97%;
+    margin-bottom: 0.5em;
+  }
+}
 button:focus,
 textarea:focus,
 input:focus,
@@ -384,7 +447,7 @@ input:focus,
 }
 
 .effect {
-  background-color: #efefef;
+  background-color: #e7e8e9;
   border-radius: 50%;
   pointer-events: none;
 
