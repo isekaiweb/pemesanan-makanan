@@ -173,10 +173,13 @@ let st, mv;
 
 mainModal.addEventListener("touchstart", function (start) {
   st = start.touches[0].clientY;
+  timer = 200;
   let touchPress = setInterval(() => {
+      if(timer < 0){
       closeModal();
-      clearInterval(touchPress);
-  }, 200);
+      clearInterval(touchPress);}
+      timer--;
+  },1);
 
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].clientY;
@@ -210,7 +213,6 @@ function detectMob() {
 function disableScroll() {
   if (detectMob()) {
     body.classList.add("overflow-hidden");
-    alert("uwak");
   } else {
     let yScroll = window.scrollY;
     window.onscroll = () => {
