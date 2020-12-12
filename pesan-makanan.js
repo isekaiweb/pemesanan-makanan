@@ -176,6 +176,7 @@ mainModal.addEventListener("touchstart", function (start) {
   st = start.touches[0].clientY;
   let touchPress = setInterval(() => {
     timeDurationTouch--;
+    console.log(timeDurationTouch);
   }, 1);
   if (touchPress < 0) {
     alert("touchPress");
@@ -213,7 +214,7 @@ function detectMob() {
 function disableScroll() {
   if (detectMob()) {
     body.classList.add("overflow-hidden");
-    alert("mobile");
+    alert("uwak");
   } else {
     let yScroll = window.scrollY;
     window.onscroll = () => {
