@@ -178,7 +178,7 @@ mainModal.addEventListener("touchstart", function (start) {
     timeDurationTouch--;
     console.log(timeDurationTouch);
   }, 1);
-  if (touchPress < 0) {
+  if (timeDurationTouch < 0) {
     alert("touchPress");
     closeModal();
   }
