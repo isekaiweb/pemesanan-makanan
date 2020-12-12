@@ -185,17 +185,24 @@ mainModal.addEventListener("touchend", () => {
 });
 
 function disableScroll() {
-  let yScroll = window.scrollY;
-  window.onscroll = () => {
-    window.scrollTo(0, yScroll);
-  };
+  if (detectMob()) {
+    body.classList.add("overflow-hidden");
+  } else {
+    let yScroll = window.scrollY;
+    window.onscroll = () => {
+      window.scrollTo(0, yScroll);
+    };
+  }
 }
 
 function enableScroll() {
-  console.log(window.scrollY);
-  window.onscroll = () => {
-    return;
-  };
+  if (detectMob()) {
+    body.classList.remove("overflow-hidden");
+  } else {
+    window.onscroll = () => {
+      return;
+    };
+  }
 }
 
 function openModal() {
@@ -310,3 +317,18 @@ window.addEventListener(
 //     elm.style.removeProperty(p);
 //   });
 // }
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
