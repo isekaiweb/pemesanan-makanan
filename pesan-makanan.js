@@ -93,21 +93,13 @@ let cetakJmlPesanan = () => {
     }, 500);
   } else {
 
-   if(mainModal.clientHeight > 0)
-    {   
-    containerFloatBtnPesanan.style.bottom = "-7em";    
-    }
-   else{
-     containerFloatBtnPesanan.style.bottom = "0";
-    }
     if(body.querySelector("#float-btn-pesanan") == null){
        document.querySelector("body > .container").insertAdjacentElement("afterend", containerFloatBtnPesanan);
         containerFloatBtnPesanan.style.bottom = "-7em";
-      
 
-    setTimeout(() => {
-      containerFloatBtnPesanan.style.bottom = "0";
-    }, 0);
+       setTimeout(() => {
+          containerFloatBtnPesanan.style.bottom = "0";
+       }, 0);
     }
   }
 };
@@ -120,6 +112,8 @@ let update = (namaMakanan, qty) => {
   });
   cetakJmlPesanan();
 };
+
+
 
 // fungsi untuk penambahan quantity
 document.querySelectorAll(".tombol-tambah").forEach((e) =>
@@ -238,6 +232,7 @@ function enableScroll() {
 }
 
 function openModal() {
+  containerFloatBtnPesanan.style.bottom = "-7em";
   mainModal.parentElement.classList.remove("d-none");
   mainModal.parentElement.parentElement.classList.remove("d-none");
   disableScroll();
@@ -265,6 +260,7 @@ function closeModal() {
     }, 500);
 
     setTimeout(() => {
+      containerFloatBtnPesanan.style.bottom = "0";
       enableScroll();
     }, 560);
   }
