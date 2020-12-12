@@ -178,11 +178,15 @@ mainModal.addEventListener("touchstart", function (start) {
     timeDurationTouch--;
     console.log(timeDurationTouch);
   }, 1);
-  if (timeDurationTouch < 0) {
-    alert("touchPress");
-    closeModal();
-    clearInterval(touchPress);
-  }
+
+  setTimeout(() => {
+    if (timeDurationTouch < 0) {
+      alert("touchPress");
+      closeModal();
+      clearInterval(touchPress);
+    }
+  }, 500);
+
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].clientY;
     clearInterval(touchPress);
