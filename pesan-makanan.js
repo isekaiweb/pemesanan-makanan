@@ -92,15 +92,23 @@ let cetakJmlPesanan = () => {
       body.removeChild(containerFloatBtnPesanan);
     }, 500);
   } else {
-    containerFloatBtnPesanan.style.bottom = "0";
+
+   if(mainModal.clientHeight > 0)
+    {   
+    containerFloatBtnPesanan.style.bottom = "-7em";    
+    }
+   else{
+     containerFloatBtnPesanan.style.bottom = "0";
+    }
     if(body.querySelector("#float-btn-pesanan") == null){
        document.querySelector("body > .container").insertAdjacentElement("afterend", containerFloatBtnPesanan);
         containerFloatBtnPesanan.style.bottom = "-7em";
-      }
+      
 
     setTimeout(() => {
       containerFloatBtnPesanan.style.bottom = "0";
     }, 0);
+    }
   }
 };
 
@@ -230,7 +238,6 @@ function enableScroll() {
 }
 
 function openModal() {
-  containerFloatBtnPesanan.style.bottom = "-7em";
   mainModal.parentElement.classList.remove("d-none");
   mainModal.parentElement.parentElement.classList.remove("d-none");
   disableScroll();
@@ -258,7 +265,6 @@ function closeModal() {
     }, 500);
 
     setTimeout(() => {
-      containerFloatBtnPesanan.style.bottom = "0";
       enableScroll();
     }, 560);
   }
