@@ -172,9 +172,18 @@ const mainModal = modal.children[0].children[0];
 let st, mv;
 
 mainModal.addEventListener("touchstart", function (start) {
+  let timeDurationTouch = 500;
   st = start.touches[0].clientY;
+  let touchPress = setInterval(() => {
+    timeDurationTouch--;
+  }, 1);
+  if (touchPress < 0) {
+    alert("touchPress");
+    closeModal();
+  }
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].clientY;
+    clearInterval(touchPress);
   });
 });
 
