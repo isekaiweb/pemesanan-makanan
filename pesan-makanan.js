@@ -177,6 +177,7 @@ mainModal.addEventListener("touchstart", function (start) {
   let touchPress = setInterval(() => {
     timeDurationTouch--;
     console.log(timeDurationTouch);
+    clearInterval(touchPress);
   }, 1);
   if (timeDurationTouch < 0) {
     alert("touchPress");
