@@ -248,8 +248,7 @@ function openModal() {
 
 function closeModal() {
   if (
-    mainModal.clientHeight ==
-    Math.floor(mainModal.parentElement.clientHeight * 0.9)
+    !mainModal.classList.contains("modal-change-size")
   ) {
     mainModal.classList.add("modal-change-size");
     setTimeout(() => {
