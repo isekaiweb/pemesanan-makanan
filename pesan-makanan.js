@@ -250,7 +250,7 @@ boxMakanan.forEach((box) => {
 
     if (!e.target.parentElement.classList.contains("tombol")) {
       this.appendChild(effect);
-      // openModal();
+      openModal();
 
       setTimeout(() => {
         this.removeChild(effect);
