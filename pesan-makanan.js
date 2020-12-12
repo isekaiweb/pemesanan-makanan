@@ -93,13 +93,13 @@ let cetakJmlPesanan = () => {
     }, 500);
   } else {
     containerFloatBtnPesanan.style.bottom =
-      body.querySelector("#float-btn-pesanan") != null &&
-      modal.classList.contains("d-none")
-        ? "0"
-        : "-7em";
-    document
-      .querySelector("body > .container")
-      .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+    if(body.querySelector("#float-btn-pesanan") == null){
+       document
+        .querySelector("body > .container")
+        .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+        containerFloatBtnPesanan.style.bottom = "-7em";
+      }
+
     setTimeout(() => {
       containerFloatBtnPesanan.style.bottom = "0";
     }, 0);
@@ -260,6 +260,7 @@ function closeModal() {
     }, 500);
 
     setTimeout(() => {
+      containerFloatBtnPesanan.style.bottom = "0";
       enableScroll();
     }, 560);
   }
