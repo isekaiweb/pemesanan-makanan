@@ -244,12 +244,17 @@ function openModal() {
   setTimeout(() => {
     mainModal.classList.remove("modal-change-size");
   }, 160);
+
+  setTimeout(() => {
+    mainModal.classList.add("close-now");
+  }, 700);
 }
 
 function closeModal() {
   if (
-    !mainModal.classList.contains("modal-change-size")
+    mainModal.classList.contains("close-now")
   ) {
+    mainModal.classList.remove("close-now");
     mainModal.classList.add("modal-change-size");
     setTimeout(() => {
       mainModal.parentElement.classList.add("d-none");
