@@ -92,11 +92,9 @@ let cetakJmlPesanan = () => {
       body.removeChild(containerFloatBtnPesanan);
     }, 500);
   } else {
-    containerFloatBtnPesanan.style.bottom =
+    containerFloatBtnPesanan.style.bottom = "0";
     if(body.querySelector("#float-btn-pesanan") == null){
-       document
-        .querySelector("body > .container")
-        .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+       document.querySelector("body > .container").insertAdjacentElement("afterend", containerFloatBtnPesanan);
         containerFloatBtnPesanan.style.bottom = "-7em";
       }
 
