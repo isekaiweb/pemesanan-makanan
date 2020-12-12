@@ -204,6 +204,7 @@ function detectMob() {
 function disableScroll() {
   if (detectMob()) {
     body.classList.add("overflow-hidden");
+    alert("mobile");
   } else {
     let yScroll = window.scrollY;
     window.onscroll = () => {
