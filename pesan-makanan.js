@@ -252,7 +252,6 @@ function closeModal() {
     Math.floor(mainModal.parentElement.clientHeight * 0.9)
   ) {
     mainModal.classList.add("modal-change-size");
-    containerFloatBtnPesanan.style.bottom = "0";
     setTimeout(() => {
       mainModal.parentElement.classList.add("d-none");
       mainModal.parentElement.parentElement.classList.add("d-none");
@@ -260,6 +259,7 @@ function closeModal() {
     }, 500);
 
     setTimeout(() => {
+      containerFloatBtnPesanan.style.bottom = "0";
       enableScroll();
     }, 560);
   }
