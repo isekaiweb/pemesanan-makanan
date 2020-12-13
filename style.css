@@ -61,7 +61,7 @@ body > .container {
   width: 7em;
   position: absolute;
   right: 0;
-  border-radius: 5px;
+  border-radius: 4px;
 
   cursor: pointer;
 }
@@ -77,7 +77,12 @@ body > .container {
 
 .tombol-tambah {
   width: 100%;
+  height: 2.5em;
   font-weight: bold;
+  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
+  margin: 0 auto;
+
+  border-radius: 4px;
 }
 
 .quantity {
@@ -162,7 +167,6 @@ body > .container {
   height: 100%;
   bottom: 0;
   position: fixed;
-  background-color: #21232586;
 
   transition: 100ms ease-out;
 }
@@ -188,9 +192,10 @@ body > .container {
   width: 100%;
   font-size: 4vmin;
   padding: 0 5vmin;
+
+  box-shadow: 0 0 5px #cccc;
   transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 
- 
   display: flex;
   flex-direction: column;
 }
@@ -202,6 +207,7 @@ body > .container {
 #main-modal > div:nth-of-type(1) {
   height: 70%;
   justify-content: space-between;
+  border-radius: 4px;
 }
 
 #main-modal > div:nth-of-type(2) {
@@ -244,6 +250,8 @@ body > .container {
   height: 100%;
   margin: 0 auto;
   display: block;
+
+  border-radius: 4px;
 }
 
 #main-modal #judul {
@@ -274,6 +282,8 @@ body > .container {
   width: 100%;
   font-size: 1em;
   font-weight: bold;
+  border-radius: 4px;
+  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 }
 
 /* bagian pesanan */
@@ -281,7 +291,6 @@ body > .container {
   position: fixed;
   bottom: 0;
   width: 100%;
-
   transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 }
 
@@ -289,9 +298,10 @@ body > .container {
   font-size: 3.4vmin;
   display: flex;
   justify-content: space-between;
-
   width: 100%;
-  margin: 0 auto 1rem auto;
+  border-radius: 4px;
+  margin: 0 auto 1.5rem auto;
+  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 }
 
 #float-btn-pesanan > div > button > p {
@@ -301,28 +311,25 @@ body > .container {
   align-items: center;
   width: 100%;
 
-  padding: 0.2em 0;
-
+  padding: 0.2em 0.5em;
   justify-content: flex-end;
 }
 
 #float-btn-pesanan > div > button > p > span:nth-of-type(1) {
-  width: 40%;
+  width: 35%;
   text-align-last: left;
-
-  padding: 0 0.5em;
 }
 
 #float-btn-pesanan > div > button > p > span:nth-of-type(2) {
   width: 65%;
   text-align: right;
-  margin-right: 0.2em;
 }
 
-#float-btn-pesanan > div > button svg {
+#float-btn-pesanan > div > button ion-icon {
   margin: auto;
   display: block;
-  width: 1.3em;
+
+  font-size: 1.2em;
 }
 
 @media (max-width: 599px) {
@@ -396,6 +403,12 @@ body > .container {
     font-size: 0.8rem;
     text-align: center;
     padding: 2px 0;
+    height: 2.3em;
+  }
+
+  .btn-click-animation {
+    width: 80%;
+    font-size: 0.7rem;
   }
 
   #tombol-browser {
@@ -429,12 +442,6 @@ body > .container {
     margin-right: 0;
 
     font-size: 1rem;
-  }
-
-  /* pesanan */
-  #float-btn-pesanan > div > button {
-    width: 97%;
-    margin-bottom: 0.5em;
   }
 }
 button:focus,

@@ -6,23 +6,13 @@ const openBrowser = document.querySelector("#tombol-browser"),
   modal = document.createElement("div");
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
-containerFloatBtnPesanan.innerHTML = `<div class="container p-0">
+containerFloatBtnPesanan.innerHTML = `<div class="container px-2">
                       <button class="btn-success btn">
                         <p class="m-0">
-                          <span></span><span></span
-                          ><span>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="currentColor"
-                              class="bi bi-bag-check-fill"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M5.5 3.5a2.5 2.5 0 0 1 5 0V4h-5v-.5zm6 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"
-                              />
-                            </svg>
-                          </span>
+                  
+                        <span></span>
+                        <span></span
+                          >
                         </p>
                       </button>
                       </div>`;
@@ -32,9 +22,9 @@ modal.setAttribute("id", "container-modal");
 modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                     <div class="bg-white modal-change-size" id="main-modal">
 
-                      <div class="rounded">
+                      <div>
                         <hr class="close-modal" />
-                        <img src="" class="img-fluid rounded" alt="" />
+                        <img src="" class="img-fluid" alt="" />
                       </div>
 
                       <div>
@@ -51,6 +41,8 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                       
                     </div>
                   </div>`;
+
+//remove hover jika dibuka dimobile
 
 class DaftarMenu {
   constructor(jenis, namaMakanan, harga, quantity = 0) {
@@ -72,6 +64,12 @@ const m1 = new DaftarMenu("Makanan", "Burger Kampung Beef", 25000),
   pesanan = [m1, m2, m3, m4];
 
 const floatBtnPesanan = containerFloatBtnPesanan.children[0].children[0];
+window.onload = () => {
+  if (detectMob()) {
+    Array.from(body.children).forEach((el) => el.classList.remove("hover"));
+    floatBtnPesanan.classList.remove("hover");
+  }
+};
 let cetakJmlPesanan = () => {
   let totalHarga = 0,
     totalItem = 0;
@@ -81,9 +79,9 @@ let cetakJmlPesanan = () => {
       totalItem += parseInt(menu.qyt);
 
       floatBtnPesanan.children[0].children[0].textContent = `${totalItem} item`;
-      floatBtnPesanan.children[0].children[1].textContent = totalHarga
+      floatBtnPesanan.children[0].children[1].textContent = `Rp ${totalHarga
         .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
     }
   });
   if (totalHarga == 0) {
@@ -92,14 +90,15 @@ let cetakJmlPesanan = () => {
       body.removeChild(containerFloatBtnPesanan);
     }, 500);
   } else {
+    if (body.querySelector("#float-btn-pesanan") == null) {
+      document
+        .querySelector("body > .container")
+        .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+      containerFloatBtnPesanan.style.bottom = "-7em";
 
-    if(body.querySelector("#float-btn-pesanan") == null){
-       document.querySelector("body > .container").insertAdjacentElement("afterend", containerFloatBtnPesanan);
-        containerFloatBtnPesanan.style.bottom = "-7em";
-
-       setTimeout(() => {
-          containerFloatBtnPesanan.style.bottom = "0";
-       }, 0);
+      setTimeout(() => {
+        containerFloatBtnPesanan.style.bottom = "0";
+      }, 0);
     }
   }
 };
@@ -112,8 +111,6 @@ let update = (namaMakanan, qty) => {
   });
   cetakJmlPesanan();
 };
-
-
 
 // fungsi untuk penambahan quantity
 document.querySelectorAll(".tombol-tambah").forEach((e) =>
@@ -175,11 +172,12 @@ mainModal.addEventListener("touchstart", function (start) {
   st = start.touches[0].clientY;
   timer = 200;
   let touchPress = setInterval(() => {
-      if(timer < 0){
+    if (timer < 0) {
       closeModal();
-      clearInterval(touchPress);}
-      timer--;
-  },1);
+      clearInterval(touchPress);
+    }
+    timer--;
+  }, 1);
 
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].clientY;
@@ -247,15 +245,15 @@ function openModal() {
 
   setTimeout(() => {
     mainModal.classList.add("close-now");
+    mainModal.parentElement.style.cssText = "backdrop-filter: blur(2px);";
   }, 700);
 }
 
 function closeModal() {
-  if (
-    mainModal.classList.contains("close-now")
-  ) {
+  if (mainModal.classList.contains("close-now")) {
     mainModal.classList.remove("close-now");
     mainModal.classList.add("modal-change-size");
+    mainModal.parentElement.style.removeProperty("backdrop-filter");
     setTimeout(() => {
       mainModal.parentElement.classList.add("d-none");
       mainModal.parentElement.parentElement.classList.add("d-none");
@@ -332,11 +330,15 @@ window.addEventListener(
   "scroll",
   function () {
     if (timer !== null) {
-      containerFloatBtnPesanan.style.bottom = "-6em";
+      containerFloatBtnPesanan.style.bottom = "-7em";
       clearTimeout(timer);
     }
     timer = setTimeout(function () {
-      containerFloatBtnPesanan.style.bottom = "0";
+      containerFloatBtnPesanan.style.bottom = mainModal.classList.contains(
+        "close-now"
+      )
+        ? "-7em"
+        : "0";
     }, 200);
   },
   false
