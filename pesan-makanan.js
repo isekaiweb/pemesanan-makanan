@@ -70,38 +70,58 @@ window.onload = () => {
     floatBtnPesanan.classList.remove("hover");
   }
 };
-let cetakJmlPesanan = () => {
-  let totalHarga = 0,
-    totalItem = 0;
-  pesanan.forEach((menu) => {
-    if (menu.cetakHarga() > 0) {
-      totalHarga += parseInt(menu.cetakHarga());
-      totalItem += parseInt(menu.qyt);
+let intervalBtnFloat,
+  timerBtnFloat,
+  cetakJmlPesanan = () => {
+    let totalHarga = 0,
+      totalItem = 0;
+    pesanan.forEach((menu) => {
+      if (menu.cetakHarga() > 0) {
+        totalHarga += parseInt(menu.cetakHarga());
+        totalItem += parseInt(menu.qyt);
 
-      floatBtnPesanan.children[0].children[0].textContent = `${totalItem} item`;
-      floatBtnPesanan.children[0].children[1].textContent = `Rp ${totalHarga
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+        floatBtnPesanan.children[0].children[0].textContent = `${totalItem} item`;
+        floatBtnPesanan.children[0].children[1].textContent = `Rp ${totalHarga
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+      }
+    });
+
+    if (totalItem == 1) {
+      timerBtnFloat = 0;
+      intervalBtnFloat = setInterval(() => {
+        timerBtnFloat++;
+      }, 1);
+    } else {
+      clearInterval(intervalBtnFloat);
+      timerBtnFloat = timerBtnFloat <= 100 ? 0 : 500;
     }
-  });
-  if (totalHarga == 0) {
-    containerFloatBtnPesanan.style.bottom = "-7em";
-    setTimeout(() => {
-      body.removeChild(containerFloatBtnPesanan);
-    }, 500);
-  } else {
-    if (body.querySelector("#float-btn-pesanan") == null) {
-      document
-        .querySelector("body > .container")
-        .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+
+    if (totalHarga == 0) {
       containerFloatBtnPesanan.style.bottom = "-7em";
-
       setTimeout(() => {
-        containerFloatBtnPesanan.style.bottom = "0";
-      }, 0);
+        containerFloatBtnPesanan.remove();
+      }, timerBtnFloat);
+    } else {
+      if (body.querySelector("#float-btn-pesanan") == null) {
+        document
+          .querySelector("body > .container")
+          .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+        containerFloatBtnPesanan.style.bottom = "-7em";
+
+        setTimeout(() => {
+          containerFloatBtnPesanan.style.bottom = "0";
+        }, 0);
+      }
     }
-  }
-};
+  };
+
+floatBtnPesanan.addEventListener("click", () => {
+  floatBtnPesanan.style.transform = "translateY(-0.8em)";
+  setTimeout(() => {
+    floatBtnPesanan.style.removeProperty("transform");
+  }, 300);
+});
 
 let update = (namaMakanan, qty) => {
   pesanan.forEach((menu) => {
@@ -166,29 +186,20 @@ function changeDisplay(children) {
 
 // fungsi bagian modal
 const mainModal = modal.children[0].children[0];
-let st, mv;
+let st = 0,
+  mv = 0;
 
 mainModal.addEventListener("touchstart", function (start) {
-  st = start.touches[0].clientY;
-  timer = 200;
-  let touchPress = setInterval(() => {
-    if (timer < 0) {
-      closeModal();
-      clearInterval(touchPress);
-    }
-    timer--;
-  }, 1);
-
+  st = start.touches[0].pageY;
   this.addEventListener("touchmove", (mvs) => {
-    mv = mvs.touches[0].clientY;
-    clearInterval(touchPress);
+    mv = mvs.touches[0].pageY;
+    if (st + 50 < mv) {
+      closeModal();
+      st = 0;
+      mv = 0;
+      timer = 200;
+    }
   });
-});
-
-mainModal.addEventListener("touchend", () => {
-  if (st + 50 < mv) {
-    closeModal();
-  }
 });
 
 //fungsi untuk mencek perangkat dibuka dimana
@@ -217,6 +228,7 @@ function disableScroll() {
       window.scrollTo(0, yScroll);
     };
   }
+  containerFloatBtnPesanan.style.bottom = "-7em";
 }
 
 function enableScroll() {
@@ -227,13 +239,13 @@ function enableScroll() {
       return;
     };
   }
+  containerFloatBtnPesanan.style.bottom = "0";
 }
 
 function openModal() {
-  containerFloatBtnPesanan.style.bottom = "-7em";
+  disableScroll();
   mainModal.parentElement.classList.remove("d-none");
   mainModal.parentElement.parentElement.classList.remove("d-none");
-  disableScroll();
   setTimeout(() => {
     document
       .querySelector("body > .container")
@@ -245,15 +257,15 @@ function openModal() {
 
   setTimeout(() => {
     mainModal.classList.add("close-now");
-    mainModal.parentElement.style.cssText = "backdrop-filter: blur(2px);";
   }, 700);
 }
 
 function closeModal() {
+  boxThis = undefined;
   if (mainModal.classList.contains("close-now")) {
     mainModal.classList.remove("close-now");
     mainModal.classList.add("modal-change-size");
-    mainModal.parentElement.style.removeProperty("backdrop-filter");
+
     setTimeout(() => {
       mainModal.parentElement.classList.add("d-none");
       mainModal.parentElement.parentElement.classList.add("d-none");
@@ -261,9 +273,8 @@ function closeModal() {
     }, 500);
 
     setTimeout(() => {
-      containerFloatBtnPesanan.style.bottom = "0";
       enableScroll();
-    }, 560);
+    }, 600);
   }
 }
 
@@ -275,7 +286,6 @@ let boxThis;
 boxMakanan.forEach((box) => {
   box.addEventListener("click", function (e) {
     // animasi ketika box makanan diklik
-    boxThis = this;
     let effect = document.createElement("span"),
       pos = getPosition(this);
     effect.classList.add("effect");
@@ -285,27 +295,14 @@ boxMakanan.forEach((box) => {
 
     if (!e.target.parentElement.classList.contains("tombol")) {
       this.appendChild(effect);
-      openModal();
+      boxThis = this;
 
       setTimeout(() => {
-        this.removeChild(effect);
-      }, 800);
-    }
-
-    function getPosition(el) {
-      let xPosition = 0,
-        yPosition = 0;
-
-      while (el) {
-        xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
-        yPosition += el.offsetTop - el.scrollTop + el.clientTop;
-        el = el.offsetParent;
-      }
-
-      return {
-        x: xPosition,
-        y: yPosition,
-      };
+        openModal();
+      }, 200);
+      setTimeout(() => {
+        effect.remove();
+      }, 500);
     }
 
     mainModal.children[0].children[1].src = this.children[1].children[0].src;
@@ -314,6 +311,23 @@ boxMakanan.forEach((box) => {
     mainModal.children[1].children[1].children[1].textContent = this.children[0].children[2].textContent;
   });
 });
+
+//pangambilan posisi dari ukuran element
+function getPosition(el) {
+  let xPosition = 0,
+    yPosition = 0;
+
+  while (el) {
+    xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
+    yPosition += el.offsetTop - el.scrollTop + el.clientTop;
+    el = el.offsetParent;
+  }
+
+  return {
+    x: xPosition,
+    y: yPosition,
+  };
+}
 
 mainModal.children[2].children[0].addEventListener("click", () => {
   const quantity = boxThis.children[1].children[1].children[2];
@@ -334,18 +348,9 @@ window.addEventListener(
       clearTimeout(timer);
     }
     timer = setTimeout(function () {
-      containerFloatBtnPesanan.style.bottom = mainModal.classList.contains(
-        "close-now"
-      )
-        ? "-7em"
-        : "0";
-    }, 200);
+      containerFloatBtnPesanan.style.bottom =
+        boxThis != undefined ? "-7em" : "0";
+    }, 500);
   },
   false
 );
-
-// function removeProperty(elm, ...prop) {
-//   prop.forEach((p) => {
-//     elm.style.removeProperty(p);
-//   });
-// }
