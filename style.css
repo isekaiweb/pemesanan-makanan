@@ -20,7 +20,7 @@ body > .container {
 .box-makanan {
   border-bottom: #e7e8e9 solid 1px;
   margin-bottom: 1rem;
-  height: 10em;
+  height: 9em;
   cursor: pointer;
   position: relative;
   font-size: 2vmin;
@@ -72,34 +72,33 @@ body > .container {
   justify-content: space-between;
   width: 7em;
   position: absolute;
-  bottom: 0.5em;
-  height: 3em;
+  bottom: 0.25em;
+  margin: 0 auto;
 }
 
 .tombol-tambah {
   width: 100%;
   font-size: 1.1em;
+  height: 2em;
   font-weight: bold;
-  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
-  margin: 0 auto;
 
+  padding: 0;
+  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
   border-radius: 4px;
 }
 
 .quantity {
-  margin: auto;
-  border-left: 0;
-  border-right: 0;
   text-align: center;
-  padding: 0 0.3em;
-  font-size: 1.3em;
+  font-size: 1.1em;
+  height: 2em;
+  line-height: 2em;
 
   font-weight: 500;
 }
 
 .tombol-inc,
 .tombol-dec {
-  font-size: 1em;
+  font-size: 1.1em;
   width: 2em;
   height: 2em;
   border: 0;
@@ -341,7 +340,7 @@ body > .container {
   }
 
   .box-makanan {
-    height: 11em;
+    height: 10em;
     font-size: 3vmin;
   }
 
@@ -363,55 +362,45 @@ body > .container {
   }
 
   .visual {
-    border: 1px solid red;
     width: 30%;
     position: relative;
   }
 
   .img-jenis {
-    width: 6.5em;
+    width: 7.5em;
     height: 6.5em;
   }
 
   .tombol {
-    width: 6.5em;
+    width: 7.5em;
     height: 1.3em;
-
-    bottom: 2em;
+    margin: auto 0;
+    bottom: 1.5em;
   }
 
   .tombol-tambah {
     font-size: 1.2em !important;
-
+    height: 2em;
+    padding: 0;
   }
 
   .quantity {
-    margin: auto;
-    border-left: 0;
-    border-right: 0;
     text-align: center;
-    padding: 0 0.3em;
-    font-size: 1em;
+    line-height: 2em;
+    font-size: 1.2em;
+    height: 2em;
   }
 
   .tombol-inc,
   .tombol-dec {
     font-size: 1.2em;
-    width: 1.6em;
-    height: 1.6em;
+    height: 2em;
+
     line-height: 1.6em;
   }
 
   #bg-profil {
     height: 12rem;
-  }
-
-  .tombol-tambah {
-    width: 100%;
-    font-size: 0.8em;
-    text-align: center;
-    padding: 2px 0;
-    height: 2.3em;
   }
 
   .btn-click-animation {
