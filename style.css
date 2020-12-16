@@ -335,51 +335,54 @@ body > .container {
 
 @media (max-width: 599px) {
   body > .container {
-    padding-bottom: 3rem;
+    padding-bottom: 3em;
   }
   .jenis {
-    font-size: 1.8em;
+    font-size: 1.9em;
   }
 
   .box-makanan {
-    height: 7.5em;
-    font-size: 3vmax;
+    height: 10em;
+    font-size: 3vmin;
   }
 
   .keterangan {
-    width: 70%;
+    width: 60%;
   }
 
   .nama-makanan {
-    font-size: 1em;
+    font-size: 1.6em;
   }
 
   .deskripsi {
-    font-size: 0.7em;
+    font-size: 1em;
   }
 
   .harga {
-    font-size: 0.9em;
+    font-size: 1.3em;
     margin-top: 0.5em;
   }
 
   .visual {
-    width: 30%;
+    width: 40%;
     position: relative;
   }
 
   .img-jenis {
-    width: 5em;
-    height: 4.5em;
+    width: 6em;
+    height: 6em;
   }
 
   .tombol {
-    width: 5em;
+    width: 6em;
     height: 2em;
+
+    bottom: 1em;
   }
 
   .tombol-tambah {
-    font-size: 0.8em !important;
+    font-size: 1em !important;
+    height: 2.5em !important;
   }
 
   .quantity {
@@ -388,12 +391,12 @@ body > .container {
     border-right: 0;
     text-align: center;
     padding: 0 0.3em;
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   .tombol-inc,
   .tombol-dec {
-    font-size: 1em;
+    font-size: 1.2em;
     width: 1.6em;
     height: 1.6em;
     line-height: 1.6em;
