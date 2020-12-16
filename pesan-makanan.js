@@ -256,22 +256,22 @@ function openModal() {
   }, 160);
 
   setTimeout(() => {
-    mainModal.classList.add("close-now");
     modal.style.background = " #302f2f48";
+    mainModal.classList.add("close-now");
   }, 700);
 }
 
 function closeModal() {
   boxThis = undefined;
   if (mainModal.classList.contains("close-now")) {
+    modal.style.removeProperty("background");
     mainModal.classList.remove("close-now");
     mainModal.classList.add("modal-change-size");
 
     setTimeout(() => {
-      modal.style.removeProperty("background");
       mainModal.parentElement.classList.add("d-none");
       mainModal.parentElement.parentElement.classList.add("d-none");
-      body.removeChild(modal);
+      modal.remove();
     }, 500);
 
     setTimeout(() => {
@@ -298,10 +298,7 @@ boxMakanan.forEach((box) => {
     if (!e.target.parentElement.classList.contains("tombol")) {
       this.appendChild(effect);
       boxThis = this;
-
-      setTimeout(() => {
-        openModal();
-      }, 200);
+      openModal();
       setTimeout(() => {
         effect.remove();
       }, 500);
