@@ -169,8 +169,8 @@ body > .container {
   bottom: 0;
   position: fixed;
   transition: 100ms ease-out;
-  backdrop-filter: blur(0.5px);
-  background-color: #302f2f48;
+
+
   z-index: 9999;
 }
 

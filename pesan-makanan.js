@@ -257,6 +257,7 @@ function openModal() {
 
   setTimeout(() => {
     mainModal.classList.add("close-now");
+    modal.style.background = " #302f2f48";
   }, 700);
 }
 
@@ -267,6 +268,7 @@ function closeModal() {
     mainModal.classList.add("modal-change-size");
 
     setTimeout(() => {
+      modal.style.removeProperty("background");
       mainModal.parentElement.classList.add("d-none");
       mainModal.parentElement.parentElement.classList.add("d-none");
       body.removeChild(modal);
