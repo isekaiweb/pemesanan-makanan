@@ -58,20 +58,39 @@ bill.innerHTML = `
 
 //remove hover jika dibuka dimobile
 
-document.querySelectorAll("img").forEach((el) => {
+document.querySelectorAll(".box-makanan img").forEach((el) => {
   const imageLoad = document.createElement("div");
   imageLoad.classList.add("img-load");
   imageLoad.innerHTML = `
                       <div></div>
-                    `;
-  if (!el.complete) {
-    el.classList.add("d-none");
-    el.parentElement.insertBefore(imageLoad, el);
-  } else {
-    el.classList.remove("d-none");
-    imageLoad.remove();
-  }
+                  `;
+
+  el.classList.add("d-none");
+  el.parentElement.insertBefore(imageLoad, el);
+  getImage(el, imageLoad);
 });
+
+function getImage(el, imageLoad) {
+  fetch(el.src).then(() => {
+    if (el.complete) {
+      el.classList.remove("d-none");
+      imageLoad.remove();
+    }
+  });
+}
+
+getBackground(document.querySelector("#bg-profil"));
+
+function getBackground(img) {
+  const image = document.createElement("img");
+  image.src = img.style.src;
+  fetch(image.src).then(() => {
+    if (image.complete) {
+      img.children[0].remove();
+      img.style.filter = "blur(5px)";
+    }
+  });
+}
 
 class DaftarMenu {
   constructor(jenis, namaMakanan, harga, quantity = 0) {
