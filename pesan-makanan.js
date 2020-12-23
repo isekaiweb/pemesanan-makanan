@@ -27,7 +27,7 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                         <img src="" class="img-fluid" />
                       </div>
 
-                      <div>
+                      <div class="main-action">
                         <p id="judul"></p>
                         <div>
                           <small id="deskripsi"></small>  
@@ -49,7 +49,7 @@ bill.innerHTML = `
           <h1 class="text-center text-uppercase text-success font-weight-bold">
             daftar Pesanan
           </h1>
-          <div>         
+          <div class="main-action">         
           </div>
           <button class="btn btn-success my-3">
             Kirim Pesanan
@@ -234,7 +234,6 @@ floatBtnPesanan.addEventListener("click", () => {
             <span>Total Pembayaran</span>
             <span>${setSatuan(hargaMakanan + hargaMinuman)}</span>
           </h2>`;
-      console.log(makanan);
       modal.children[0].replaceChild(bill, mainModal);
     }
     openModal();
@@ -267,17 +266,32 @@ function setSatuan(data) {
 let st = 0,
   mv = 0;
 modal.children[0].addEventListener("touchstart", function (start) {
-  st = start.touches[0].pageY;
-  this.addEventListener("touchmove", (mvs) => {
-    mv = mvs.touches[0].pageY;
-    if (st + 50 < mv) {
-      closeModal();
-      st = 0;
-      mv = 0;
-      timer = 200;
-    }
-  });
+  if (childrenMainAction(start.target) == false) {
+    st = start.touches[0].pageY;
+    this.addEventListener("touchmove", (mvs) => {
+      mv = mvs.touches[0].pageY;
+      if (st + 50 < mv) {
+        closeModal();
+        st = 0;
+        mv = 0;
+        timer = 200;
+      }
+    });
+  }
 });
+
+function childrenMainAction(el) {
+  const parent = document.querySelector(".main-action");
+  return el == parent
+    ? true
+    : el.parentElement == parent
+    ? true
+    : el.parentElement.parentElement == parent
+    ? true
+    : el.parentElement.parentElement.parentElement == parent
+    ? true
+    : false;
+}
 
 //fungsi untuk mencek perangkat dibuka dimana
 function detectMob() {
