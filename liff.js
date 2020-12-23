@@ -14,7 +14,7 @@
 // }
 
 // function mulaiAPP() {
-//   //cek apakah sudah login
+//   //cek apakah sudah login jika belum maka login
 //   if (!liff.isLoggedIn()) {
 //     liff.login();
 //   } else {

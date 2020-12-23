@@ -3,7 +3,8 @@ const openBrowser = document.querySelector("#tombol-browser"),
   profilContainer = document.querySelector("#profil"),
   boxMakanan = document.querySelectorAll(".box-makanan"),
   containerFloatBtnPesanan = document.createElement("div"),
-  modal = document.createElement("div");
+  modal = document.createElement("div"),
+  bill = document.createElement("div");
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
 containerFloatBtnPesanan.innerHTML = `<div class="container px-2">
@@ -21,10 +22,9 @@ modal.classList = "close-modal d-none";
 modal.setAttribute("id", "container-modal");
 modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                     <div class="bg-white modal-change-size" id="main-modal">
-
+                    <hr class="close-modal" />
                       <div>
-                        <hr class="close-modal" />
-                        <img src="" class="img-fluid" alt="" />
+                        <img src="" class="img-fluid" />
                       </div>
 
                       <div>
@@ -35,12 +35,26 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                         </div>
                       </div>
 
-                      <div>
+                      
                         <button class="btn btn-success close-modal">Tambah pesanan</button>
-                      </div>
+                    
                       
                     </div>
                   </div>`;
+
+bill.classList = "bg-white modal-change-size";
+bill.setAttribute("id", "bill");
+bill.innerHTML = `
+          <hr class="close-modal" />
+          <h1 class="text-center text-uppercase text-success font-weight-bold">
+            daftar Pesanan
+          </h1>
+          <div>         
+          </div>
+          <button class="btn btn-success my-3">
+            Kirim Pesanan
+          </button>
+      `;
 
 //remove hover jika dibuka dimobile
 
@@ -81,9 +95,9 @@ let intervalBtnFloat,
         totalItem += parseInt(menu.qyt);
 
         floatBtnPesanan.children[0].children[0].textContent = `${totalItem} item`;
-        floatBtnPesanan.children[0].children[1].textContent = `Rp ${totalHarga
-          .toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+        floatBtnPesanan.children[0].children[1].textContent = `Rp ${setSatuan(
+          totalHarga
+        )}`;
       }
     });
 
@@ -111,17 +125,10 @@ let intervalBtnFloat,
 
         setTimeout(() => {
           containerFloatBtnPesanan.style.bottom = "0";
-        }, 0);
+        }, 500);
       }
     }
   };
-
-floatBtnPesanan.addEventListener("click", () => {
-  floatBtnPesanan.style.transform = "translateY(-0.8em)";
-  setTimeout(() => {
-    floatBtnPesanan.style.removeProperty("transform");
-  }, 300);
-});
 
 let update = (namaMakanan, qty) => {
   pesanan.forEach((menu) => {
@@ -186,10 +193,80 @@ function changeDisplay(children) {
 
 // fungsi bagian modal
 const mainModal = modal.children[0].children[0];
+
+floatBtnPesanan.addEventListener("click", () => {
+  floatBtnPesanan.style.transform = "translateY(-0.8em)";
+  setTimeout(() => {
+    floatBtnPesanan.style.removeProperty("transform");
+    if (modal.querySelector("#bill") == null) {
+      let elMakanan = "",
+        hargaMakanan = 0,
+        elMinuman = "",
+        hargaMinuman = 0,
+        makanan = "",
+        minuman = "";
+      pesanan.forEach((menu) => {
+        if (menu.qyt > 0) {
+          if (menu.jenis.toLowerCase() == "makanan") {
+            hargaMakanan += menu.harga * menu.qyt;
+            elMakanan += buatElementMakanan(menu);
+            makanan = elParentJenis(
+              menu.jenis,
+              elMakanan,
+              setSatuan(hargaMakanan)
+            );
+          } else {
+            hargaMinuman += menu.harga;
+            elMinuman += buatElementMakanan(menu);
+            minuman = elParentJenis(
+              menu.jenis,
+              elMinuman,
+              setSatuan(hargaMinuman)
+            );
+          }
+        }
+      });
+
+      bill.children[2].innerHTML =
+        makanan +
+        minuman +
+        `<h2 id="grand-total">
+            <span>Total Pembayaran</span>
+            <span>${setSatuan(hargaMakanan + hargaMinuman)}</span>
+          </h2>`;
+      console.log(makanan);
+      modal.children[0].replaceChild(bill, mainModal);
+    }
+    openModal();
+  }, 300);
+});
+
+function buatElementMakanan(m) {
+  return `<p>
+            <span>${m.nama}</span>
+            <span>${setSatuan(m.harga)} x ${m.qyt}</span>
+            <span>${setSatuan(m.harga * m.qyt)}</span>
+          </p>`;
+}
+
+function elParentJenis(jenis, el, totalHarga) {
+  return `<div>
+            <h2>${jenis}</h2>
+            ${el}
+            <p class="sub-total">
+              <span>Total Harga ${jenis}</span>
+              <span>${totalHarga}</span>
+            </p>
+          </div>`;
+}
+
+function setSatuan(data) {
+  return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 let st = 0,
   mv = 0;
-
-mainModal.addEventListener("touchstart", function (start) {
+modal.children[0].addEventListener("touchstart", function (start) {
   st = start.touches[0].pageY;
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].pageY;
@@ -244,43 +321,47 @@ function enableScroll() {
 
 function openModal() {
   disableScroll();
-  mainModal.parentElement.classList.remove("d-none");
-  mainModal.parentElement.parentElement.classList.remove("d-none");
+  modal.children[0].classList.remove("d-none");
+  modal.classList.remove("d-none");
   setTimeout(() => {
     document
       .querySelector("body > .container")
       .insertAdjacentElement("afterend", modal);
   }, 100);
   setTimeout(() => {
-    mainModal.classList.remove("modal-change-size");
+    modal.children[0].children[0].classList.remove("modal-change-size");
   }, 160);
 
   setTimeout(() => {
     modal.style.background = " #302f2f48";
-    mainModal.classList.add("close-now");
+    modal.children[0].children[0].classList.add("close-now");
   }, 700);
 }
 
 function closeModal() {
   boxThis = undefined;
-  if (mainModal.classList.contains("close-now")) {
+  if (modal.children[0].children[0].classList.contains("close-now")) {
     modal.style.removeProperty("background");
-    mainModal.classList.remove("close-now");
-    mainModal.classList.add("modal-change-size");
+    modal.children[0].children[0].classList.remove("close-now");
+    modal.children[0].children[0].classList.add("modal-change-size");
 
     setTimeout(() => {
-      mainModal.parentElement.classList.add("d-none");
-      mainModal.parentElement.parentElement.classList.add("d-none");
+      modal.children[0].classList.add("d-none");
+      modal.classList.add("d-none");
       modal.remove();
     }, 500);
 
     setTimeout(() => {
+      // cek modal
+      if (modal.querySelector("#bill") != null) {
+        modal.children[0].replaceChild(mainModal, bill);
+      }
       enableScroll();
     }, 600);
   }
 }
 
-mainModal.parentElement.parentElement.addEventListener("click", (e) => {
+modal.addEventListener("click", (e) => {
   if (e.target.classList.contains("close-modal")) closeModal();
 });
 
@@ -298,18 +379,25 @@ boxMakanan.forEach((box) => {
     if (!e.target.parentElement.classList.contains("tombol")) {
       this.appendChild(effect);
       boxThis = this;
+      isiModal(boxThis);
       openModal();
       setTimeout(() => {
         effect.remove();
       }, 500);
     }
-
-    mainModal.children[0].children[1].src = this.children[1].children[0].src;
-    mainModal.children[1].children[0].textContent = this.children[0].children[0].textContent;
-    mainModal.children[1].children[1].children[0].textContent = this.children[0].children[1].textContent;
-    mainModal.children[1].children[1].children[1].textContent = this.children[0].children[2].textContent;
   });
 });
+
+// mengisi modal
+function isiModal(box) {
+  modal.querySelector("img").src = box.children[1].children[0].src;
+  modal.querySelector("#judul").textContent =
+    box.children[0].children[0].textContent;
+  modal.querySelector("#deskripsi").textContent =
+    box.children[0].children[1].textContent;
+  modal.querySelector("#harga").textContent =
+    box.children[0].children[2].textContent;
+}
 
 //pangambilan posisi dari ukuran element
 function getPosition(el) {
@@ -328,7 +416,7 @@ function getPosition(el) {
   };
 }
 
-mainModal.children[2].children[0].addEventListener("click", () => {
+modal.querySelector("button").addEventListener("click", () => {
   const quantity = boxThis.children[1].children[1].children[2];
   if (quantity.textContent == "") {
     quantity.previousElementSibling.previousElementSibling.click();
@@ -348,7 +436,7 @@ window.addEventListener(
     }
     timer = setTimeout(function () {
       containerFloatBtnPesanan.style.bottom =
-        boxThis != undefined ? "-7em" : "0";
+        document.querySelector("#container-modal") != null ? "-7em" : "0";
     }, 500);
   },
   false
