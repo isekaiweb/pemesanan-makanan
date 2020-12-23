@@ -28,10 +28,10 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                       </div>
 
                       <div class="main-action">
-                        <p id="judul"></p>
-                        <div>
-                          <small id="deskripsi"></small>  
-                          <p id="harga"></p>
+                        <p id="judul" class="main-action"></p>
+                        <div class="main-action">
+                          <small id="deskripsi" class="main-action"></small>  
+                          <p id="harga" class="main-action"></p>
                         </div>
                       </div>
 
@@ -245,9 +245,11 @@ floatBtnPesanan.addEventListener("click", () => {
       bill.children[2].innerHTML =
         makanan +
         minuman +
-        `<h2 id="grand-total">
-            <span>Total Pembayaran</span>
-            <span>${setSatuan(hargaMakanan + hargaMinuman)}</span>
+        `<h2 id="grand-total" class="main-action">
+            <span class="main-action">Total Pembayaran</span>
+            <span class="main-action">${setSatuan(
+              hargaMakanan + hargaMinuman
+            )}</span>
           </h2>`;
       modal.children[0].replaceChild(bill, mainModal);
     }
@@ -256,20 +258,20 @@ floatBtnPesanan.addEventListener("click", () => {
 });
 
 function buatElementMakanan(m) {
-  return `<p>
-            <span>${m.nama}</span>
-            <span>${setSatuan(m.harga)} x ${m.qyt}</span>
-            <span>${setSatuan(m.harga * m.qyt)}</span>
+  return `<p class="main-action">
+            <span class="main-action">${m.nama}</span>
+            <span class="main-action">${setSatuan(m.harga)} x ${m.qyt}</span>
+            <span class="main-action">${setSatuan(m.harga * m.qyt)}</span>
           </p>`;
 }
 
 function elParentJenis(jenis, el, totalHarga) {
-  return `<div>
-            <h2>${jenis}</h2>
+  return `<div class="main-action">
+            <h2 class="main-action">${jenis}</h2>
             ${el}
-            <p class="sub-total">
-              <span>Total Harga ${jenis}</span>
-              <span>${totalHarga}</span>
+            <p class="sub-total main-action">
+              <span class="main-action">Total Harga ${jenis}</span>
+              <span class="main-action">${totalHarga}</span>
             </p>
           </div>`;
 }
@@ -281,32 +283,27 @@ function setSatuan(data) {
 let st = 0,
   mv = 0;
 modal.children[0].addEventListener("touchstart", function (start) {
-  if (childrenMainAction(start.target) == false) {
-    st = start.touches[0].pageY;
-    this.addEventListener("touchmove", (mvs) => {
+  st = start.touches[0].pageY;
+
+  this.addEventListener("touchmove", (mvs) => {
+    if (!start.target.classList.contains("main-action")) {
       mv = mvs.touches[0].pageY;
-      if (st + 50 < mv) {
-        closeModal();
-        st = 0;
-        mv = 0;
-        timer = 200;
-      }
-    });
-  }
+    } else {
+      mv = 0;
+    }
+  });
 });
 
-function childrenMainAction(el) {
-  const parent = document.querySelector(".main-action");
-  return el == parent
-    ? true
-    : el.parentElement == parent
-    ? true
-    : el.parentElement.parentElement == parent
-    ? true
-    : el.parentElement.parentElement.parentElement == parent
-    ? true
-    : false;
-}
+modal.children[0].addEventListener("touchend", () => {
+  console.log(`st:${st}; mv:${mv}`);
+  if (st + 50 < mv) {
+    st = 0;
+    mv = 0;
+    timer = 200;
+    close = true;
+    closeModal();
+  }
+});
 
 //fungsi untuk mencek perangkat dibuka dimana
 function detectMob() {
