@@ -58,6 +58,21 @@ bill.innerHTML = `
 
 //remove hover jika dibuka dimobile
 
+document.querySelectorAll("img").forEach((el) => {
+  const imageLoad = document.createElement("div");
+  imageLoad.classList.add("img-load");
+  imageLoad.innerHTML = `
+                      <div></div>
+                    `;
+  if (!el.complete) {
+    el.classList.add("d-none");
+    el.parentElement.insertBefore(imageLoad, el);
+  } else {
+    el.classList.remove("d-none");
+    imageLoad.remove();
+  }
+});
+
 class DaftarMenu {
   constructor(jenis, namaMakanan, harga, quantity = 0) {
     this.jenis = jenis;

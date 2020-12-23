@@ -20,7 +20,7 @@ body > .container {
 .box-makanan {
   border-bottom: #e7e8e9 solid 1px;
   margin-bottom: 1rem;
-  height: 9em;
+  height: 10em;
   cursor: pointer;
   position: relative;
   font-size: 2vmin;
@@ -57,13 +57,43 @@ body > .container {
 }
 
 .img-jenis {
-  height: 6em;
+  height: 6.8em;
   width: 7em;
   position: absolute;
   right: 0;
   border-radius: 4px;
 
   cursor: pointer;
+}
+
+.img-load {
+  height: 6.8em;
+  width: 7em;
+  position: absolute;
+  right: 0;
+  border-radius: 4px;
+  background-color: #e7e8e9;
+  overflow: hidden;
+}
+
+.img-load > div {
+  width: 7em;
+  height: 15em;
+  background-color: #dbdddf;
+  /* border: 1px solid red; */
+
+  animation: image-load 1s infinite;
+}
+
+@keyframes image-load {
+  0% {
+    transform: translateY(-15em);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(15em);
+    opacity: 0.2;
+  }
 }
 
 .tombol {
@@ -208,16 +238,6 @@ body > .container {
   justify-content: space-between;
   border-radius: 4px;
 }
-
-/* #bill > div {
-  overflow-y: scroll;
-  scrollbar-width: none;
-  height: 70%;
-}
-
-#bill > div::-webkit-scrollbar {
-  display: none;
-} */
 
 #main-modal > div:nth-of-type(2) {
   height: 25%;
