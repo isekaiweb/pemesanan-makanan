@@ -61,7 +61,7 @@ body > .container {
   width: 7em;
   position: absolute;
   right: 0;
-  border-radius: 4px;
+  border-radius: 0.3rem;
 
   cursor: pointer;
 }
@@ -71,7 +71,7 @@ body > .container {
   width: 7em;
   position: absolute;
   right: 0;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   background-color: #e7e8e9;
   overflow: hidden;
 }
@@ -114,7 +114,6 @@ body > .container {
 
   padding: 0;
   transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
-  border-radius: 4px;
 }
 
 .quantity {
@@ -151,8 +150,6 @@ body > .container {
 
 /* bagian profil */
 #bg-profil {
-
-
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -263,24 +260,23 @@ body > .container {
 #main-modal > div:nth-of-type(1) {
   height: 65%;
   justify-content: space-between;
-  border-radius: 4px;
+  border-radius: 0.4rem;
+  margin-bottom: 0.2em;
 }
 
 #main-modal > div:nth-of-type(2) {
   height: 25%;
-  font-size: 2.5vmin;
   margin: 0 0 2em 0;
-  overflow: scroll;
+  overflow-y: scroll;
   scrollbar-width: none;
+  font-size: 2.6vmin;
 }
 
 #main-modal > div:nth-of-type(2)::-webkit-scrollbar {
   display: none;
 }
 
-#main-modal > div:nth-of-type(2) > div {
-  font-size: 2.8vmin;
-}
+
 
 #main-modal hr {
   height: 0.25em;
@@ -299,13 +295,13 @@ body > .container {
 #main-modal img {
   height: 100%;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 }
 
 .load-img-main-modal {
   height: 100%;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   background-color: #e7e8e9;
 }
 
@@ -330,21 +326,21 @@ body > .container {
 
 #main-modal #judul {
   font-weight: bolder;
-  font-size: 1.8em;
+  font-size: 2em;
   margin: 0;
   word-wrap: break-word;
   width: fit-content;
 }
 
 #main-modal #deskripsi {
-  font-size: 1.2em;
+  font-size: 1.5em;
   word-wrap: break-word;
   width: fit-content;
   color: #acacac;
 }
 
 #main-modal #harga {
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: 500;
   margin: 0;
 
@@ -373,7 +369,7 @@ body > .container {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  border-radius: 4px;
+
   margin: 0 auto 1.5rem auto;
   transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 }
@@ -553,6 +549,16 @@ body > .container {
     height: 6.5em;
   }
 
+  .img-load {
+    width: 7.5em;
+    height: 6.5em;
+  }
+
+  .img-load > div {
+    width: 7.5em;
+    height: 6.5em;
+  }
+
   .tombol {
     width: 7.5em;
     height: 1.3em;
@@ -627,8 +633,10 @@ body > .container {
     font-size: 1.2em;
   }
 
-  #bill hr {
-    font-size: 4vmin;
+  #bill hr,
+  #main-modal hr {
+    height: 5.5px;
+    width: 30px;
   }
   /* bagian pemesanan */
 

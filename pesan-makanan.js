@@ -24,7 +24,7 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                     <div class="bg-white modal-change-size" id="main-modal">
                     <hr class="close-modal" />
                       <div>
-                        <img src="" />
+                        <img src="" class="img-fluid" />
                       </div>
 
                       <div class="main-action">
@@ -56,18 +56,24 @@ bill.innerHTML = `
           </button>
       `;
 
-document.querySelectorAll(".visual img").forEach((el) => {
-  el.onload = function () {
-    el.previousElementSibling.remove();
-    el.classList.remove("d-none");
+const srcImageMakanan = [
+  "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  "https://images.pexels.com/photos/239584/pexels-photo-239584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+];
+document.querySelectorAll(".img-load").forEach((el, i) => {
+  const img = document.createElement("img");
+  img.classList = "img-fluid img-jenis";
+  img.src = srcImageMakanan[i];
+
+  img.onload = function () {
+    el.parentElement.replaceChild(img, el);
   };
 });
 
 (function loadBackground() {
   const bg = document.querySelector("#bg-profil");
-  // fetch(bg.style.backgroundImage)
-  //   .then((src) => src.blob())
-  //   .then(() => console.log(bg.style.backgroundImage));
 
   const bgImg = new Image();
   bgImg.onload = function () {
@@ -330,7 +336,6 @@ function isiModal(box) {
   const src = box.children[1].children[0].src;
   if (src != undefined) {
     modal.querySelector("img").src = src;
-    cekImgModal(src);
   } else {
     timeOutModal = setTimeout(() => {
       isiModal(box);
@@ -358,22 +363,6 @@ function loadDataImg(img) {
     ld.remove();
     img.classList.remove("d-none");
   };
-}
-
-function cekImgModal(src) {
-  console.log(imgModal.includes((img) => img.src == src));
-  // if (imgModal.length > 0) {
-  //   if ( == false) {
-  //     console.log("masuk");
-  //     pushToImgModal(src);
-  //   }
-  // } else pushToImgModal(src);
-}
-
-function pushToImgModal(src) {
-  const imgTag = document.createElement("img");
-  imgTag.src = src;
-  imgModal.push(imgTag);
 }
 
 //pangambilan posisi dari ukuran element
