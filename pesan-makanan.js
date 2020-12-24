@@ -24,7 +24,7 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                     <div class="bg-white modal-change-size" id="main-modal">
                     <hr class="close-modal" />
                       <div>
-                        <img src="" class="img-fluid" />
+                        <img src="" />
                       </div>
 
                       <div class="main-action">
@@ -56,41 +56,27 @@ bill.innerHTML = `
           </button>
       `;
 
-//remove hover jika dibuka dimobile
-
-document.querySelectorAll(".box-makanan img").forEach((el) => {
-  const imageLoad = document.createElement("div");
-  imageLoad.classList.add("img-load");
-  imageLoad.innerHTML = `
-                      <div></div>
-                  `;
-
-  el.classList.add("d-none");
-  el.parentElement.insertBefore(imageLoad, el);
-  getImage(el, imageLoad);
+document.querySelectorAll(".visual img").forEach((el) => {
+  el.onload = function () {
+    el.previousElementSibling.remove();
+    el.classList.remove("d-none");
+  };
 });
 
-function getImage(el, imageLoad) {
-  fetch(el.src).then(() => {
-    if (el.complete) {
-      el.classList.remove("d-none");
-      imageLoad.remove();
-    }
-  });
-}
+(function loadBackground() {
+  const bg = document.querySelector("#bg-profil");
+  // fetch(bg.style.backgroundImage)
+  //   .then((src) => src.blob())
+  //   .then(() => console.log(bg.style.backgroundImage));
 
-getBackground(document.querySelector("#bg-profil"));
-
-function getBackground(img) {
-  const image = document.createElement("img");
-  image.src = img.style.src;
-  fetch(image.src).then(() => {
-    if (image.complete) {
-      img.children[0].remove();
-      img.style.filter = "blur(5px)";
-    }
-  });
-}
+  const bgImg = new Image();
+  bgImg.onload = function () {
+    bg.children[0].remove();
+    bg.style.backgroundImage = "url(" + bgImg.src + ")";
+  };
+  bgImg.src =
+    "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
+})();
 
 class DaftarMenu {
   constructor(jenis, namaMakanan, harga, quantity = 0) {
@@ -108,7 +94,7 @@ class DaftarMenu {
 const m1 = new DaftarMenu("Makanan", "Burger Kampung Beef", 25000),
   m2 = new DaftarMenu("Makanan", "Potato Chrunch", 23000),
   m3 = new DaftarMenu("Minuman", "Milkshake", 17900),
-  m4 = new DaftarMenu("Minuman", "Ice Cream and Hot Chocolate Powder", 22500),
+  m4 = new DaftarMenu("Minuman", "Hot Chocolate", 22500),
   pesanan = [m1, m2, m3, m4];
 
 const floatBtnPesanan = containerFloatBtnPesanan.children[0].children[0];
@@ -135,6 +121,8 @@ let intervalBtnFloat,
       }
     });
 
+    console.log(totalItem);
+
     if (totalItem == 1) {
       timerBtnFloat = 0;
       intervalBtnFloat = setInterval(() => {
@@ -146,7 +134,7 @@ let intervalBtnFloat,
     }
 
     if (totalHarga == 0) {
-      containerFloatBtnPesanan.style.bottom = "-7em";
+      containerFloatBtnPesanan.style.bottom = "-7rem";
       setTimeout(() => {
         containerFloatBtnPesanan.remove();
       }, timerBtnFloat);
@@ -155,7 +143,7 @@ let intervalBtnFloat,
         document
           .querySelector("body > .container")
           .insertAdjacentElement("afterend", containerFloatBtnPesanan);
-        containerFloatBtnPesanan.style.bottom = "-7em";
+        containerFloatBtnPesanan.style.bottom = "-7rem";
 
         setTimeout(() => {
           containerFloatBtnPesanan.style.bottom = "0";
@@ -225,10 +213,217 @@ function changeDisplay(children) {
   Array.from(children).forEach((e) => e.classList.toggle("d-none"));
 }
 
+//fungsi untuk mencek perangkat dibuka dimana
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
+
+function disableScroll() {
+  if (detectMob()) {
+    body.classList.add("overflow-hidden");
+  } else {
+    let yScroll = window.scrollY;
+    window.onscroll = () => {
+      window.scrollTo(0, yScroll);
+    };
+  }
+  containerFloatBtnPesanan.style.bottom = "-7rem";
+}
+
+function enableScroll() {
+  if (detectMob()) {
+    body.classList.remove("overflow-hidden");
+  } else {
+    window.onscroll = () => {
+      return;
+    };
+  }
+  containerFloatBtnPesanan.style.bottom = "0";
+}
+
+function openModal() {
+  disableScroll();
+  modal.children[0].classList.remove("d-none");
+  modal.classList.remove("d-none");
+  setTimeout(() => {
+    document
+      .querySelector("body > .container")
+      .insertAdjacentElement("afterend", modal);
+  }, 100);
+  setTimeout(() => {
+    modal.children[0].children[0].classList.remove("modal-change-size");
+  }, 160);
+
+  setTimeout(() => {
+    modal.style.background = " #302f2f48";
+    modal.children[0].children[0].classList.add("close-now");
+  }, 700);
+}
+
+function closeModal() {
+  boxThis = undefined;
+  if (modal.children[0].children[0].classList.contains("close-now")) {
+    modal.style.removeProperty("background");
+    modal.children[0].children[0].classList.remove("close-now");
+    modal.children[0].children[0].classList.add("modal-change-size");
+
+    setTimeout(() => {
+      modal.children[0].classList.add("d-none");
+      modal.classList.add("d-none");
+      modal.remove();
+    }, 500);
+
+    setTimeout(() => {
+      // cek modal
+      if (modal.querySelector("#bill") != null) {
+        modal.children[0].replaceChild(mainModal, bill);
+      }
+      enableScroll();
+    }, 600);
+  }
+}
+
+modal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("close-modal")) closeModal();
+});
+
+let boxThis;
+boxMakanan.forEach((box) => {
+  box.addEventListener("click", function (e) {
+    // animasi ketika box makanan diklik
+    let effect = document.createElement("span"),
+      pos = getPosition(this);
+    effect.classList.add("effect");
+    effect.style.transform = `translate3d(
+      ${e.pageX - pos.x - 10}px, ${e.pageY - pos.y - 10}px
+    ,0)`;
+
+    if (!e.target.parentElement.classList.contains("tombol")) {
+      this.appendChild(effect);
+      boxThis = this;
+      isiModal(boxThis);
+      openModal();
+      setTimeout(() => {
+        effect.remove();
+      }, 500);
+    }
+  });
+});
+
+const imgModal = [];
+let timeOutModal;
+// mengisi modal
+function isiModal(box) {
+  clearTimeout(timeOutModal);
+  const src = box.children[1].children[0].src;
+  if (src != undefined) {
+    modal.querySelector("img").src = src;
+    cekImgModal(src);
+  } else {
+    timeOutModal = setTimeout(() => {
+      isiModal(box);
+    }, 500);
+  }
+
+  modal.querySelector("#judul").textContent =
+    box.children[0].children[0].textContent;
+  modal.querySelector("#deskripsi").textContent =
+    box.children[0].children[1].textContent;
+  modal.querySelector("#harga").textContent =
+    box.children[0].children[2].textContent;
+  loadDataImg(modal.querySelector("img"));
+}
+
+function loadDataImg(img) {
+  const ld = document.createElement("div");
+  ld.classList.add("load-img-main-modal");
+  ld.innerHTML = `<div></div>`;
+
+  img.parentElement.appendChild(ld);
+  img.classList.add("d-none");
+
+  img.onload = () => {
+    ld.remove();
+    img.classList.remove("d-none");
+  };
+}
+
+function cekImgModal(src) {
+  console.log(imgModal.includes((img) => img.src == src));
+  // if (imgModal.length > 0) {
+  //   if ( == false) {
+  //     console.log("masuk");
+  //     pushToImgModal(src);
+  //   }
+  // } else pushToImgModal(src);
+}
+
+function pushToImgModal(src) {
+  const imgTag = document.createElement("img");
+  imgTag.src = src;
+  imgModal.push(imgTag);
+}
+
+//pangambilan posisi dari ukuran element
+function getPosition(el) {
+  let xPosition = 0,
+    yPosition = 0;
+
+  while (el) {
+    xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
+    yPosition += el.offsetTop - el.scrollTop + el.clientTop;
+    el = el.offsetParent;
+  }
+
+  return {
+    x: xPosition,
+    y: yPosition,
+  };
+}
+
+modal.querySelector("button").addEventListener("click", () => {
+  const quantity = boxThis.children[1].children[2].children[2];
+  if (quantity.textContent == "") {
+    quantity.previousElementSibling.previousElementSibling.click();
+  } else {
+    quantity.nextElementSibling.click();
+  }
+});
+
+// animasi float btn
+let timer = null;
+window.addEventListener(
+  "scroll",
+  function () {
+    if (timer !== null) {
+      containerFloatBtnPesanan.style.bottom = "-7rem";
+      clearTimeout(timer);
+    }
+    timer = setTimeout(function () {
+      containerFloatBtnPesanan.style.bottom =
+        document.querySelector("#container-modal") != null ? "-7rem" : "0";
+    }, 500);
+  },
+  false
+);
+
 // fungsi bagian modal
 const mainModal = modal.children[0].children[0];
 
 floatBtnPesanan.addEventListener("click", () => {
+  clearTimeout(timeOutModal);
   floatBtnPesanan.style.transform = "translateY(-0.8em)";
   setTimeout(() => {
     floatBtnPesanan.style.removeProperty("transform");
@@ -314,7 +509,6 @@ modal.children[0].addEventListener("touchstart", function (start) {
 });
 
 modal.children[0].addEventListener("touchend", () => {
-  console.log(`st:${st}; mv:${mv}`);
   if (st + 50 < mv) {
     st = 0;
     mv = 0;
@@ -323,166 +517,3 @@ modal.children[0].addEventListener("touchend", () => {
     closeModal();
   }
 });
-
-//fungsi untuk mencek perangkat dibuka dimana
-function detectMob() {
-  const toMatch = [
-    /Android/i,
-    /webOS/i,
-    /iPhone/i,
-    /iPad/i,
-    /iPod/i,
-    /BlackBerry/i,
-    /Windows Phone/i,
-  ];
-
-  return toMatch.some((toMatchItem) => {
-    return navigator.userAgent.match(toMatchItem);
-  });
-}
-
-function disableScroll() {
-  if (detectMob()) {
-    body.classList.add("overflow-hidden");
-  } else {
-    let yScroll = window.scrollY;
-    window.onscroll = () => {
-      window.scrollTo(0, yScroll);
-    };
-  }
-  containerFloatBtnPesanan.style.bottom = "-7em";
-}
-
-function enableScroll() {
-  if (detectMob()) {
-    body.classList.remove("overflow-hidden");
-  } else {
-    window.onscroll = () => {
-      return;
-    };
-  }
-  containerFloatBtnPesanan.style.bottom = "0";
-}
-
-function openModal() {
-  disableScroll();
-  modal.children[0].classList.remove("d-none");
-  modal.classList.remove("d-none");
-  setTimeout(() => {
-    document
-      .querySelector("body > .container")
-      .insertAdjacentElement("afterend", modal);
-  }, 100);
-  setTimeout(() => {
-    modal.children[0].children[0].classList.remove("modal-change-size");
-  }, 160);
-
-  setTimeout(() => {
-    modal.style.background = " #302f2f48";
-    modal.children[0].children[0].classList.add("close-now");
-  }, 700);
-}
-
-function closeModal() {
-  boxThis = undefined;
-  if (modal.children[0].children[0].classList.contains("close-now")) {
-    modal.style.removeProperty("background");
-    modal.children[0].children[0].classList.remove("close-now");
-    modal.children[0].children[0].classList.add("modal-change-size");
-
-    setTimeout(() => {
-      modal.children[0].classList.add("d-none");
-      modal.classList.add("d-none");
-      modal.remove();
-    }, 500);
-
-    setTimeout(() => {
-      // cek modal
-      if (modal.querySelector("#bill") != null) {
-        modal.children[0].replaceChild(mainModal, bill);
-      }
-      enableScroll();
-    }, 600);
-  }
-}
-
-modal.addEventListener("click", (e) => {
-  if (e.target.classList.contains("close-modal")) closeModal();
-});
-
-let boxThis;
-boxMakanan.forEach((box) => {
-  box.addEventListener("click", function (e) {
-    // animasi ketika box makanan diklik
-    let effect = document.createElement("span"),
-      pos = getPosition(this);
-    effect.classList.add("effect");
-    effect.style.transform = `translate3d(
-      ${e.pageX - pos.x - 10}px, ${e.pageY - pos.y - 10}px
-    ,0)`;
-
-    if (!e.target.parentElement.classList.contains("tombol")) {
-      this.appendChild(effect);
-      boxThis = this;
-      isiModal(boxThis);
-      openModal();
-      setTimeout(() => {
-        effect.remove();
-      }, 500);
-    }
-  });
-});
-
-// mengisi modal
-function isiModal(box) {
-  modal.querySelector("img").src = box.children[1].children[0].src;
-  modal.querySelector("#judul").textContent =
-    box.children[0].children[0].textContent;
-  modal.querySelector("#deskripsi").textContent =
-    box.children[0].children[1].textContent;
-  modal.querySelector("#harga").textContent =
-    box.children[0].children[2].textContent;
-}
-
-//pangambilan posisi dari ukuran element
-function getPosition(el) {
-  let xPosition = 0,
-    yPosition = 0;
-
-  while (el) {
-    xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
-    yPosition += el.offsetTop - el.scrollTop + el.clientTop;
-    el = el.offsetParent;
-  }
-
-  return {
-    x: xPosition,
-    y: yPosition,
-  };
-}
-
-modal.querySelector("button").addEventListener("click", () => {
-  const quantity = boxThis.children[1].children[1].children[2];
-  if (quantity.textContent == "") {
-    quantity.previousElementSibling.previousElementSibling.click();
-  } else {
-    quantity.nextElementSibling.click();
-  }
-});
-
-// animasi float btn
-let timer = null;
-window.addEventListener(
-  "scroll",
-  function () {
-    if (timer !== null) {
-      containerFloatBtnPesanan.style.bottom = "-7em";
-      clearTimeout(timer);
-    }
-    timer = setTimeout(function () {
-      containerFloatBtnPesanan.style.bottom =
-        document.querySelector("#container-modal") != null ? "-7em" : "0";
-    }, 500);
-  },
-  false
-);
