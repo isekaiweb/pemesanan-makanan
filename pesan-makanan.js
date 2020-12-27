@@ -76,7 +76,7 @@ document.querySelectorAll(".img-load").forEach((el, i) => {
   const bg = document.querySelector("#bg-profil");
 
   const bgImg = new Image();
-  bgImg.onload = function () {
+  bgImg.onload = () => {
     bg.children[0].remove();
     bg.style.backgroundImage = "url(" + bgImg.src + ")";
   };
@@ -316,7 +316,7 @@ boxMakanan.forEach((box) => {
       ${e.pageX - pos.x - 10}px, ${e.pageY - pos.y - 10}px
     ,0)`;
 
-    if (!e.target.parentElement.classList.contains("tombol")) {
+    if (!e.target.classList.contains("bukan-tringger-modal")) {
       this.appendChild(effect);
       boxThis = this;
       isiModal(boxThis);
