@@ -15,7 +15,9 @@ function ambilApiLIFF(idLiff) {
 
 function mulaiAPP() {
   //cek apakah sudah login jika belum maka login
-  if (liff.isLoggedIn()) {
+  if (!liff.isLoggedIn()) {
+    liff.login();
+  } else {
     liff
       .getProfile()
       .then((profile) => {
@@ -37,7 +39,8 @@ function removeClass(el, cls) {
   el.classList.remove(cls);
 }
 
-/* <div class="container mb-4 px-4">
+{
+  /* <div class="container mb-4 px-4">
       <!-- bagian profil -->
       <div
         class="row container-profil position-relative justify-content-center"
@@ -212,3 +215,4 @@ function removeClass(el, cls) {
     <script src="liff.js"></script>
   
   */
+}
