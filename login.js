@@ -55,6 +55,7 @@ setInterval(buble, 200);
 })();
 
 document.querySelector(".btn-masuk").addEventListener("click", () => {
+  liff.login();
   body.classList.add("d-none");
   document.querySelector("body").innerHTML = mainHtml();
 });

@@ -15,9 +15,7 @@ function ambilApiLIFF(idLiff) {
 
 function mulaiAPP() {
   //cek apakah sudah login jika belum maka login
-  if (!liff.isLoggedIn()) {
-    liff.login();
-  } else {
+  if (liff.isLoggedIn()) {
     liff
       .getProfile()
       .then((profile) => {
