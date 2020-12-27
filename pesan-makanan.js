@@ -36,7 +36,6 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
 
                       
                         <button class="btn btn-success close-modal">Tambah pesanan</button>
-                    
                       
                     </div>
                   </div>`;

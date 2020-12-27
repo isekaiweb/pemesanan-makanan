@@ -36,7 +36,7 @@ function buble() {
 
 setInterval(buble, 200);
 
-function changeChild(oldEl1 = section[0], oldEl, newEl) {
+function changeChild(oldEl, oldEl1, newEl) {
   const img = new Image();
   img.src =
     "https://images.unsplash.com/photo-1550949987-440138d6550e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=889&q=80";
