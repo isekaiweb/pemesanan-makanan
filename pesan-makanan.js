@@ -381,7 +381,7 @@ function getPosition(el) {
 }
 
 modal.querySelector("button").addEventListener("click", () => {
-  const quantity = boxThis.children[1].children[2].children[2];
+  const quantity = boxThis.querySelector(".quantity");
   if (quantity.textContent == "") {
     quantity.previousElementSibling.previousElementSibling.click();
   } else {
