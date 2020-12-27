@@ -18,12 +18,11 @@ function mulaiAPP() {
     {
       console.log("blm login");
       // document.querySelector("body").innerHTML = secondHtml();
-      document
-        .querySelector(".btn-masuk")
-        .addEventListener("click", () => {
-          liff.login();
-          window.location.reload();
-        });
+      document.querySelector(".btn-masuk").addEventListener("click", () => {
+        liff.login();
+        window.location.reload();
+        console.log("sip");
+      });
     }
   } else {
     document.querySelector("body").innerHTML = mainHtml();
