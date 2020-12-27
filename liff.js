@@ -26,7 +26,7 @@ function mulaiAPP() {
                                 alt="foto profil"
                                 />`;
         profilContainer.innerHTML += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
-        profilContainer.innerHTML += `<ion-icon name="power"></ion-icon>`;
+        profilContainer.innerHTML += `<ion-icon id="icon-power" name="power"></ion-icon>`;
       })
       .catch((err) => {
         console.log("error", err);
