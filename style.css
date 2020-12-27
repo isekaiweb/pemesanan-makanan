@@ -201,14 +201,14 @@
 #img-profil {
   width: 6rem;
   height: 6rem;
-  border: 0.2rem solid #f8f9fa;
+  border: 0.2rem solid var(--light);
 
   margin: auto 0;
 }
 
 #nama-profil {
   color: #f8f9fa;
-  text-shadow: 1px 2px #343a40;
+  -webkit-text-stroke: 1px var(--black);
   font-size: 1.6rem;
   margin: auto 1rem;
   font-weight: bold;
@@ -217,8 +217,6 @@
   width: 70%;
   word-break: break-all;
 }
-
-
 
 /* bagian modal */
 #container-modal {
