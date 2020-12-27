@@ -36,7 +36,7 @@ function buble() {
 
 setInterval(buble, 200);
 
-(function changeChild() {
+function changeChild(oldEl, newEl) {
   const img = new Image();
   img.src =
     "https://images.unsplash.com/photo-1550949987-440138d6550e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=889&q=80";
@@ -47,12 +47,12 @@ setInterval(buble, 200);
         ".not-login > div"
       ).style.cssText = `background-image: linear-gradient(#284b3c9a, #f8f9faaf, #f8f9fa),url("${img.src}")`;
       body.style.backgroundColor = "#f8f9fa";
-      section[1].classList.remove("d-none");
+      oldEl.remove();
+      newEl.classList.remove("d-none");
       clearInterval(buble);
-      body.replaceChild(section[1], section[0]);
     }, 1000);
   };
-})();
+}
 
 document.querySelector(".btn-masuk").addEventListener("click", () => {
   // liff.login();
