@@ -16,7 +16,6 @@ window.addEventListener("load", () => {
 function mulaiAPP() {
   if (liff.isLoggedIn()) {
     changeChild(section[0], section[1], section[2]);
-    console.log(section);
     liff
       .getProfile()
       .then((profile) => {
@@ -31,8 +30,4 @@ function mulaiAPP() {
         console.log("error", err);
       });
   }
-  document.querySelector(".btn-masuk").addEventListener("click", () => {
-    liff.login();
-    changeChild(section[0], section[1], section[2]);
-  });
 }
