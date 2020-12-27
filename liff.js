@@ -16,9 +16,11 @@ function mulaiAPP() {
   //cek apakah sudah login jika belum maka login
   if (!liff.isLoggedIn()) {
     liff.login();
-    changeChild(section.children[0], section.children[1]);
+    // changeChild(section.children[0], section.children[1]);
+    console.log(section);
   } else {
-    changeChild(section.children[0], section.children[1]);
+    // changeChild(section.children[0], section.children[1]);
+    console.log(section);
     liff
       .getProfile()
       .then((profile) => {
