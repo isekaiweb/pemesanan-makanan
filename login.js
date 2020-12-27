@@ -36,7 +36,7 @@ function buble() {
 
 setInterval(buble, 200);
 
-function changeChild(oldEl, newEl) {
+function changeChild(oldEl1 = section[0], oldEl, newEl) {
   const img = new Image();
   img.src =
     "https://images.unsplash.com/photo-1550949987-440138d6550e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=889&q=80";
@@ -48,6 +48,7 @@ function changeChild(oldEl, newEl) {
       ).style.cssText = `background-image: linear-gradient(#284b3c9a, #f8f9faaf, #f8f9fa),url("${img.src}")`;
       body.style.backgroundColor = "#f8f9fa";
       oldEl.remove();
+      oldEl1.remove();
       newEl.classList.remove("d-none");
       clearInterval(buble);
     }, 1000);
