@@ -19,7 +19,7 @@ function mulaiAPP() {
     changeChild(section[0], section[1]);
     console.log(section);
   } else {
-    changeChild(section[0], section[1]);
+    changeChild(section[1], section[2]);
     console.log(section);
     liff
       .getProfile()

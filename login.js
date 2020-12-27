@@ -57,5 +57,4 @@ function changeChild(oldEl, newEl) {
 document.querySelector(".btn-masuk").addEventListener("click", () => {
   // liff.login();
   // body.classList.add("d-none");
-  console.log(section.children[0]);
 });
