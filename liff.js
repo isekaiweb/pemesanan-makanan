@@ -14,7 +14,18 @@ function ambilApiLIFF(idLiff) {
 }
 //cek apakah sudah login jika belum maka login
 function mulaiAPP() {
-  if (liff.isLoggedIn()) {
+  if (!liff.isLoggedIn()) {
+    {
+      console.log("blm login");
+      // document.querySelector("body").innerHTML = secondHtml();
+      document
+        .querySelector(".btn-masuk")
+        .addEventListener("click", () => {
+          liff.login();
+          window.location.reload();
+        });
+    }
+  } else {
     document.querySelector("body").innerHTML = mainHtml();
     console.log("masuk");
     liff
@@ -30,12 +41,6 @@ function mulaiAPP() {
       .catch((err) => {
         console.log("error", err);
       });
-  } else {
-    console.log("blm login");
-    // document.querySelector("body").innerHTML = secondHtml();
-    document
-      .querySelector(".btn-masuk")
-      .addEventListener("click", () => liff.login());
   }
 }
 
