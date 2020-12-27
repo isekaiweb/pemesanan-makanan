@@ -15,7 +15,6 @@ window.addEventListener("load", () => {
 function mulaiAPP() {
   //cek apakah sudah login jika belum maka login
   if (!liff.isLoggedIn()) {
-    liff.login();
     changeChild(section[0], section[2], section[1]);
     console.log(section);
   } else {
