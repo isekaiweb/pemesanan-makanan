@@ -8,8 +8,8 @@ function ambilApiLIFF(idLiff) {
     .then(() => {
       mulaiAPP();
     })
-    .catch(() => {
-      alert("Id LIFF Tidak ada");
+    .catch((err) => {
+      console.error(err);
     });
 }
 
