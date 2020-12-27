@@ -29,5 +29,7 @@ function mulaiAPP() {
       .catch((err) => {
         console.log("error", err);
       });
+  } else {
+    changeChild(section[0], section[2], section[1]);
   }
 }
