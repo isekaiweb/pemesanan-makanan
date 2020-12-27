@@ -1,6 +1,5 @@
-ambilApiLIFF("1655324717-zK2NJ5e3");
-
-function ambilApiLIFF(idLiff) {
+window.addEventListener("load", () => {
+  const idLiff = "1655324717-zK2NJ5e3";
   liff
     .init({
       liffId: idLiff,
@@ -11,7 +10,7 @@ function ambilApiLIFF(idLiff) {
     .catch((err) => {
       console.error(err);
     });
-}
+});
 
 function mulaiAPP() {
   //cek apakah sudah login jika belum maka login
