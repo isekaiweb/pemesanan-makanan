@@ -33,7 +33,6 @@ function mulaiAPP() {
       .catch((err) => {
         console.log("error", err);
       });
-    removeClass(body, "d-none");
   }
 }
 
@@ -41,8 +40,7 @@ function removeClass(el, cls) {
   el.classList.remove(cls);
 }
 
-{
-  /* <div class="container mb-4 px-4">
+/* <div class="container mb-4 px-4">
       <!-- bagian profil -->
       <div
         class="row container-profil position-relative justify-content-center"
@@ -217,4 +215,3 @@ function removeClass(el, cls) {
     <script src="liff.js"></script>
   
   */
-}
