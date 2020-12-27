@@ -1,5 +1,5 @@
 const openBrowser = document.querySelector("#tombol-browser"),
-  profilContainer = document.querySelector("#profil"),
+  profilContainer = document.querySelector("#profil > div"),
   boxMakanan = document.querySelectorAll(".box-makanan"),
   containerFloatBtnPesanan = document.createElement("div"),
   modal = document.createElement("div"),

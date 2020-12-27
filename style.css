@@ -190,32 +190,51 @@
 }
 
 #profil {
+  display: flex;
   position: absolute;
   width: 100%;
-  height: 50%;
-  justify-content: start;
+  padding: 1em 0;
+  font-size: 1.5vmin;
 
   bottom: 0;
+  justify-content: space-between;
+}
+
+#profil > div {
+  display: flex;
+  width: 85%;
 }
 
 #img-profil {
-  width: 6rem;
-  height: 6rem;
-  border: 0.2rem solid var(--light);
-
-  margin: auto 0;
+  width: 7.8em;
+  height: 7.8em;
+  border: 0.3em solid var(--light);
+  align-self: center;
 }
 
 #nama-profil {
-  color: #f8f9fa;
-  -webkit-text-stroke: 1px var(--black);
-  font-size: 1.6rem;
-  margin: auto 1rem;
+  color: var(--light);
+  /* -webkit-text-stroke: 0.015em var(--black); */
+  text-shadow: 0 0 5px var(--black);
+  font-size: 2em;
+  margin: 0 0 0 0.5em;
   font-weight: bold;
   text-transform: uppercase;
 
-  width: 70%;
+  align-self: center;
   word-break: break-all;
+}
+
+#icon-power {
+  font-size: 2.5em;
+  box-shadow: 0 0 10px 1px var(--light);
+  color: var(--light);
+  background-color: var(--danger);
+  border-radius: 50%;
+  padding: 0.2em;
+  cursor: pointer;
+  align-self: center;
+  margin-right: 0.5em;
 }
 
 /* bagian modal */
@@ -609,25 +628,7 @@
 
   /* bagian profil */
   #profil {
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    justify-content: start;
-
-    bottom: 0;
-  }
-
-  #img-profil {
-    width: 4rem;
-    height: 4rem;
-    border: 0.15rem solid #f8f9fa;
-  }
-
-  #nama-profil {
-    margin: auto 0.5rem;
-    margin-right: 0;
-
-    font-size: 1rem;
+    font-size: 2vmin;
   }
 
   #main-modal button {
