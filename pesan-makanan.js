@@ -145,7 +145,7 @@ let intervalBtnFloat,
     } else {
       if (body.querySelector("#float-btn-pesanan") == null) {
         document
-          .querySelector("body > .container")
+          .querySelector("body .container")
           .insertAdjacentElement("afterend", containerFloatBtnPesanan);
         containerFloatBtnPesanan.style.bottom = "-7rem";
 
@@ -263,7 +263,7 @@ function openModal() {
   modal.classList.remove("d-none");
   setTimeout(() => {
     document
-      .querySelector("body > .container")
+      .querySelector("body .container")
       .insertAdjacentElement("afterend", modal);
   }, 100);
   setTimeout(() => {
