@@ -55,7 +55,4 @@ function changeChild(oldEl, oldEl1, newEl) {
   };
 }
 
-document.querySelector(".btn-masuk").addEventListener("click", () => {
-  liff.login();
-  changeChild(section[0], section[1], section[2]);
-});
+
