@@ -387,7 +387,7 @@ window.addEventListener(
     }
     timer = setTimeout(function () {
       containerFloatBtnPesanan.style.bottom =
-        document.querySelector("#container-modal") != null ? "-7rem" : "0";
+        document.querySelector(".close-modal") != null ? "-7rem" : "0";
     }, 500);
   },
   false
@@ -472,6 +472,10 @@ modal.children[0].addEventListener("touchstart", function (start) {
   st = start.touches[0].pageY;
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].pageY;
+    if (st + 100 > mv) {
+      mv = 0;
+      st = 0;
+    }
   });
 });
 
