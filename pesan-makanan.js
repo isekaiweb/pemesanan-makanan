@@ -478,7 +478,6 @@ modal.children[0].addEventListener("touchstart", function (start) {
     mv = mvs.touches[0].pageY;
     if (st + 100 > mv) {
       mv = 0;
-      st = 0;
     }
   });
 });
