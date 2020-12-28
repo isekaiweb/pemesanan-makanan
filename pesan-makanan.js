@@ -470,10 +470,12 @@ let st = 0,
   mv = 0;
 modal.children[0].addEventListener("touchstart", function (start) {
   st = start.touches[0].pageY;
+  console.log(st);
   document
     .querySelector(".main-action")
     .addEventListener("touchstart", function () {
-      start.touches[0].pageY + Math.floor(this.scrollHeight / 2);
+      st += Math.floor(this.scrollHeight / 2);
+      console.log(st);
     });
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].pageY;
