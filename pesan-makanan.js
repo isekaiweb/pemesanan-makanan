@@ -8,9 +8,9 @@ document.querySelectorAll(".img-load").forEach((el, i) => {
   };
   dataImgModal.push(data);
 
-  img.onload = function () {
+  if (img.complete) {
     el.parentElement.replaceChild(img, el);
-  };
+  }
 });
 
 (function loadBackground() {
@@ -19,10 +19,11 @@ document.querySelectorAll(".img-load").forEach((el, i) => {
   const bgImg = new Image();
   bgImg.src =
     "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
-  bgImg.onload = () => {
+
+  if (bgImg.complete) {
     bg.children[0].remove();
     bg.style.backgroundImage = "url(" + bgImg.src + ")";
-  };
+  }
 })();
 
 class DaftarMenu {
