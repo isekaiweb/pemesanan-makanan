@@ -19,7 +19,7 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                         <img src="" class="img-fluid" />
                       </div>
 
-                      <div>
+                      <div class="main-action">
                         <p id="judul"></p>
                         <div>
                           <small id="deskripsi"></small>  
@@ -40,7 +40,7 @@ bill.innerHTML = `
           <h1 class="text-center text-uppercase text-success font-weight-bold">
             daftar Pesanan
           </h1>
-          <div>         
+          <div class="main-action">         
           </div>
           <button class="btn btn-success my-3">
             Kirim Pesanan
@@ -469,8 +469,10 @@ function setSatuan(data) {
 let st = 0,
   mv = 0;
 modal.children[0].addEventListener("touchstart", function (start) {
-  st = start.touches[0].pageY;
-
+  st = start.target.classList.contains("main-action")
+    ? start.touches[0].pageY +
+      Math.floor(document.querySelector(".main-action").scrollHeight / 3)
+    : start.touches[0].pageY;
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].pageY;
   });
