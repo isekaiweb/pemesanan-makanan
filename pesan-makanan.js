@@ -258,11 +258,10 @@ function openModal() {
   setTimeout(() => {
     modal.style.background = " #302f2f48";
     modal.children[0].children[0].classList.add("close-now");
+    document
+      .querySelector("#main-action")
+      .addEventListener("touchstart", (ev) => ev.stopPropagation());
   }, 700);
-
-  document
-    .querySelector("#main-action")
-    .addEventListener("touchstart", (ev) => ev.stopPropagation());
 }
 
 function closeModal() {
