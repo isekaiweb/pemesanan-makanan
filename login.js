@@ -1,7 +1,3 @@
-const loading = document.querySelector(".load"),
-  body = document.querySelector("body"),
-  section = document.querySelectorAll("body > div");
-
 window.addEventListener("load", changeSizeCard);
 window.addEventListener("resize", changeSizeCard);
 
