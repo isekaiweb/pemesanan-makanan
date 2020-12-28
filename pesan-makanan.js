@@ -442,6 +442,7 @@ function removeFloatBtnPesanan() {
 document.querySelector("#icon-power").addEventListener("click", () => {
   if (!liff.isInClient()) {
     liff.logout();
+    window.location.reload();
   } else {
     liff.closeWindow();
   }
