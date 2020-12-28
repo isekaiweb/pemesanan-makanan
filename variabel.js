@@ -16,7 +16,7 @@ const loading = document.querySelector(".load"),
   ],
   alertB4 = document.createElement("div");
 
-alertB4.classList = "alert alert-warning alert-dismissible fade show";
+alertB4.classList = "alert alert-warning alert-dismissible fade show alert-b4";
 alertB4.setAttribute("role", "alert");
 alertB4.innerHTML = `   <p class="text-center m-0"><strong>Anda mengakses Dikita diluar Aplikasi LINE</strong>, akses Dikita melalui <strong>Aplikasi LINE</strong> agar dapat menggunakan fitur Dikita secara penuh
                         </p>

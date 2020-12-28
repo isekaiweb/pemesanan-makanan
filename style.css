@@ -676,3 +676,11 @@ input:focus,
     opacity: 0;
   }
 }
+
+.alert-b4 {
+  font-size: 4vmin;
+}
+
+.alert-b4 p {
+  font-size: 2em;
+}
