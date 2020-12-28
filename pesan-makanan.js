@@ -19,7 +19,7 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                         <img src="" class="img-fluid" />
                       </div>
 
-                      <div class="main-action">
+                      <div>
                         <p id="judul"></p>
                         <div>
                           <small id="deskripsi"></small>  
@@ -40,7 +40,7 @@ bill.innerHTML = `
           <h1 class="text-center text-uppercase text-success font-weight-bold">
             daftar Pesanan
           </h1>
-          <div class="main-action">         
+          <div>         
           </div>
           <button class="btn btn-success my-3">
             Kirim Pesanan
@@ -472,16 +472,12 @@ modal.children[0].addEventListener("touchstart", function (start) {
   st = start.touches[0].pageY;
 
   this.addEventListener("touchmove", (mvs) => {
-    if (start.target.classList.contains("main-action")) {
-      mv = 0;
-    } else {
-      mv = mvs.touches[0].pageY;
-    }
+    mv = mvs.touches[0].pageY;
   });
 });
 
 modal.children[0].addEventListener("touchend", () => {
-  if (st + 50 < mv) {
+  if (st + 100 < mv) {
     st = 0;
     mv = 0;
     timer = 200;
