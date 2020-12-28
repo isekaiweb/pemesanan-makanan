@@ -442,7 +442,9 @@ function removeFloatBtnPesanan() {
   }, 500);
 }
 
-document.querySelector("#icon-power title").textContent = "logout";
+document
+  .querySelector("#icon-power")
+  .shadowRoot.querySelector("title").textContent = "logout";
 
 document.querySelector("#icon-power").addEventListener("click", () => {
   if (!liff.isInClient()) {
