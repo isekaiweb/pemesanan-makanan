@@ -39,6 +39,6 @@ function cekJikaLoginDariLine() {
   if (!liff.isInClient()) {
     document
       .querySelector(".main-page")
-      .insertAdjacentElement("afterbegin", alertB4);
+      .parentElement.insertAdjacentElement("afterbegin", alertB4);
   }
 }
