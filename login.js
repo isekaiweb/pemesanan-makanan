@@ -43,16 +43,13 @@ function changeChild(oldEl, oldEl1, newEl) {
         ".not-login > div"
       ).style.cssText = `background-image: linear-gradient(#284b3c9a, #f8f9faaf, #f8f9fa),url("${img.src}")`;
       body.style.backgroundColor = "#f8f9fa";
-      // if (newEl == section[2] && !liff.isLoggedIn()) {
-      //   window.location.reload();
-      // } else {
-      //   oldEl.remove();
-      //   oldEl1.remove();
-      //   newEl.removeAttribute("class");
-      // }
-      oldEl.remove();
-      oldEl1.remove();
-      newEl.removeAttribute("class");
+      if (newEl == section[2] && !liff.isLoggedIn()) {
+        window.location.reload();
+      } else {
+        oldEl.remove();
+        oldEl1.remove();
+        newEl.removeAttribute("class");
+      }
       clearInterval(buble);
     }, 500);
   };
