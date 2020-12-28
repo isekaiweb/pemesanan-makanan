@@ -228,7 +228,6 @@ function disableScroll() {
       window.scrollTo(0, yScroll);
     };
   }
-  containerFloatBtnPesanan.style.bottom = "-7rem";
 }
 
 function enableScroll() {
@@ -239,10 +238,10 @@ function enableScroll() {
       return;
     };
   }
-  containerFloatBtnPesanan.style.bottom = "0";
 }
 
 function openModal() {
+  containerFloatBtnPesanan.style.bottom = "-7rem";
   disableScroll();
   modal.children[0].classList.remove("d-none");
   modal.classList.remove("d-none");
@@ -280,6 +279,7 @@ function closeModal() {
         modal.children[0].replaceChild(mainModal, bill);
       }
       enableScroll();
+      containerFloatBtnPesanan.style.bottom = "0";
     }, 600);
   }
 }
@@ -382,13 +382,11 @@ window.addEventListener(
   "scroll",
   function () {
     if (body.querySelector("#float-btn-pesanan") != null) {
-      if (
-        timer !== null ||
-        document.querySelector("#container-modal") != null
-      ) {
+      if (timer !== null) {
         containerFloatBtnPesanan.style.bottom = "-7rem";
         clearTimeout(timer);
       }
+
       timer = setTimeout(function () {
         containerFloatBtnPesanan.style.bottom = "0";
       }, 500);
@@ -476,9 +474,6 @@ modal.children[0].addEventListener("touchstart", function (start) {
   st = start.touches[0].pageY;
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].pageY;
-    if (st + 100 > mv) {
-      mv = 0;
-    }
   });
 });
 
@@ -486,7 +481,6 @@ modal.children[0].addEventListener("touchend", () => {
   if (st + 50 < mv) {
     st = 0;
     mv = 0;
-    timer = 200;
     close = true;
     closeModal();
   }
