@@ -432,7 +432,7 @@ floatBtnPesanan.addEventListener("click", () => {
               setSatuan(hargaMakanan)
             );
           } else {
-            hargaMinuman += menu.harga;
+            hargaMinuman += menu.harga * menu.qyt;
             elMinuman += buatElementMakanan(menu);
             minuman = elParentJenis(
               menu.jenis,

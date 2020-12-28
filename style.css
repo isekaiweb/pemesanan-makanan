@@ -158,7 +158,7 @@
   background-size: cover;
   filter: blur(5px);
   display: block;
-  height: 15rem;
+  height: 30vmin;
   width: 100%;
   padding: 0;
 
@@ -196,7 +196,7 @@
   padding: 1em 0;
   font-size: 1.5vmin;
 
-  bottom: 0;
+  bottom: 2em;
   justify-content: space-between;
 }
 
@@ -605,10 +605,6 @@
     height: 2em;
 
     line-height: 1.6em;
-  }
-
-  #bg-profil {
-    height: 12rem;
   }
 
   .btn-click-animation {
