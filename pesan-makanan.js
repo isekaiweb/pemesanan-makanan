@@ -291,7 +291,7 @@ modal.addEventListener("click", (e) => {
 });
 
 document.querySelectorAll(".tombol").forEach((el) => {
-  el.onclick() = ev = ev.stopPropagation();
+  el.onclick = (ev) => ev.stopPropagation();
 });
 
 let boxThis;
