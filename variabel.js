@@ -18,7 +18,7 @@ const loading = document.querySelector(".load"),
 
 alertB4.classList = "alert alert-warning alert-dismissible fade show";
 alertB4.setAttribute("role", "alert");
-alertB4.innerHTML = `   <p class="text-center"><strong>Anda mengakses diluar aplikasi LINE</strong>,akses aplikasi Dikita
+alertB4.innerHTML = `   <p class="text-center m-0"><strong>Anda mengakses diluar aplikasi LINE</strong>,akses aplikasi Dikita
                             melalui LINE agar dapat mengunakan semua fiturnya
                         </p>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

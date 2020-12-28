@@ -111,7 +111,7 @@ body {
 }
 
 .box-card p {
-  text-align: justify;
+  text-align: center;
   color: var(--black);
   margin: 0;
 }
