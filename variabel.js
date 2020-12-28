@@ -18,11 +18,13 @@ const loading = document.querySelector(".load"),
 
 alertB4.classList = "alert alert-warning alert-dismissible fade show alert-b4";
 alertB4.setAttribute("role", "alert");
-alertB4.innerHTML = `   <p class="text-center m-0"><strong>Anda mengakses Dikita diluar Aplikasi LINE</strong>, akses Dikita melalui <strong>Aplikasi LINE</strong> agar dapat menggunakan fitur Dikita secara penuh
-                        </p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>`;
+alertB4.innerHTML = `<div class="container">
+<p><strong>Anda mengakses Dikita di ${liff.getOS()}</strong>, segera akses melalui Aplikasi LINE untuk dapat menggunakan semua fitur yang ada
+</p>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+                    </div>`;
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
 containerFloatBtnPesanan.innerHTML = `<div class="container px-2">

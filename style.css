@@ -678,9 +678,29 @@ input:focus,
 }
 
 .alert-b4 {
-  font-size: 4vmin;
+  font-size: 1.8vmin;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.alert-b4 > div {
+  display: flex;
+  margin: 0 auto;
+  padding: 1em 0.5em;
 }
 
 .alert-b4 p {
+  font-size: 1.2em;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  width: 90%;
+}
+
+.alert-b4 button {
   font-size: 2em;
+  padding: 0 !important;
+  display: block;
+  top: 25% !important;
+  margin-right: 0.5em;
 }
