@@ -1,51 +1,3 @@
-containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
-containerFloatBtnPesanan.innerHTML = `<div class="container px-2">
-                      <button class="btn-success btn">
-                        <p class="m-0">
-                  
-                        <span></span>
-                        <span></span
-                          >
-                        </p>
-                      </button>
-                      </div>`;
-
-modal.classList = "close-modal d-none";
-modal.setAttribute("id", "container-modal");
-modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
-                    <div class="bg-white modal-change-size" id="main-modal">
-                    <hr class="close-modal" />
-                      <div id="container-img-modal">                       
-                      </div>
-
-                      <div>
-                        <p id="judul"></p>
-                        <div>
-                          <small id="deskripsi"></small>  
-                          <p id="harga"></p>
-                        </div>
-                      </div>
-
-                      
-                        <button class="btn btn-success close-modal">Tambah pesanan</button>
-                      
-                    </div>
-                  </div>`;
-
-bill.classList = "bg-white modal-change-size";
-bill.setAttribute("id", "bill");
-bill.innerHTML = `
-          <hr class="close-modal" />
-          <h1 class="text-center text-uppercase text-success font-weight-bold">
-            daftar Pesanan
-          </h1>
-          <div>         
-          </div>
-          <button class="btn btn-success my-3 close-modal">
-            Kirim Pesanan
-          </button>
-      `;
-
 document.querySelectorAll(".img-load").forEach((el, i) => {
   const img = document.createElement("img");
   img.classList = "img-fluid img-jenis";
@@ -486,3 +438,11 @@ function removeFloatBtnPesanan() {
     containerFloatBtnPesanan.remove();
   }, 500);
 }
+
+document.querySelector("#icon-power").addEventListener("click", () => {
+  if (!liff.isInClient()) {
+    liff.logout();
+  } else {
+    liff.closeWindow();
+  }
+});

@@ -29,7 +29,16 @@ function mulaiAPP() {
       .catch((err) => {
         console.error("error", err);
       });
+    cekJikaLoginDariLine();
   } else {
     changeChild(section[0], section[2], section[1]);
+  }
+}
+
+function cekJikaLoginDariLine() {
+  if (!liff.isInClient()) {
+    document
+      .querySelector(".main-page")
+      .insertAdjacentElement("afterbegin", alertB4);
   }
 }
