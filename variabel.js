@@ -1,0 +1,15 @@
+const loading = document.querySelector(".load"),
+  body = document.querySelector("body"),
+  section = document.querySelectorAll("body > div"),
+  openBrowser = document.querySelector("#tombol-browser"),
+  profilContainer = document.querySelector("#profil > div"),
+  boxMakanan = document.querySelectorAll(".box-makanan"),
+  containerFloatBtnPesanan = document.createElement("div"),
+  modal = document.createElement("div"),
+  bill = document.createElement("div"),
+  srcImageMakanan = [
+    "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "https://images.pexels.com/photos/239584/pexels-photo-239584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  ];
