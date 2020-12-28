@@ -112,8 +112,6 @@ let intervalBtnFloat,
       }
     });
 
-    console.log(totalItem);
-
     if (totalItem == 1) {
       timerBtnFloat = 0;
       intervalBtnFloat = setInterval(() => {

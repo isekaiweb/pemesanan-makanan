@@ -27,7 +27,7 @@ function mulaiAPP() {
         profilContainer.innerHTML += `<p id="nama-profil">Hi, ${profile.displayName}</p>`;
       })
       .catch((err) => {
-        console.log("error", err);
+        console.error("error", err);
       });
   } else {
     changeChild(section[0], section[2], section[1]);
