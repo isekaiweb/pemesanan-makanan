@@ -1,3 +1,15 @@
+document
+  .querySelector("#icon-power")
+  .shadowRoot.querySelector("title").textContent = "logout";
+document
+  .querySelector("[name='pizza-outline']")
+  .shadowRoot.querySelector("title")
+  .remove();
+document
+  .querySelector("[name='beer-outline'")
+  .shadowRoot.querySelector("title")
+  .remove();
+  
 document.querySelectorAll(".img-load").forEach((el, i) => {
   const img = document.createElement("img");
   img.classList = "img-fluid img-jenis";
@@ -441,10 +453,6 @@ function removeFloatBtnPesanan() {
     containerFloatBtnPesanan.remove();
   }, 500);
 }
-
-document
-  .querySelector("#icon-power")
-  .shadowRoot.querySelector("title").textContent = "logout";
 
 document.querySelector("#icon-power").addEventListener("click", () => {
   if (!liff.isInClient()) {
