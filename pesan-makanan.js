@@ -267,11 +267,11 @@ let timeOutModal;
 function isiModal(box) {
   modal.children[0]
     .querySelector("#container-img-modal")
-    .insertAdjacentElement(
+    .insertAdjacentHTML(
       "afterbegin",
       dataImgModal
         .filter((txt) => txt.box == box.children[0].children[0].textContent)
-        .pop().image
+        .pop().image.outerHTML
     );
   modal.children[0].querySelector("#judul").textContent =
     box.children[0].children[0].textContent;
@@ -353,9 +353,9 @@ floatBtnPesanan.addEventListener("click", () => {
       bill.children[2].innerHTML =
         makanan +
         minuman +
-        `<h2 id="grand-total"">
-            <span">Total Pembayaran</span>
-            <span">${setSatuan(hargaMakanan + hargaMinuman)}</span>
+        `<h2 id="grand-total">
+            <span>Total Pembayaran</span>
+            <span>${setSatuan(hargaMakanan + hargaMinuman)}</span>
           </h2>`;
       modal.children[0].replaceChild(bill, mainModal);
     }
