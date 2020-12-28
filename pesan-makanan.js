@@ -47,7 +47,6 @@ bill.innerHTML = `
           </button>
       `;
 
-
 document.querySelectorAll(".img-load").forEach((el, i) => {
   const img = document.createElement("img");
   img.classList = "img-fluid img-jenis";
@@ -291,6 +290,10 @@ modal.addEventListener("click", (e) => {
   if (e.target.classList.contains("close-modal")) closeModal();
 });
 
+document.querySelectorAll(".tombol").forEach((el) => {
+  el.onclik() = ev = ev.stopPropagation();
+});
+
 let boxThis;
 boxMakanan.forEach((box) => {
   box.addEventListener("click", function (e) {
@@ -302,15 +305,13 @@ boxMakanan.forEach((box) => {
       ${e.pageX - pos.x - 10}px, ${e.pageY - pos.y - 10}px
     ,0)`;
 
-    if (!e.target.classList.contains("bukan-tringger-modal")) {
-      this.appendChild(effect);
-      boxThis = this;
-      isiModal(boxThis);
-      openModal();
-      setTimeout(() => {
-        effect.remove();
-      }, 500);
-    }
+    this.appendChild(effect);
+    boxThis = this;
+    isiModal(boxThis);
+    openModal();
+    setTimeout(() => {
+      effect.remove();
+    }, 500);
   });
 });
 

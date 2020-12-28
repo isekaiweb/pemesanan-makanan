@@ -45,7 +45,7 @@ function changeChild(oldEl, oldEl1, newEl) {
       body.style.backgroundColor = "#f8f9fa";
       oldEl.remove();
       oldEl1.remove();
-      newEl.classList.remove("d-none");
+      newEl.removeAttribute("class");
       clearInterval(buble);
     }, 1000);
   };
