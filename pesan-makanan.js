@@ -381,11 +381,11 @@ let timer = null;
 window.addEventListener(
   "scroll",
   function () {
-    if (
-      document.querySelector("#container-modal") == null &&
-      body.querySelector("#float-btn-pesanan") != null
-    ) {
-      if (timer !== null) {
+    if (body.querySelector("#float-btn-pesanan") != null) {
+      if (
+        timer !== null ||
+        document.querySelector("#container-modal") != null
+      ) {
         containerFloatBtnPesanan.style.bottom = "-7rem";
         clearTimeout(timer);
       }
