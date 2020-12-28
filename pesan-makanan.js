@@ -19,11 +19,11 @@ modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                         <img src="" class="img-fluid" />
                       </div>
 
-                      <div class="main-action">
-                        <p id="judul" class="main-action"></p>
-                        <div class="main-action">
-                          <small id="deskripsi" class="main-action"></small>  
-                          <p id="harga" class="main-action"></p>
+                      <div id="main-action">
+                        <p id="judul"></p>
+                        <div>
+                          <small id="deskripsi"></small>  
+                          <p id="harga"></p>
                         </div>
                       </div>
 
@@ -40,7 +40,7 @@ bill.innerHTML = `
           <h1 class="text-center text-uppercase text-success font-weight-bold">
             daftar Pesanan
           </h1>
-          <div class="main-action">         
+          <div id="main-action">         
           </div>
           <button class="btn btn-success my-3">
             Kirim Pesanan
@@ -433,11 +433,9 @@ floatBtnPesanan.addEventListener("click", () => {
       bill.children[2].innerHTML =
         makanan +
         minuman +
-        `<h2 id="grand-total" class="main-action">
-            <span class="main-action">Total Pembayaran</span>
-            <span class="main-action">${setSatuan(
-              hargaMakanan + hargaMinuman
-            )}</span>
+        `<h2 id="grand-total"">
+            <span">Total Pembayaran</span>
+            <span">${setSatuan(hargaMakanan + hargaMinuman)}</span>
           </h2>`;
       modal.children[0].replaceChild(bill, mainModal);
     }
@@ -446,20 +444,20 @@ floatBtnPesanan.addEventListener("click", () => {
 });
 
 function buatElementMakanan(m) {
-  return `<p class="main-action">
-            <span class="main-action">${m.nama}</span>
-            <span class="main-action">${setSatuan(m.harga)} x ${m.qyt}</span>
-            <span class="main-action">${setSatuan(m.harga * m.qyt)}</span>
+  return `<p>
+            <span>${m.nama}</span>
+            <span>${setSatuan(m.harga)} x ${m.qyt}</span>
+            <span>${setSatuan(m.harga * m.qyt)}</span>
           </p>`;
 }
 
 function elParentJenis(jenis, el, totalHarga) {
-  return `<div class="main-action">
-            <h2 class="main-action">${jenis}</h2>
+  return `<div>
+            <h2>${jenis}</h2>
             ${el}
-            <p class="sub-total main-action">
-              <span class="main-action">Total Harga ${jenis}</span>
-              <span class="main-action">${totalHarga}</span>
+            <p>
+              <span>Total Harga ${jenis}</span>
+              <span>${totalHarga}</span>
             </p>
           </div>`;
 }
@@ -474,11 +472,7 @@ modal.children[0].addEventListener("touchstart", function (start) {
   st = start.touches[0].pageY;
 
   this.addEventListener("touchmove", (mvs) => {
-    if (!start.target.classList.contains("main-action")) {
-      mv = mvs.touches[0].pageY;
-    } else {
-      mv = 0;
-    }
+    mv = mvs.touches[0].pageY;
   });
 });
 
@@ -491,3 +485,7 @@ modal.children[0].addEventListener("touchend", () => {
     closeModal();
   }
 });
+
+document
+  .querySelector("#main-action")
+  .addEventListener("touchstart", (ev) => ev.stopPropagation());
