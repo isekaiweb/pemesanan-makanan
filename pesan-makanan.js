@@ -15,8 +15,7 @@ modal.setAttribute("id", "container-modal");
 modal.innerHTML = `<div id="field-content" class="container close-modal d-none">
                     <div class="bg-white modal-change-size" id="main-modal">
                     <hr class="close-modal" />
-                      <div>
-                        <img src="" class="img-fluid" />
+                      <div id="container-img-modal">                       
                       </div>
 
                       <div>
@@ -51,6 +50,11 @@ document.querySelectorAll(".img-load").forEach((el, i) => {
   const img = document.createElement("img");
   img.classList = "img-fluid img-jenis";
   img.src = srcImageMakanan[i];
+  let data = {
+    box: el.parentElement.previousElementSibling.children[0].textContent,
+    image: img,
+  };
+  dataImgModal.push(data);
 
   img.onload = function () {
     el.parentElement.replaceChild(img, el);
@@ -97,6 +101,7 @@ window.onload = () => {
 };
 let intervalBtnFloat,
   timerBtnFloat,
+  floatBtnExist = false,
   cetakJmlPesanan = () => {
     let totalHarga = 0,
       totalItem = 0;
@@ -124,20 +129,13 @@ let intervalBtnFloat,
 
     if (totalHarga == 0) {
       containerFloatBtnPesanan.style.bottom = "-7rem";
+      floatBtnExist = false;
       setTimeout(() => {
         containerFloatBtnPesanan.remove();
       }, timerBtnFloat);
     } else {
-      if (body.querySelector("#float-btn-pesanan") == null) {
-        document
-          .querySelector("body .container")
-          .insertAdjacentElement("afterend", containerFloatBtnPesanan);
-        containerFloatBtnPesanan.style.bottom = "-7rem";
-
-        setTimeout(() => {
-          containerFloatBtnPesanan.style.bottom = "0";
-        }, 500);
-      }
+      floatBtnExist = true;
+      tambahkanFloatBtnPesanan();
     }
   };
 
@@ -220,6 +218,7 @@ function detectMob() {
 }
 
 function disableScroll() {
+  removeFloatBtnPesanan();
   if (detectMob()) {
     body.classList.add("overflow-hidden");
   } else {
@@ -231,6 +230,7 @@ function disableScroll() {
 }
 
 function enableScroll() {
+  tambahkanFloatBtnPesanan();
   if (detectMob()) {
     body.classList.remove("overflow-hidden");
   } else {
@@ -241,7 +241,6 @@ function enableScroll() {
 }
 
 function openModal() {
-  containerFloatBtnPesanan.style.bottom = "-7rem";
   disableScroll();
   modal.children[0].classList.remove("d-none");
   modal.classList.remove("d-none");
@@ -279,7 +278,6 @@ function closeModal() {
         modal.children[0].replaceChild(mainModal, bill);
       }
       enableScroll();
-      containerFloatBtnPesanan.style.bottom = "0";
     }, 600);
   }
 }
@@ -295,14 +293,12 @@ document.querySelectorAll(".tombol").forEach((el) => {
 let boxThis;
 boxMakanan.forEach((box) => {
   box.addEventListener("click", function (e) {
-    // animasi ketika box makanan diklik
     let effect = document.createElement("span"),
       pos = getPosition(this);
     effect.classList.add("effect");
     effect.style.transform = `translate3d(
       ${e.pageX - pos.x - 10}px, ${e.pageY - pos.y - 10}px
     ,0)`;
-
     this.appendChild(effect);
     boxThis = this;
     isiModal(boxThis);
@@ -317,37 +313,23 @@ const imgModal = [];
 let timeOutModal;
 // mengisi modal
 function isiModal(box) {
-  clearTimeout(timeOutModal);
-  const src = box.children[1].children[0].src;
-  if (src != undefined) {
-    modal.querySelector("img").src = src;
-  } else {
-    timeOutModal = setTimeout(() => {
-      isiModal(box);
-    }, 500);
-  }
-
-  modal.querySelector("#judul").textContent =
+  modal.children[0].querySelector(
+    "#container-img-modal"
+  ).innerHTML = dataImgModal
+    .filter((txt) => txt.box == box.children[0].children[0].textContent)
+    .pop().image.outerHTML;
+  modal.children[0].querySelector("#judul").textContent =
     box.children[0].children[0].textContent;
-  modal.querySelector("#deskripsi").textContent =
+  modal.children[0].querySelector("#deskripsi").textContent =
     box.children[0].children[1].textContent;
-  modal.querySelector("#harga").textContent =
+  modal.children[0].querySelector("#harga").textContent =
     box.children[0].children[2].textContent;
-  loadDataImg(modal.querySelector("img"));
-}
 
-function loadDataImg(img) {
-  const ld = document.createElement("div");
-  ld.classList.add("load-img-main-modal");
-  ld.innerHTML = `<div></div>`;
-
-  img.parentElement.appendChild(ld);
-  img.classList.add("d-none");
-
-  img.onload = () => {
-    ld.remove();
-    img.classList.remove("d-none");
-  };
+  setTimeout(() => {
+    modal.children[0].children[0].children[1].children[0].classList.remove(
+      "img-jenis"
+    );
+  }, 400);
 }
 
 //pangambilan posisi dari ukuran element
@@ -367,7 +349,7 @@ function getPosition(el) {
   };
 }
 
-modal.querySelector("button").addEventListener("click", () => {
+modal.children[0].querySelector("button").addEventListener("click", () => {
   const quantity = boxThis.querySelector(".quantity");
   if (quantity.textContent == "") {
     quantity.previousElementSibling.previousElementSibling.click();
@@ -375,25 +357,6 @@ modal.querySelector("button").addEventListener("click", () => {
     quantity.nextElementSibling.click();
   }
 });
-
-// animasi float btn
-let timer = null;
-window.addEventListener(
-  "scroll",
-  function () {
-    if (body.querySelector("#float-btn-pesanan") != null) {
-      if (timer !== null) {
-        containerFloatBtnPesanan.style.bottom = "-7rem";
-        clearTimeout(timer);
-      }
-
-      timer = setTimeout(function () {
-        containerFloatBtnPesanan.style.bottom = "0";
-      }, 500);
-    }
-  },
-  false
-);
 
 // fungsi bagian modal
 const mainModal = modal.children[0].children[0];
@@ -478,10 +441,48 @@ modal.children[0].addEventListener("touchstart", function (start) {
 });
 
 modal.children[0].addEventListener("touchend", () => {
-  if (st + 50 < mv) {
+  if (st + 70 < mv) {
     st = 0;
     mv = 0;
-    close = true;
     closeModal();
   }
 });
+
+// animasi float btn
+let timer = null;
+window.addEventListener(
+  "scroll",
+  () => {
+    if (body.querySelector("#float-btn-pesanan") != null) {
+      if (timer !== null) {
+        containerFloatBtnPesanan.style.bottom = "-7rem";
+        clearTimeout(timer);
+      }
+
+      timer = setTimeout(() => {
+        containerFloatBtnPesanan.style.bottom = "0";
+      }, 500);
+    }
+  },
+  false
+);
+
+function tambahkanFloatBtnPesanan() {
+  if (body.querySelector("#float-btn-pesanan") == null && floatBtnExist) {
+    document
+      .querySelector("body .container")
+      .insertAdjacentElement("afterend", containerFloatBtnPesanan);
+    containerFloatBtnPesanan.style.bottom = "-7rem";
+
+    setTimeout(() => {
+      containerFloatBtnPesanan.style.bottom = "0";
+    }, 500);
+  }
+}
+
+function removeFloatBtnPesanan() {
+  containerFloatBtnPesanan.style.bottom = "-7rem";
+  setTimeout(() => {
+    containerFloatBtnPesanan.remove();
+  }, 500);
+}

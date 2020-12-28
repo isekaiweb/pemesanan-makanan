@@ -7,6 +7,7 @@ const loading = document.querySelector(".load"),
   containerFloatBtnPesanan = document.createElement("div"),
   modal = document.createElement("div"),
   bill = document.createElement("div"),
+  dataImgModal = [],
   srcImageMakanan = [
     "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
