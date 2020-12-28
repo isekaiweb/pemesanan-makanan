@@ -469,10 +469,12 @@ function setSatuan(data) {
 let st = 0,
   mv = 0;
 modal.children[0].addEventListener("touchstart", function (start) {
-  st = start.target.classList.contains("main-action")
-    ? start.touches[0].pageY +
-      Math.floor(document.querySelector(".main-action").scrollHeight / 3)
-    : start.touches[0].pageY;
+  st = start.touches[0].pageY;
+  document
+    .querySelector(".main-action")
+    .addEventListener("touchstart", function () {
+      start.touches[0].pageY + Math.floor(this.scrollHeight / 2);
+    });
   this.addEventListener("touchmove", (mvs) => {
     mv = mvs.touches[0].pageY;
   });
