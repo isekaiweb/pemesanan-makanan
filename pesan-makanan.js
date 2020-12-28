@@ -259,6 +259,10 @@ function openModal() {
     modal.style.background = " #302f2f48";
     modal.children[0].children[0].classList.add("close-now");
   }, 700);
+
+  document
+    .querySelector("#main-action")
+    .addEventListener("touchstart", (ev) => ev.stopPropagation());
 }
 
 function closeModal() {
@@ -485,7 +489,3 @@ modal.children[0].addEventListener("touchend", () => {
     closeModal();
   }
 });
-
-document
-  .querySelector("#main-action")
-  .addEventListener("touchstart", (ev) => ev.stopPropagation());
