@@ -381,14 +381,18 @@ let timer = null;
 window.addEventListener(
   "scroll",
   function () {
-    if (timer !== null) {
-      containerFloatBtnPesanan.style.bottom = "-7rem";
-      clearTimeout(timer);
+    if (
+      document.querySelector("#container-modal") == null &&
+      body.querySelector("#float-btn-pesanan") != null
+    ) {
+      if (timer !== null) {
+        containerFloatBtnPesanan.style.bottom = "-7rem";
+        clearTimeout(timer);
+      }
+      timer = setTimeout(function () {
+        containerFloatBtnPesanan.style.bottom = "0";
+      }, 500);
     }
-    timer = setTimeout(function () {
-      containerFloatBtnPesanan.style.bottom =
-        document.querySelector(".close-modal") != null ? "-7rem" : "0";
-    }, 500);
   },
   false
 );
