@@ -43,5 +43,5 @@ function cekJikaLoginDariLine() {
 
 function getDataUser(profil) {
   profilContainer.children[0].src = `${profil.pictureUrl}`;
-  profilContainer.children[1].textContent = `Hi, ${profile.displayName}`;
+  profilContainer.children[1].textContent = `Hi, ${profil.displayName}`;
 }
