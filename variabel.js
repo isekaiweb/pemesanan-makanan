@@ -13,18 +13,8 @@ const loading = document.querySelector(".load"),
     "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     "https://images.pexels.com/photos/239584/pexels-photo-239584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  ],
-  alertB4 = document.createElement("div");
+  ];
 
-alertB4.classList = "alert alert-warning alert-dismissible fade show alert-b4";
-alertB4.setAttribute("role", "alert");
-alertB4.innerHTML = `<div class="container">
-<p><strong>Anda mengakses Dikita di ${liff.getOS()}</strong>, segera akses melalui Aplikasi LINE untuk dapat menggunakan semua fitur yang ada
-</p>
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-                    </div>`;
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
 containerFloatBtnPesanan.innerHTML = `<div class="container px-2">

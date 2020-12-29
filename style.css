@@ -681,6 +681,9 @@ input:focus,
   font-size: 1.8vmin;
   margin: 0 !important;
   padding: 0 !important;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
 }
 
 .alert-b4 > div {

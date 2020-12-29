@@ -450,13 +450,3 @@ document.querySelector("#icon-power").addEventListener("click", () => {
     liff.closeWindow();
   }
 });
-
-document.querySelectorAll("ion-icon").forEach((icon) => {
-  icon.addEventListener("load", () => {
-    if (icon.name != "power") {
-      icon.shadowRoot.querySelector("title").remove();
-    } else {
-      icon.shadowRoot.querySelector("title").textContent = "Logout";
-    }
-  });
-});
