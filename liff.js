@@ -15,28 +15,42 @@ window.addEventListener("load", () => {
 //cek apakah sudah login jika belum maka login
 function mulaiAPP() {
   if (liff.isLoggedIn()) {
-    changeChild(section[0], section[1], section[2]);
     liff
       .getProfile()
       .then((profil) => {
+        changeChild(section[0], section[1], section[2]);
         getDataUser(profil);
+        alertb4(liff.getOS());
       })
       .catch((err) => {
         console.error("error", err);
       });
-    cekJikaLoginDariLine();
   } else {
     changeChild(section[0], section[2], section[1]);
   }
 }
 
-function cekJikaLoginDariLine() {
+function alertb4(os) {
   if (!liff.isInClient()) {
-    document.querySelector(".alert-b4").insertAdjacentHTML(
+    profilContainer.insertAdjacentHTML(
       "afterbegin",
-      `<p>
-        <strong>Anda mengakses Dikita di ${liff.getOS()}</strong>, segera akses melalui Aplikasi LINE untuk dapat menggunakan semua fitur yang ada
-            </p>`
+      `<div class="alert alert-warning alert-dismissible fade show alert-b4">
+    <div class="container">
+      <p>
+        <strong>Anda mengakses Dikita di ${os}</strong>,
+        segera akses melalui Aplikasi LINE untuk dapat menggunakan semua
+        fitur yang ada
+      </p>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>`
     );
   }
 }
