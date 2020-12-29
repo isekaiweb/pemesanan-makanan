@@ -37,7 +37,7 @@ function alertb4(os) {
       `<div class="alert alert-warning alert-dismissible fade show alert-b4">
     <div class="container">
       <p>
-        <strong>Anda sedang mengakses Dikita melalui browser ${os}</strong>,
+        <strong>Anda sedang mengakses Dikita pada Browser ${os.toUpperCase()}</strong>,
         gunakan Aplikasi LINE untuk dapat melakukan pemesanan
       </p>
       <button
