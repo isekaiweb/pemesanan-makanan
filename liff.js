@@ -37,9 +37,8 @@ function alertb4(os) {
       `<div class="alert alert-warning alert-dismissible fade show alert-b4">
     <div class="container">
       <p>
-        <strong>Anda mengakses Dikita melalui browser ${os}</strong>,
-        segera akses melalui Aplikasi LINE untuk dapat menggunakan semua
-        fitur yang ada
+        <strong>Anda sedang mengakses Dikita melalui browser ${os}</strong>,
+        gunakan Aplikasi LINE untuk dapat melakukan pemesanan
       </p>
       <button
         type="button"
