@@ -32,8 +32,8 @@ function mulaiAPP() {
 
 function alertb4(os) {
   if (!liff.isInClient()) {
-    profilContainer.insertAdjacentHTML(
-      "afterbegin",
+    document.querySelector("#bg-profil").insertAdjacentHTML(
+      "beforebegin",
       `<div class="alert alert-warning alert-dismissible fade show alert-b4">
     <div class="container">
       <p>
