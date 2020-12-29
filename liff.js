@@ -32,13 +32,14 @@ function mulaiAPP() {
 
 function alertb4(os) {
   if (!liff.isInClient()) {
+    alert(liff.getLineVersion());
     document.querySelector("#bg-profil").insertAdjacentHTML(
       "beforebegin",
       `<div class="alert alert-warning alert-dismissible fade show alert-b4">
     <div class="container">
       <p>
-        <strong>Anda sedang mengakses Dikita megnggunakan ${os.toUpperCase()} Browser</strong>,
-        gunakan Aplikasi LINE untuk dapat melakukan pemesanan
+        <strong>Anda sedang mengakses Dikita menggunakan ${os.toUpperCase()} Browser</strong>,
+        harap mengakses menggunakan Aplikasi LINE untuk dapat melakukan pemesanan lebih lanjut
       </p>
       <button
         type="button"

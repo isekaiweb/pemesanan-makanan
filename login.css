@@ -11,7 +11,7 @@ body {
 }
 .not-login {
   position: relative;
-  font-size: 2vmax;
+  font-size: 3vmin;
   display: block;
   width: 100%;
 
@@ -29,7 +29,6 @@ body {
 }
 
 .not-login > div:nth-of-type(1) > div > h1 {
-  font-size: 3.8em !important;
   word-wrap: break-word;
   line-height: 1em;
   display: block;
@@ -51,7 +50,7 @@ body {
   display: block;
   font-weight: 500;
   width: 100%;
-  font-size: 1.14em;
+  font-size: 1em;
   margin: 0;
   color: var(--black);
   font-weight: 400;
@@ -62,7 +61,7 @@ body {
 .not-login > div:nth-of-type(1) > div > div {
   margin: 0 auto;
   width: 100%;
-  margin-top: 5em;
+  margin-top: 3em;
 }
 
 .not-login > div:nth-of-type(1) > div > p > ion-icon {

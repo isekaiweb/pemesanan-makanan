@@ -450,3 +450,9 @@ document.querySelector("#icon-power").addEventListener("click", () => {
     liff.closeWindow();
   }
 });
+
+bill.children[3].addEventListener("click", () => {
+  if (liff.isInClient()) {
+  } else {
+  }
+});
