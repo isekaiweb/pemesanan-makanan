@@ -32,19 +32,16 @@ function mulaiAPP() {
 
 function cekJikaLoginDariLine() {
   if (!liff.isInClient()) {
-    document
-      .querySelector(".main-page")
-      .parentElement.insertAdjacentElement("afterbegin", alertB4);
+    document.querySelector(".alert-b4").insertAdjacentHTML(
+      "afterbegin",
+      `<p>
+        <strong>Anda mengakses Dikita di ${liff.getOS()}</strong>, segera akses melalui Aplikasi LINE untuk dapat menggunakan semua fitur yang ada
+            </p>`
+    );
   }
 }
 
 function getDataUser(profil) {
   profilContainer.children[0].src = `${profil.pictureUrl}`;
   profilContainer.children[1].textContent = `Hi, ${profile.displayName}`;
-  document.querySelector(".alert-b4").insertAdjacentHTML(
-    "afterbegin",
-    `<p>
-    <strong>Anda mengakses Dikita di ${liff.getOS()}</strong>, segera akses melalui Aplikasi LINE untuk dapat menggunakan semua fitur yang ada
-        </p>`
-  );
 }
