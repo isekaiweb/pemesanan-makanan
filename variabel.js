@@ -33,7 +33,7 @@ Lanjut
 </button>`,
   },
   alertFailed = {
-    pesan: `<p>Maaf nih untuk melakukan pesanan kamu harus buka Dikita melalui App LINE</p>`,
+    pesan: `<p>Maaf nih untuk melakukan pemesanan kamu harus buka Dikita melalui App LINE</p>`,
     icon: `<svg
   xmlns="http://www.w3.org/2000/svg"
   fill="currentColor"

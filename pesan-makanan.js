@@ -479,7 +479,7 @@ bill.children[3].addEventListener("click", () => {
     } else {
       setNotifikasi(alertFailed);
     }
-    removeFloatBtnPesanan();
+    disableScroll();
     document
       .querySelector(".container-notif")
       .addEventListener("click", function (e) {
@@ -487,7 +487,7 @@ bill.children[3].addEventListener("click", () => {
           this.style.opacity = "0";
           setTimeout(() => {
             this.remove();
-            tambahkanFloatBtnPesanan();
+            enableScroll();
           }, 500);
         }
       });
