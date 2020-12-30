@@ -511,12 +511,12 @@ function browserExternal() {
   if (liff.getOS() != "web" && liff.getVersion() != null) {
     mainPage.insertAdjacentHTML(
       "beforeend",
-      `<button id="tombol-browser" onclick= ()=>{
+      `<button id="tombol-browser" onclick="()=>{
         liff.openWindow({
           url: "https://dikita.herokuapp.com/",
           external: true
         });
-      }>
+      }">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
