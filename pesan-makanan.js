@@ -505,7 +505,7 @@ function setNotifikasi(notif) {
 
 function browserExternal() {
   if (liff.getOS() != "web" && liff.getVersion() != null) {
-    mainPage.insertAdjacentElement(
+    mainPage.insertAdjacentHTML(
       "beforeend",
       `<button id="tombol-browser" onclick= ()=>{
         liff.openWindow({
