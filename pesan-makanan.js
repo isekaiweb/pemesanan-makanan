@@ -473,13 +473,13 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 });
 
 bill.children[3].addEventListener("click", () => {
+  disableScroll();
   setTimeout(() => {
     if (liff.isInClient()) {
       setNotifikasi(alertSuccess);
     } else {
       setNotifikasi(alertFailed);
     }
-    disableScroll();
     document
       .querySelector(".container-notif")
       .addEventListener("click", function (e) {
