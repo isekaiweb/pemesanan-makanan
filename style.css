@@ -147,7 +147,7 @@
 #tombol-browser {
   font-size: 4vmin;
   position: fixed;
-  bottom: 2em;
+  bottom: 3em;
   color: var(--light);
   right: 0;
   cursor: pointer;
@@ -547,7 +547,7 @@
     padding-bottom: 3em;
   }
   .jenis {
-    font-size: 1.9em;
+    font-size: 4em;
   }
 
   .box-makanan {

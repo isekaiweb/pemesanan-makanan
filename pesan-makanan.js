@@ -512,12 +512,7 @@ function browserExternal() {
   if (liff.getOS() != "web" && liff.getLineVersion() != null) {
     mainPage.insertAdjacentHTML(
       "beforeend",
-      `<button id="tombol-browser" onclick="()=>{
-        liff.openWindow({
-          url: "https://dikita.herokuapp.com/",
-          external: true
-        });
-      }">
+      `<button id="tombol-browser">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
@@ -535,5 +530,11 @@ function browserExternal() {
       </svg>
     </button>`
     );
+    document.querySelector("#tombol-browser").onclick = () => {
+      liff.openWindow({
+        url: "https://makan-dikita.herokuapp.com/",
+        external: true,
+      });
+    };
   }
 }
