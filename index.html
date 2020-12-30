@@ -21,11 +21,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- <div class="container-notif">
-      <div class="notif">
-
-      </div>
-    </div> -->
     <div class="load">
       <p class="display-1">Dikita</p>
       <p class="display-1">Dikita</p>
@@ -35,13 +30,7 @@
       <div class="not-login">
         <div class="container-fluid py-5">
           <div>
-            <p>
-              <ion-icon name="star-outline"></ion-icon
-              ><ion-icon name="star-outline"></ion-icon
-              ><ion-icon name="star-outline"></ion-icon
-              ><ion-icon name="star-outline"></ion-icon
-              ><ion-icon name="star-outline"></ion-icon>
-            </p>
+            <p></p>
             <h1 class="display-1 mt-5">Makan Dikita</h1>
 
             <p id="text">
@@ -61,34 +50,25 @@
         <h1></h1>
         <div class="box-card row">
           <div class="card">
-            <ion-icon name="stopwatch-outline"></ion-icon>
-            <div>
-              <p>Cepat</p>
-              <p>
-                Dikita akan melakukan yang terbaik buat kamu dalam pelayanan
-                pemesanan akan dilakukan dengan cepat
-              </p>
-            </div>
+            <p>Cepat</p>
+            <p>
+              Dikita akan melakukan yang terbaik buat kamu dalam pelayanan
+              pemesanan akan dilakukan dengan cepat
+            </p>
           </div>
           <div class="card">
-            <ion-icon name="wallet-outline"></ion-icon>
-            <div>
-              <p>Hemat</p>
-              <p>
-                Dikita tidak akan menguras isi dompet kamu hanya untuk
-                mendapatkan kepuasan
-              </p>
-            </div>
+            <p>Hemat</p>
+            <p>
+              Dikita tidak akan menguras isi dompet kamu walaupun kamu makan
+              sampai kamu tidak sangup untuk makan lagi
+            </p>
           </div>
           <div class="card">
-            <ion-icon name="fast-food-outline"></ion-icon>
-            <div>
-              <p>sedap</p>
-              <p>
-                Dikita tidak akan mengecewakan kamu walaupun kamu menghemat
-                lebih kamu tetap mendapat kulitas rasa yang terbaik
-              </p>
-            </div>
+            <p>sedap</p>
+            <p>
+              Dikita tidak akan mengecewakan kamu soal rasa walaupun dengan
+              harga miring kamu tetap bisa makan enak
+            </p>
           </div>
         </div>
       </div>
@@ -117,15 +97,23 @@
               />
               <p id="nama-profil"></p>
             </div>
-            <ion-icon id="icon-power" name="power"></ion-icon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+              id="icon-power"
+            >
+              <title>logout</title>
+              <path d="M7.5 1v7h1V1h-1z" />
+              <path
+                d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"
+              />
+            </svg>
           </div>
         </div>
 
         <!-- bagian makanan -->
-        <p class="row jenis">
-          Makanan
-          <ion-icon name="pizza-outline"></ion-icon>
-        </p>
+        <p class="row jenis">Makanan</p>
         <div class="row box-makanan mb-2">
           <div class="keterangan">
             <p class="nama-makanan">Burger Kampung Beef</p>
@@ -134,21 +122,7 @@
           </div>
           <div class="visual">
             <div class="img-load"><div></div></div>
-            <div class="tombol">
-              <button class="btn btn-success tombol-tambah">Tambah</button>
-
-              <button
-                class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&minus;</span>
-              </button>
-              <span class="quantity text-dark d-none"></span>
-              <button
-                class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&plus;</span>
-              </button>
-            </div>
+            <div class="tombol"></div>
           </div>
         </div>
         <div class="row box-makanan">
@@ -159,35 +133,12 @@
           </div>
           <div class="visual">
             <div class="img-load"><div></div></div>
-            <div class="tombol">
-              <button class="btn btn-success tombol-tambah">Tambah</button>
-
-              <button
-                class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&minus;</span>
-              </button>
-              <span class="quantity text-dark d-none"></span>
-              <button
-                class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&plus;</span>
-              </button>
-            </div>
+            <div class="tombol"></div>
           </div>
         </div>
 
-        <button
-          class="btn rounded btn-info rounded-circle d-none"
-          id="tombol-browser"
-        >
-          <ion-icon name="open-outline"></ion-icon>
-        </button>
-
         <!-- bagian minuman -->
-        <p class="row jenis">
-          Minuman<ion-icon name="beer-outline"></ion-icon>
-        </p>
+        <p class="row jenis">Minuman</p>
         <div class="row box-makanan mb-2">
           <div class="keterangan">
             <p class="nama-makanan">Milkshake</p>
@@ -197,21 +148,7 @@
           <div class="visual">
             <div class="img-load"><div></div></div>
 
-            <div class="tombol">
-              <button class="btn btn-success tombol-tambah">Tambah</button>
-
-              <button
-                class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&minus;</span>
-              </button>
-              <span class="quantity text-dark d-none"></span>
-              <button
-                class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&plus;</span>
-              </button>
-            </div>
+            <div class="tombol"></div>
           </div>
         </div>
         <div class="row box-makanan">
@@ -222,30 +159,9 @@
           </div>
           <div class="visual">
             <div class="img-load"><div></div></div>
-            <div class="tombol">
-              <button class="btn btn-success tombol-tambah">Tambah</button>
-
-              <button
-                class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&minus;</span>
-              </button>
-              <span class="quantity text-dark d-none"></span>
-              <button
-                class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-              >
-                <span>&plus;</span>
-              </button>
-            </div>
+            <div class="tombol"></div>
           </div>
         </div>
-
-        <button
-          class="btn rounded btn-success d-none rounded-circle"
-          id="tombol-browser"
-        >
-          <ion-icon name="open-outline"></ion-icon>
-        </button>
       </div>
     </div>
     <!-- Optional JavaScript -->

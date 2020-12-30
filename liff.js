@@ -31,15 +31,14 @@ function mulaiAPP() {
 }
 
 function alertb4(os) {
-  if (!liff.isInClient()) {
-    alert(liff.getLineVersion());
+  if (liff.getLineVersion() == null) {
     document.querySelector("#bg-profil").insertAdjacentHTML(
       "beforebegin",
       `<div class="alert alert-warning alert-dismissible fade show alert-b4">
     <div class="container">
       <p>
-        <strong>Anda sedang mengakses Dikita menggunakan ${os.toUpperCase()} Browser</strong>,
-        harap mengakses menggunakan Aplikasi LINE untuk dapat melakukan pemesanan lebih lanjut
+        <strong>Kamu buka Dikita di ${os.toUpperCase()} Browser nih!</strong>,
+        Yuk buka di Aplikasi LINE biar bisa mesan makananan yang kamu suka
       </p>
       <button
         type="button"
@@ -59,3 +58,4 @@ function getDataUser(profil) {
   profilContainer.children[0].src = `${profil.pictureUrl}`;
   profilContainer.children[1].textContent = `Hi, ${profil.displayName}`;
 }
+

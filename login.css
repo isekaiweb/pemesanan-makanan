@@ -2,6 +2,7 @@
   --silver: #bec2cb;
   --black: #323334;
   --gold: #ffd700;
+  --cubic-500: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
 }
 
 body {
@@ -64,18 +65,24 @@ body {
   margin-top: 3em;
 }
 
-.not-login > div:nth-of-type(1) > div > p > ion-icon {
-  font-size: 4em;
+.not-login > div:nth-of-type(1) > div > p {
+  display: flex;
+  justify-content: center;
+}
+
+.not-login > div:nth-of-type(1) > div > p > svg {
+  width: 4em;
   color: var(--gold);
+  align-self: baseline;
 }
 
-.not-login > div:nth-of-type(1) > div > p > ion-icon:nth-of-type(1),
-.not-login > div:nth-of-type(1) > div > p > ion-icon:nth-of-type(5) {
-  font-size: 3em;
+.not-login > div:nth-of-type(1) > div > p > svg:nth-of-type(1),
+.not-login > div:nth-of-type(1) > div > p > svg:nth-of-type(5) {
+  width: 3em;
 }
 
-.not-login > div:nth-of-type(1) > div > p > ion-icon:nth-of-type(3) {
-  font-size: 5em;
+.not-login > div:nth-of-type(1) > div > p > svg:nth-of-type(3) {
+  width: 5em;
 }
 
 .btn-masuk {
@@ -101,12 +108,10 @@ body {
   padding: 1em 0.5em;
 }
 
-.box-card > div > ion-icon {
-  font-size: 7em;
-
-  margin: 0 auto;
-  display: block;
-  color: var(--black);
+.box-card > div > p:nth-of-type(1) {
+  text-transform: uppercase;
+  font-size: 3em;
+  font-weight: 700;
 }
 
 .box-card p {
@@ -115,14 +120,7 @@ body {
   margin: 0;
 }
 
-.box-card > div > div > p:nth-of-type(1) {
-  font-size: 1.8em;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0.2em 0 0.5em 0;
-}
-
-.box-card > div > div > p:nth-of-type(2) {
+.box-card > div > p:nth-of-type(2) {
   font-size: 1.3em;
 }
 

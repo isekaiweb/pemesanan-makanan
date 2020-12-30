@@ -1,4 +1,5 @@
 const loading = document.querySelector(".load"),
+  mainPage = document.querySelector(".main-page"),
   body = document.querySelector("body"),
   section = document.querySelectorAll("body > div"),
   openBrowser = document.querySelector("#tombol-browser"),
@@ -13,8 +14,40 @@ const loading = document.querySelector(".load"),
     "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     "https://images.pexels.com/photos/239584/pexels-photo-239584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  ];
-
+  ],
+  alertSuccess = {
+    pesan: `Mantap! kamu udah berhasil ngirimin pesanan kamu, yuk tekan tombol lanjut dan
+  kamu akan diarahin ke proses pembelian `,
+    icon: `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="currentColor"
+  viewBox="0 0 16 16"
+  style="color: var(--success)"
+>
+  <path
+    d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+  />
+</svg> `,
+    btn: `<button class="btn btn-success text-uppercase font-weight-bold">
+Lanjut
+</button>`,
+  },
+  alertFailed = {
+    pesan: `Maaf nih untuk melakukan pesanan kamu harus buka Dikita melalui App LINE`,
+    icon: `<svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="currentColor"
+  viewBox="0 0 16 16"
+  style="color: var(--danger)"
+>
+  <path
+    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+  />
+</svg> `,
+    btn: `<button class="btn btn-danger text-uppercase font-weight-bold">
+ok
+</button>`,
+  };
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
 containerFloatBtnPesanan.innerHTML = `<div class="container px-2">
@@ -63,3 +96,5 @@ bill.innerHTML = `
                                     Kirim Pesanan
                                   </button>
                               `;
+
+

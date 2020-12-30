@@ -100,51 +100,69 @@ let update = (namaMakanan, qty) => {
   cetakJmlPesanan();
 };
 
-// fungsi untuk penambahan quantity
-document.querySelectorAll(".tombol-tambah").forEach((e) =>
-  e.addEventListener("click", function () {
-    changeDisplay(this.parentElement.children);
-    this.parentElement.children[2].textContent = 1;
-    this.parentElement.parentElement.previousElementSibling.style.boxShadow =
-      "inset 0.2em 0  #28a745";
-
-    update(
-      this.parentElement.parentElement.previousElementSibling.children[0]
-        .textContent,
-      this.parentElement.children[2].textContent
-    );
-  })
-);
-
-document.querySelectorAll(".tombol-inc").forEach((inc) => {
-  inc.classList.add("btn-success");
-  inc.addEventListener("click", function () {
-    this.previousElementSibling.textContent =
-      parseInt(this.previousElementSibling.textContent) + 1;
-
-    update(
-      this.parentElement.parentElement.previousElementSibling.children[0]
-        .textContent,
-      this.previousElementSibling.textContent
-    );
-  });
+document.querySelectorAll(".tombol").forEach((btn) => {
+  btn.innerHTML = `<button class="btn btn-success tombol-tambah">Tambah</button>
+  <button class="tombol-dec d-none">
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+    >
+    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+    </svg>
+  </button>
+  <span class="quantity text-dark d-none"></span>
+  <button class="tombol-inc d-none">
+      <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+    >
+    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+    </svg>
+  </button>`;
 });
-document.querySelectorAll(".tombol-dec").forEach((dec) => {
-  dec.classList.add("btn-danger");
-  dec.addEventListener("click", function () {
-    this.nextElementSibling.textContent -= 1;
-    if (this.nextElementSibling.textContent < 1) {
+
+window.addEventListener("load", () => {
+  browserExternal(); //penambahan tombol eksternal browser
+  // fungsi untuk penambahan quantity
+  document.querySelectorAll(".tombol-tambah").forEach((e) =>
+    e.addEventListener("click", function () {
       changeDisplay(this.parentElement.children);
-      this.nextElementSibling.textContent = "";
-      this.parentElement.parentElement.previousElementSibling.style.removeProperty(
-        "box-shadow"
+      this.parentElement.children[2].textContent = 1;
+      update(
+        this.parentElement.parentElement.previousElementSibling.children[0]
+          .textContent,
+        this.parentElement.children[2].textContent
       );
-    }
-    update(
-      this.parentElement.parentElement.previousElementSibling.children[0]
-        .textContent,
-      this.nextElementSibling.textContent
-    );
+    })
+  );
+
+  document.querySelectorAll(".tombol-inc").forEach((inc) => {
+    inc.addEventListener("click", function () {
+      this.previousElementSibling.textContent =
+        parseInt(this.previousElementSibling.textContent) + 1;
+
+      update(
+        this.parentElement.parentElement.previousElementSibling.children[0]
+          .textContent,
+        this.previousElementSibling.textContent
+      );
+    });
+  });
+  document.querySelectorAll(".tombol-dec").forEach((dec) => {
+    dec.addEventListener("click", function () {
+      this.nextElementSibling.textContent -= 1;
+      if (this.nextElementSibling.textContent < 1) {
+        changeDisplay(this.parentElement.children);
+        this.nextElementSibling.textContent = "";
+      }
+      update(
+        this.parentElement.parentElement.previousElementSibling.children[0]
+          .textContent,
+        this.nextElementSibling.textContent
+      );
+    });
   });
 });
 
@@ -375,7 +393,7 @@ function elParentJenis(jenis, el, totalHarga) {
   return `<div>
             <h2>${jenis}</h2>
             ${el}
-            <p>
+            <p class="sub-total">
               <span>Total Harga ${jenis}</span>
               <span>${totalHarga}</span>
             </p>
@@ -443,9 +461,12 @@ function removeFloatBtnPesanan() {
 }
 
 document.querySelector("#icon-power").addEventListener("click", () => {
-  if (!liff.isInClient()) {
+  if (!liff.isInClient() && liff.getLineVersion() == null) {
     liff.logout();
     window.location.reload();
+  } else if (!liff.isInClient() && liff.getLineVersion() != null) {
+    liff.logout();
+    liff.closeWindow();
   } else {
     liff.closeWindow();
   }
@@ -453,6 +474,61 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 
 bill.children[3].addEventListener("click", () => {
   if (liff.isInClient()) {
+    setNotifikasi(alertSuccess);
   } else {
+    setNotifikasi(alertFailed);
   }
+
+  mainPage.firstElementChild.addEventListener("click", function (e) {
+    if (e.target == this) {
+      this.style.opacity = "0";
+      setTimeout(() => {
+        this.remove();
+      }, 500);
+    }
+  });
 });
+
+function setNotifikasi(notif) {
+  mainPage.parentElement.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="container-notif">
+  <div class="notif">
+    <div>
+     ${notif.icon}
+     ${notif.pesan}
+     ${notif.btn}
+  </div>
+</div>`
+  );
+}
+
+function browserExternal() {
+  if (liff.getOS() != "web" && liff.getVersion() != null) {
+    mainPage.insertAdjacentElement(
+      "beforeend",
+      `<button id="tombol-browser" onclick= ()=>{
+        liff.openWindow({
+          url: "https://dikita.herokuapp.com/",
+          external: true
+        });
+      }>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 16 16"
+      >
+        <title>Open in Browser</title>
+        <path
+          fill-rule="evenodd"
+          d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"
+        />
+      </svg>
+    </button>`
+    );
+  }
+}
