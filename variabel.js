@@ -16,8 +16,8 @@ const loading = document.querySelector(".load"),
     "https://images.pexels.com/photos/239584/pexels-photo-239584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   ],
   alertSuccess = {
-    pesan: `Mantap! kamu udah berhasil ngirimin pesanan kamu, yuk tekan tombol lanjut dan
-  kamu akan diarahin ke proses pembelian `,
+    pesan: `<p>Mantap! kamu udah berhasil ngirimin pesanan kamu, yuk tekan tombol lanjut dan
+    kamu akan diarahin ke proses pembelian</p> `,
     icon: `<svg
   xmlns="http://www.w3.org/2000/svg"
   fill="currentColor"
@@ -33,7 +33,7 @@ Lanjut
 </button>`,
   },
   alertFailed = {
-    pesan: `Maaf nih untuk melakukan pesanan kamu harus buka Dikita melalui App LINE`,
+    pesan: `<p>Maaf nih untuk melakukan pesanan kamu harus buka Dikita melalui App LINE</p>`,
     icon: `<svg
   xmlns="http://www.w3.org/2000/svg"
   fill="currentColor"
@@ -96,5 +96,3 @@ bill.innerHTML = `
                                     Kirim Pesanan
                                   </button>
                               `;
-
-

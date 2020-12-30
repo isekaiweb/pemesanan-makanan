@@ -473,32 +473,36 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 });
 
 bill.children[3].addEventListener("click", () => {
-  if (liff.isInClient()) {
-    setNotifikasi(alertSuccess);
-  } else {
-    setNotifikasi(alertFailed);
-  }
-
-  mainPage.firstElementChild.addEventListener("click", function (e) {
-    if (e.target == this) {
-      this.style.opacity = "0";
-      setTimeout(() => {
-        this.remove();
-      }, 500);
+  setTimeout(() => {
+    if (liff.isInClient()) {
+      setNotifikasi(alertSuccess);
+    } else {
+      setNotifikasi(alertFailed);
     }
-  });
+    removeFloatBtnPesanan();
+    document
+      .querySelector(".container-notif")
+      .addEventListener("click", function (e) {
+        if (e.target == this) {
+          this.style.opacity = "0";
+          setTimeout(() => {
+            this.remove();
+            tambahkanFloatBtnPesanan();
+          }, 500);
+        }
+      });
+  }, 500);
 });
 
 function setNotifikasi(notif) {
   mainPage.parentElement.insertAdjacentHTML(
     "afterbegin",
     `<div class="container-notif">
-  <div class="notif">
-    <div>
+  <div class="notif">  
      ${notif.icon}
      ${notif.pesan}
      ${notif.btn}
-  </div>
+ </div>
 </div>`
   );
 }
