@@ -491,7 +491,7 @@ bill.children[3].addEventListener("click", () => {
           }, 500);
         }
       });
-  }, 500);
+  }, 610);
 });
 
 function setNotifikasi(notif) {
@@ -508,7 +508,7 @@ function setNotifikasi(notif) {
 }
 
 function browserExternal() {
-  if (liff.getOS() != "web" && liff.getVersion() != null) {
+  if (liff.getOS() != "web" && liff.getLineVersion() != null) {
     mainPage.insertAdjacentHTML(
       "beforeend",
       `<button id="tombol-browser" onclick="()=>{
