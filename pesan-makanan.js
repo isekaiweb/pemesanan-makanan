@@ -474,6 +474,7 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 
 bill.children[3].addEventListener("click", () => {
   setTimeout(() => {
+    scrollY;
     disableScroll();
     if (liff.isInClient()) {
       setNotifikasi(alertSuccess);
@@ -492,20 +493,20 @@ bill.children[3].addEventListener("click", () => {
         }
       });
   }, 610);
-});
 
-function setNotifikasi(notif) {
-  mainPage.parentElement.insertAdjacentHTML(
-    "afterbegin",
-    `<div class="container-notif">
-  <div class="notif">  
-     ${notif.icon}
-     ${notif.pesan}
-     ${notif.btn}
- </div>
-</div>`
-  );
-}
+  function setNotifikasi(notif) {
+    mainPage.parentElement.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="container-notif">
+    <div class="notif">  
+       ${notif.icon}
+       ${notif.pesan}
+       ${notif.btn}
+   </div>
+  </div>`
+    );
+  }
+});
 
 function browserExternal() {
   if (liff.getOS() != "web" && liff.getLineVersion() != null) {

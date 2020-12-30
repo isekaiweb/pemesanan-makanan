@@ -701,7 +701,7 @@ input:focus,
 }
 
 .container-notif {
-  position: absolute;
+  position: fixed;
   background: #302f2f48;
   z-index: 999999;
   width: 100vw;
