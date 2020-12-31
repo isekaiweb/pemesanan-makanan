@@ -518,10 +518,10 @@ bill.children[3].addEventListener("click", () => {
 });
 
 function browserExternal() {
-  // if (liff.getOS() != "web" && liff.getLineVersion() != null) {
-  mainPage.insertAdjacentHTML(
-    "beforeend",
-    `<button id="tombol-browser">
+  if (liff.getOS() != "web" && liff.getLineVersion() != null) {
+    mainPage.insertAdjacentHTML(
+      "beforeend",
+      `<button id="tombol-browser">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
@@ -538,41 +538,41 @@ function browserExternal() {
         />
       </svg>
     </button>`
-  );
+    );
 
-  const btnExtendBrowser = document.querySelector("#tombol-browser");
-  btnExtendBrowser.style.right = "-2.5em";
-  btnExtendBrowser.addEventListener("click", function () {
-    if (this.style.right == "0.5em") {
-      liff.openWindow({
-        url: "https://makan-dikita.herokuapp.com/",
-        external: true,
-      });
-    }
-  });
+    const btnExtendBrowser = document.querySelector("#tombol-browser");
+    btnExtendBrowser.style.right = "-2.5em";
+    btnExtendBrowser.addEventListener("click", function () {
+      if (this.style.right == "0.5em") {
+        liff.openWindow({
+          url: "https://makan-dikita.herokuapp.com/",
+          external: true,
+        });
+      }
+    });
 
-  let sr = 0,
-    mvr = 0;
-  btnExtendBrowser.addEventListener("touchstart", function (onstart) {
-    if (this.style.right != "0.5em") {
-      this.style.right = "0.5em";
-    } else {
-      sr = onstart.touches[0].pageX;
-      this.addEventListener("touchmove", (onmove) => {
-        mvr = onmove.touches[0].pageX;
-        if (sr < mvr) {
-          this.style.right = "-2.5em";
-          sr = 0;
-          mvr = 0;
-        } else {
-          this.style.right = "0.5em";
-          sr = 0;
-          mvr = 0;
-        }
-      });
-    }
-  });
-  // }
+    let sr = 0,
+      mvr = 0;
+    btnExtendBrowser.addEventListener("touchstart", function (onstart) {
+      if (this.style.right != "0.5em") {
+        this.style.right = "0.5em";
+      } else {
+        sr = onstart.touches[0].pageX;
+        this.addEventListener("touchmove", (onmove) => {
+          mvr = onmove.touches[0].pageX;
+          if (sr < mvr) {
+            this.style.right = "-2.5em";
+            sr = 0;
+            mvr = 0;
+          } else {
+            this.style.right = "0.5em";
+            sr = 0;
+            mvr = 0;
+          }
+        });
+      }
+    });
+  }
 }
 
 function templatePesan(src) {
