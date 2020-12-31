@@ -519,7 +519,7 @@ bill.children[3].addEventListener("click", () => {
             liff.closeWindow();
           })
           .catch((err) => {
-            console.log("error", err);
+            alert(err);
           });
       }
     });
