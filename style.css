@@ -126,22 +126,23 @@
 .tombol-dec {
   cursor: pointer;
   padding: 0;
-
+  width: 2em;
+  height: 2em;
   border-radius: 100%;
   border: none;
   color: var(--light);
 }
 
-.tombol-inc > svg {
+.tombol-inc {
   background-color: var(--success);
-  width: 2em;
-  border-radius: 100%;
+}
+.tombol-dec {
+  background-color: var(--danger);
 }
 
+.tombol-inc > svg,
 .tombol-dec > svg {
-  background-color: var(--danger);
   width: 2em;
-  border-radius: 100%;
 }
 
 #tombol-browser {
@@ -149,12 +150,13 @@
   position: fixed;
   bottom: 3em;
   color: var(--light);
-  right: 0;
+  right: 0.5em;
   cursor: pointer;
   background: var(--success);
   border-radius: 100%;
   border: none;
   padding: 0;
+  transition: var(--cubic-500);
 }
 
 #tombol-browser svg {

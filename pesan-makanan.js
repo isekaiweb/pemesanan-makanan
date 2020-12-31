@@ -1,3 +1,7 @@
+function setSatuan(data) {
+  return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
 document.querySelectorAll(".img-load").forEach((el, i) => {
   const img = document.createElement("img");
   img.classList = "img-fluid img-jenis";
@@ -80,11 +84,8 @@ let intervalBtnFloat,
     }
 
     if (totalHarga == 0) {
-      containerFloatBtnPesanan.style.bottom = "-7rem";
       floatBtnExist = false;
-      setTimeout(() => {
-        containerFloatBtnPesanan.remove();
-      }, timerBtnFloat);
+      removeFloatBtnPesanan(timerBtnFloat);
     } else {
       floatBtnExist = true;
       tambahkanFloatBtnPesanan();
@@ -379,18 +380,17 @@ floatBtnPesanan.addEventListener("click", () => {
     }
     openModal();
   }, 300);
-});
 
-function buatElementMakanan(m) {
-  return `<p>
+  function buatElementMakanan(m) {
+    return `<p>
             <span>${m.nama}</span>
             <span>${setSatuan(m.harga)} x ${m.qyt}</span>
             <span>${setSatuan(m.harga * m.qyt)}</span>
           </p>`;
-}
+  }
 
-function elParentJenis(jenis, el, totalHarga) {
-  return `<div>
+  function elParentJenis(jenis, el, totalHarga) {
+    return `<div>
             <h2>${jenis}</h2>
             ${el}
             <p class="sub-total">
@@ -398,11 +398,8 @@ function elParentJenis(jenis, el, totalHarga) {
               <span>${totalHarga}</span>
             </p>
           </div>`;
-}
-
-function setSatuan(data) {
-  return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
+  }
+});
 
 let st = 0,
   mv = 0;
@@ -448,16 +445,22 @@ function tambahkanFloatBtnPesanan() {
     containerFloatBtnPesanan.style.bottom = "-7rem";
 
     setTimeout(() => {
+      if (document.querySelector("#tombol-browser") != null) {
+        document.querySelector("#tombol-browser").style.bottom = "7em";
+      }
       containerFloatBtnPesanan.style.bottom = "0";
     }, 500);
   }
 }
 
-function removeFloatBtnPesanan() {
+function removeFloatBtnPesanan(timeout = 500) {
+  if (document.querySelector("#tombol-browser") != null) {
+    document.querySelector("#tombol-browser").style.bottom = "3em";
+  }
   containerFloatBtnPesanan.style.bottom = "-7rem";
   setTimeout(() => {
     containerFloatBtnPesanan.remove();
-  }, 500);
+  }, timeout);
 }
 
 document.querySelector("#icon-power").addEventListener("click", () => {
@@ -484,13 +487,13 @@ bill.children[3].addEventListener("click", () => {
     document
       .querySelector(".container-notif")
       .addEventListener("click", function (e) {
-        if (e.target == this) {
+        if (e.target == this || e.target.textContent.toLowerCase == "ok") {
           this.style.opacity = "0";
           setTimeout(() => {
             this.remove();
             enableScroll();
           }, 500);
-        }
+        } else if (e.target.textContent.toLowerCase == "lanjut") convertToImage();
       });
   }, 610);
 
@@ -530,11 +533,85 @@ function browserExternal() {
       </svg>
     </button>`
     );
-    document.querySelector("#tombol-browser").onclick = () => {
-      liff.openWindow({
-        url: "https://makan-dikita.herokuapp.com/",
-        external: true,
-      });
+
+    const btnExtendBrowser = document.querySelector("#tombol-browser");
+    btnExtendBrowser.onclick = function () {
+      if (this.style.right != "0.5em") {
+        this.style.right = "0.5em";
+      } else {
+        this.addEventListener("click", () => {
+          liff.openWindow({
+            url: "https://makan-dikita.herokuapp.com/",
+            external: true,
+          });
+        });
+      }
     };
+
+    let sr = 0,
+      mvr = 0;
+    btnExtendBrowser.addEventListener("touchstart", function (onstart) {
+      sr = onstart.touches[0].pageX;
+      this.addEventListener("touchmove", (onmove) => {
+        mvr = onmove.touches[0].pageX;
+      });
+    });
+
+    btnExtendBrowser.addEventListener("touchend", function () {
+      if (sr + 30 < mvr) {
+        this.style.right = "-2.5em";
+        console.log("right");
+      } else {
+        this.style.right = "0.5em";
+      }
+      console.log(this.style.right);
+      sr = 0;
+      mvr = 0;
+    });
   }
+}
+
+function templatePesan(src) {
+  liif.sendMessages({
+    type: "template",
+    altText: "This is a buttons template",
+    template: {
+      type: "buttons",
+      thumbnailImageUrl: `${src}`,
+      imageAspectRatio: "rectangle",
+      imageSize: "cover",
+      imageBackgroundColor: "#FFFFFF",
+      title: "Pemesanan",
+      text: `Hi, ${
+        document.querySelector("#nama-profil").textContent
+      } total pembayaran kamu sebesar Rp ${
+        document.querySelector("#grand-total").children[1].textContent
+      }`,
+      defaultAction: {
+        type: "uri",
+        label: "Lihat Bill",
+        uri: imageBill(),
+      },
+      actions: [
+        {
+          type: "postback",
+          label: "Pesan Sekarang",
+          data: "action=buy&itemid=123",
+        },
+        {
+          type: "postback",
+          label: "Pesan Ulang",
+          uri: "https://makan-dikita.herokuapp.com/",
+        },
+      ],
+    },
+  });
+}
+
+function imageBill() {
+  let url;
+  domtoimage.toJpeg(bill.children[2], { quality: 0.95 }).then((dataUrl) => {
+    url = dataUrl;
+  });
+  return url;
 }
