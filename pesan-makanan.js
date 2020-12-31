@@ -509,7 +509,14 @@ bill.children[3].addEventListener("click", () => {
           }, 500);
         } else if (e.target.textContent.trim().toLowerCase() == "lanjut") {
           alert("siap");
-          templatePesan();
+          liif
+            .sendMessages({
+              type: "text",
+              text: "Hello, World!",
+            })
+            .then(() => liff.closeWindow())
+            .catch((e) => alert(`waduh ada error nih ${e}`))
+            .finally(() => alert("siap juga"));
         }
       });
   }, 610);
@@ -586,15 +593,7 @@ function browserExternal() {
   }
 }
 
-function templatePesan() {
-  liif
-    .sendMessages({
-      type: "text",
-      text: "Hello, World!",
-    })
-    .then(() => liff.closeWindow())
-    .catch((e) => alert(`waduh ada error nih ${e}`));
-}
+function templatePesan() {}
 
 function imageBill() {
   domtoimage.toJpeg(bill, { quality: 0.95 }).then((dataUrl) => {
