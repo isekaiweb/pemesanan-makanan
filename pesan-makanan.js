@@ -482,7 +482,7 @@ bill.children[3].addEventListener("click", () => {
   setTimeout(() => {
     scrollY;
     disableScroll();
-    if (liff.isInClient()) {
+    if (liff.getLineVersion()) {
       setNotifikasi(alertSuccess);
     } else {
       setNotifikasi(alertFailed);
@@ -542,7 +542,7 @@ function browserExternal() {
 
     const btnExtendBrowser = document.querySelector("#tombol-browser");
     btnExtendBrowser.style.right = "-2.5em";
-    btnExtendBrowser.addEventListener("click", function () {
+    btnExtendBrowser.addEventListener("touch", function () {
       if (this.style.right == "0.5em") {
         liff.openWindow({
           url: "https://makan-dikita.herokuapp.com/",

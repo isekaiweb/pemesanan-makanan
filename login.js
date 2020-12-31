@@ -87,10 +87,11 @@ function convertToImage() {
   domtoimage
     .toPng(data)
     .then((dataUrl) => {
-      templatePesan(dataUrl);
+      // templatePesan(dataUrl);
+      alert(dataUrl);
     })
     .catch((error) => {
-      console.error("oops, something went wrong!", error);
+      alert("oops, something went wrong!", error);
     })
     .finally(() => {
       data.children[0].children[2].innerHTML = `aplikasi yang selalu menemani setiap kamu lapar, <br />
