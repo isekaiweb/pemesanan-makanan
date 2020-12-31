@@ -140,7 +140,9 @@ document.querySelectorAll(".tombol").forEach((btn) => {
 });
 
 window.addEventListener("load", () => {
-  browserExternal(); //penambahan tombol eksternal browser
+  //penambahan tombol eksternal browser
+  browserExternal();
+
   // fungsi untuk penambahan quantity
   document.querySelectorAll(".tombol-tambah").forEach((e) =>
     e.addEventListener("click", function () {
@@ -508,19 +510,20 @@ bill.children[3].addEventListener("click", () => {
         liff
           .sendMessages([
             {
-              type: "text",
-              text: "Hello, World!",
+              type: "image",
+              originalContentUrl: imgViewBill.src,
+              previewImageUrl: imgViewBill.src,
             },
           ])
           .then(() => {
-            console.log("message sent");
+            liff.closeWindow();
           })
           .catch((err) => {
             console.log("error", err);
           });
       }
     });
-  }, 700);
+  }, 1000);
 
   function setNotifikasi(notif) {
     mainPage.parentElement.insertAdjacentHTML(
