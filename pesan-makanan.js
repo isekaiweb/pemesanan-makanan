@@ -592,7 +592,7 @@ function templatePesan() {
       altText: "This is a buttons template",
       template: {
         type: "buttons",
-        thumbnailImageUrl: imgPesan.src,
+        thumbnailImageUrl: "imgPesan.src",
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#FFFFFF",
@@ -605,7 +605,7 @@ function templatePesan() {
         defaultAction: {
           type: "uri",
           label: "Lihat Bill",
-          uri: imgViewBill.src,
+          uri: "imgViewBill.src",
         },
         actions: [
           {
