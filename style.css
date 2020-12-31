@@ -182,6 +182,7 @@
   height: 15rem;
   width: 100%;
   background-color: #e7e8e9;
+  overflow: hidden;
 }
 
 #bg-profil > div > div {
@@ -711,9 +712,12 @@ input:focus,
   width: 100vw;
   height: 100vh;
 
-  backdrop-filter: blur(5px);
   animation: popup var(--cubic-500) forwards;
   transition: var(--cubic-500);
+}
+
+.blur-container {
+  backdrop-filter: blur(5px);
 }
 
 .notif {

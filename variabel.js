@@ -49,7 +49,8 @@ ok
 </button>`,
   },
   imgPesan = document.createElement("img"),
-  imgViewBill = document.createElement("img");
+  imgViewBill = document.createElement("img"),
+  bgProfil = document.querySelector("#bg-profil");
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
 containerFloatBtnPesanan.innerHTML = `<div class="container px-2">
@@ -98,4 +99,3 @@ bill.innerHTML = `
                                     Kirim Pesanan
                                   </button>
                               `;
-

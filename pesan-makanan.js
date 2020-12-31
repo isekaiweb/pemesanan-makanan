@@ -2,6 +2,23 @@ function setSatuan(data) {
   return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+//fungsi untuk mencek perangkat dibuka dimana
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+}
+
 document.querySelectorAll(".img-load").forEach((el, i) => {
   const img = document.createElement("img");
   img.classList = "img-fluid img-jenis";
@@ -18,15 +35,12 @@ document.querySelectorAll(".img-load").forEach((el, i) => {
 });
 
 (function loadBackground() {
-  const bg = document.querySelector("#bg-profil");
-
   const bgImg = new Image();
   bgImg.src =
     "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
   bgImg.onload = () => {
-    convertToImage(bg);
-    bg.children[0].remove();
-    bg.style.backgroundImage = "url(" + bgImg.src + ")";
+    bgProfil.children[0].remove();
+    bgProfil.style.backgroundImage = `url("${bgImg.src})`;
   };
 })();
 
@@ -170,23 +184,6 @@ window.addEventListener("load", () => {
 
 function changeDisplay(children) {
   Array.from(children).forEach((e) => e.classList.toggle("d-none"));
-}
-
-//fungsi untuk mencek perangkat dibuka dimana
-function detectMob() {
-  const toMatch = [
-    /Android/i,
-    /webOS/i,
-    /iPhone/i,
-    /iPad/i,
-    /iPod/i,
-    /BlackBerry/i,
-    /Windows Phone/i,
-  ];
-
-  return toMatch.some((toMatchItem) => {
-    return navigator.userAgent.match(toMatchItem);
-  });
 }
 
 function disableScroll() {
@@ -485,41 +482,45 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 // fungsi kirim pesanan
 bill.children[3].addEventListener("click", () => {
   setTimeout(() => {
-    imageBill();
+    convertToImage(bill, imgViewBill);
   }, 0);
   setTimeout(() => {
-    scrollY;
     disableScroll();
     if (liff.getLineVersion()) {
       setNotifikasi(alertSuccess);
     } else {
       setNotifikasi(alertFailed);
     }
-    document
-      .querySelector(".container-notif")
-      .addEventListener("click", function (e) {
-        if (
-          e.target == this ||
-          e.target.textContent.trim().toLowerCase() == "ok"
-        ) {
-          this.style.opacity = "0";
-          setTimeout(() => {
-            this.remove();
-            enableScroll();
-          }, 500);
-        } else if (e.target.textContent.trim().toLowerCase() == "lanjut") {
-          alert("siap");
-          liif
-            .sendMessages({
+    const containerNotif = document.querySelector(".container-notif");
+    containerNotif.classList.add("blur-container");
+    containerNotif.addEventListener("click", function (e) {
+      if (
+        e.target == this ||
+        e.target.textContent.trim().toLowerCase() == "ok"
+      ) {
+        this.classList.remove("blur-container");
+        this.style.opacity = "0";
+        setTimeout(() => {
+          this.remove();
+          enableScroll();
+        }, 500);
+      } else if (e.target.textContent.trim().toLowerCase() == "lanjut") {
+        liff
+          .sendMessages([
+            {
               type: "text",
               text: "Hello, World!",
-            })
-            .then(() => liff.closeWindow())
-            .catch((e) => alert(`waduh ada error nih ${e}`))
-            .finally(() => alert("siap juga"));
-        }
-      });
-  }, 610);
+            },
+          ])
+          .then(() => {
+            console.log("message sent");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      }
+    });
+  }, 700);
 
   function setNotifikasi(notif) {
     mainPage.parentElement.insertAdjacentHTML(
@@ -557,55 +558,49 @@ function browserExternal() {
       </svg>
     </button>`
     );
-
-    const btnExtendBrowser = document.querySelector("#tombol-browser");
-
-    window.onload = () => {
-      setTimeout(() => {
-        btnExtendBrowser.style.right = "-3em";
-      }, 500);
-    };
-
-    let sr = 0,
-      mvr = 0;
-    btnExtendBrowser.addEventListener("touchstart", function (onstart) {
-      sr = onstart.touches[0].pageX;
-      this.addEventListener("touchmove", (onmove) => {
-        mvr = onmove.touches[0].pageX;
-      });
-    });
-
-    btnExtendBrowser.addEventListener("touchend", function () {
-      if (mvr == 0) {
-        if (this.style.right != "0.5em") {
-          this.style.right = "0.5em";
-        } else {
-          liff.openWindow({
-            url: "https://makan-dikita.herokuapp.com/",
-            external: true,
-          });
-        }
-      } else {
-        if (sr < mvr) {
-          this.style.right = "-3em";
-          sr = 0;
-          mvr = 0;
-        }
-      }
-    });
+    eventSwipeTombolExtendBrowser();
   }
+}
+function eventSwipeTombolExtendBrowser() {
+  const btnExtendBrowser = document.querySelector("#tombol-browser");
+
+  setTimeout(() => {
+    btnExtendBrowser.style.right = "-3em";
+  }, 1000);
+
+  let sr = 0,
+    mvr = 0;
+  btnExtendBrowser.addEventListener("touchstart", function (onstart) {
+    sr = onstart.touches[0].pageX;
+    this.addEventListener("touchmove", (onmove) => {
+      mvr = onmove.touches[0].pageX;
+    });
+  });
+
+  btnExtendBrowser.addEventListener("touchend", function () {
+    if (mvr == 0) {
+      if (this.style.right != "0.5em") {
+        this.style.right = "0.5em";
+      } else {
+        liff.openWindow({
+          url: "https://makan-dikita.herokuapp.com/",
+          external: true,
+        });
+      }
+    } else {
+      if (sr < mvr) {
+        this.style.right = "-3em";
+        sr = 0;
+        mvr = 0;
+      }
+    }
+  });
 }
 
 function templatePesan() {}
 
-function imageBill() {
-  domtoimage.toJpeg(bill, { quality: 0.95 }).then((dataUrl) => {
-    imgViewBill.src = dataUrl;
-  });
-}
-
-function convertToImage(data) {
-  domtoimage.toPng(data).then((dataUrl) => {
-    imgPesan.src = dataUrl;
+function convertToImage(src, img) {
+  domtoimage.toJpeg(src, { quality: 0.95 }).then((dataUrl) => {
+    img.src = dataUrl;
   });
 }
