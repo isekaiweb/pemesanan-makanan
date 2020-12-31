@@ -572,40 +572,43 @@ function browserExternal() {
 }
 
 function templatePesan(src) {
-  liif.sendMessages({
-    type: "template",
-    altText: "This is a buttons template",
-    template: {
-      type: "buttons",
-      thumbnailImageUrl: `${src}`,
-      imageAspectRatio: "rectangle",
-      imageSize: "cover",
-      imageBackgroundColor: "#FFFFFF",
-      title: "Pemesanan",
-      text: `Hi, ${
-        document.querySelector("#nama-profil").textContent
-      } total pembayaran kamu sebesar Rp ${
-        document.querySelector("#grand-total").children[1].textContent
-      }`,
-      defaultAction: {
-        type: "uri",
-        label: "Lihat Bill",
-        uri: imageBill(),
+  liif
+    .sendMessages({
+      type: "template",
+      altText: "This is a buttons template",
+      template: {
+        type: "buttons",
+        thumbnailImageUrl: `${src}`,
+        imageAspectRatio: "rectangle",
+        imageSize: "cover",
+        imageBackgroundColor: "#FFFFFF",
+        title: "Pemesanan",
+        text: `Hi, ${
+          document.querySelector("#nama-profil").textContent
+        } total pembayaran kamu sebesar Rp ${
+          document.querySelector("#grand-total").children[1].textContent
+        }`,
+        defaultAction: {
+          type: "uri",
+          label: "Lihat Bill",
+          uri: imageBill(),
+        },
+        actions: [
+          {
+            type: "postback",
+            label: "Pesan Sekarang",
+            data: "action=buy&itemid=123",
+          },
+          {
+            type: "postback",
+            label: "Pesan Ulang",
+            uri: "https://makan-dikita.herokuapp.com/",
+          },
+        ],
       },
-      actions: [
-        {
-          type: "postback",
-          label: "Pesan Sekarang",
-          data: "action=buy&itemid=123",
-        },
-        {
-          type: "postback",
-          label: "Pesan Ulang",
-          uri: "https://makan-dikita.herokuapp.com/",
-        },
-      ],
-    },
-  });
+    })
+    .then(() => liff.closeWindow())
+    .catch((e) => alert(`waduh ada error nih ${e}`));
 }
 
 function imageBill() {
