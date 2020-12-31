@@ -606,6 +606,6 @@ function convertToImage(src, img) {
   domtoimage.toJpeg(src, { quality: 0.95 }).then((dataUrl) => {
     fetch(dataUrl)
       .then((res) => res.blob())
-      .then((res) => (img.src = URL.createObjectURL(res)));
+      .then((res) => console.log(URL.createObjectURL(res)));
   });
 }
