@@ -508,6 +508,7 @@ bill.children[3].addEventListener("click", () => {
             enableScroll();
           }, 500);
         } else if (e.target.textContent.trim().toLowerCase() == "lanjut") {
+          alert("siap");
           templatePesan();
         }
       });
@@ -588,38 +589,8 @@ function browserExternal() {
 function templatePesan() {
   liif
     .sendMessages({
-      type: "template",
-      altText: "This is a buttons template",
-      template: {
-        type: "buttons",
-        thumbnailImageUrl: "imgPesan.src",
-        imageAspectRatio: "rectangle",
-        imageSize: "cover",
-        imageBackgroundColor: "#FFFFFF",
-        title: "Pemesanan",
-        text: `Hi, ${
-          document.querySelector("#nama-profil").textContent
-        } total pembayaran kamu sebesar Rp ${
-          document.querySelector("#grand-total").children[1].textContent
-        }`,
-        defaultAction: {
-          type: "uri",
-          label: "Lihat Bill",
-          uri: "imgViewBill.src",
-        },
-        actions: [
-          {
-            type: "postback",
-            label: "Pesan Sekarang",
-            data: "action=buy&itemid=123",
-          },
-          {
-            type: "postback",
-            label: "Pesan Ulang",
-            uri: "https://makan-dikita.herokuapp.com/",
-          },
-        ],
-      },
+      type: "text",
+      text: "Hello, World!",
     })
     .then(() => liff.closeWindow())
     .catch((e) => alert(`waduh ada error nih ${e}`));
