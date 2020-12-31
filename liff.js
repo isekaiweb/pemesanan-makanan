@@ -21,7 +21,6 @@ function mulaiAPP() {
         changeChild(section[0], section[1], section[2]);
         getDataUser(profil);
         alertb4(liff.getOS());
-        convertToImage();
       })
       .catch((err) => {
         console.error("error", err);

@@ -559,9 +559,12 @@ function browserExternal() {
     );
 
     const btnExtendBrowser = document.querySelector("#tombol-browser");
-    setTimeout(() => {
-      btnExtendBrowser.style.right = "-3em";
-    }, 500);
+
+    window.onload = () => {
+      setTimeout(() => {
+        btnExtendBrowser.style.right = "-3em";
+      }, 500);
+    };
 
     let sr = 0,
       mvr = 0;
