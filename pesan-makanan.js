@@ -511,8 +511,8 @@ bill.children[3].addEventListener("click", () => {
           .sendMessages([
             {
               type: "image",
-              originalContentUrl: imgViewBill.src,
-              previewImageUrl: imgViewBill.src,
+              originalContentUrl: `${imgViewBill.src}`,
+              previewImageUrl: `${imgViewBill.src}`,
             },
           ])
           .then(() => {
