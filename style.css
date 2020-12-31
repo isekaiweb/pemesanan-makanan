@@ -150,13 +150,22 @@
   position: fixed;
   bottom: 3em;
   color: var(--light);
-  right: 0.5em;
   cursor: pointer;
   background: var(--success);
-  border-radius: 100%;
+  border-radius: 50%;
   border: none;
   padding: 0;
   transition: var(--cubic-500);
+  animation: swipe var(--cubic-500);
+}
+
+@keyframes swipe {
+  0% {
+    right: 0.5em;
+  }
+  100% {
+    right: -2.5em;
+  }
 }
 
 #tombol-browser svg {
