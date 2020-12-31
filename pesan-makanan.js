@@ -24,6 +24,7 @@ document.querySelectorAll(".img-load").forEach((el, i) => {
   bgImg.src =
     "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
   bgImg.onload = () => {
+    convertToImage(bg);
     bg.children[0].remove();
     bg.style.backgroundImage = "url(" + bgImg.src + ")";
   };
@@ -210,7 +211,7 @@ function enableScroll() {
     };
   }
 }
-
+// fungsi open modal
 function openModal() {
   disableScroll();
   modal.children[0].classList.remove("d-none");
@@ -230,6 +231,7 @@ function openModal() {
   }, 700);
 }
 
+// fungsi close modal
 function closeModal() {
   boxThis = undefined;
   if (modal.children[0].children[0].classList.contains("close-now")) {
@@ -332,9 +334,9 @@ modal.children[0].querySelector("button").addEventListener("click", () => {
   }
 });
 
-// fungsi bagian modal
 const mainModal = modal.children[0].children[0];
 
+// fungsi click float btn pesanan
 floatBtnPesanan.addEventListener("click", () => {
   clearTimeout(timeOutModal);
   floatBtnPesanan.style.transform = "translateY(-0.8em)";
@@ -425,7 +427,7 @@ window.addEventListener(
   () => {
     if (body.querySelector("#float-btn-pesanan") != null) {
       if (timer !== null) {
-        containerFloatBtnPesanan.style.bottom = "-7rem";
+        containerFloatBtnPesanan.style.bottom = "-7.2em";
         clearTimeout(timer);
       }
 
@@ -437,12 +439,13 @@ window.addEventListener(
   false
 );
 
+//buat element float btn
 function tambahkanFloatBtnPesanan() {
   if (body.querySelector("#float-btn-pesanan") == null && floatBtnExist) {
     document
       .querySelector("body .container")
       .insertAdjacentElement("afterend", containerFloatBtnPesanan);
-    containerFloatBtnPesanan.style.bottom = "-7rem";
+    containerFloatBtnPesanan.style.bottom = "-7.2em";
 
     setTimeout(() => {
       if (
@@ -456,11 +459,12 @@ function tambahkanFloatBtnPesanan() {
   }
 }
 
+// hapus element float btn
 function removeFloatBtnPesanan(timeout = 500) {
   if (document.querySelector("#tombol-browser") != null) {
     document.querySelector("#tombol-browser").style.bottom = "3em";
   }
-  containerFloatBtnPesanan.style.bottom = "-7rem";
+  containerFloatBtnPesanan.style.bottom = "-7.2em";
   setTimeout(() => {
     containerFloatBtnPesanan.remove();
   }, timeout);
@@ -478,7 +482,11 @@ document.querySelector("#icon-power").addEventListener("click", () => {
   }
 });
 
+// fungsi kirim pesanan
 bill.children[3].addEventListener("click", () => {
+  setTimeout(() => {
+    imageBill();
+  }, 0);
   setTimeout(() => {
     scrollY;
     disableScroll();
@@ -499,7 +507,9 @@ bill.children[3].addEventListener("click", () => {
             this.remove();
             enableScroll();
           }, 500);
-        } else if (e.target.textContent.trim().toLowerCase() == "lanjut") convertToImage();
+        } else if (e.target.textContent.trim().toLowerCase() == "lanjut") {
+          templatePesan();
+        }
       });
   }, 610);
 
@@ -541,48 +551,48 @@ function browserExternal() {
     );
 
     const btnExtendBrowser = document.querySelector("#tombol-browser");
-    btnExtendBrowser.style.right = "-2.5em";
-    btnExtendBrowser.addEventListener("touch", function () {
-      if (this.style.right == "0.5em") {
-        liff.openWindow({
-          url: "https://makan-dikita.herokuapp.com/",
-          external: true,
-        });
-      }
-    });
+    setTimeout(() => {
+      btnExtendBrowser.style.right = "-3em";
+    }, 500);
 
     let sr = 0,
       mvr = 0;
     btnExtendBrowser.addEventListener("touchstart", function (onstart) {
-      if (this.style.right != "0.5em") {
-        this.style.right = "0.5em";
+      sr = onstart.touches[0].pageX;
+      this.addEventListener("touchmove", (onmove) => {
+        mvr = onmove.touches[0].pageX;
+      });
+    });
+
+    btnExtendBrowser.addEventListener("touchend", function () {
+      if (mvr == 0) {
+        if (this.style.right != "0.5em") {
+          this.style.right = "0.5em";
+        } else {
+          liff.openWindow({
+            url: "https://makan-dikita.herokuapp.com/",
+            external: true,
+          });
+        }
       } else {
-        sr = onstart.touches[0].pageX;
-        this.addEventListener("touchmove", (onmove) => {
-          mvr = onmove.touches[0].pageX;
-          if (sr < mvr) {
-            this.style.right = "-2.5em";
-            sr = 0;
-            mvr = 0;
-          } else {
-            this.style.right = "0.5em";
-            sr = 0;
-            mvr = 0;
-          }
-        });
+        if (sr < mvr) {
+          this.style.right = "-3em";
+          sr = 0;
+          mvr = 0;
+        }
       }
     });
   }
 }
 
-function templatePesan(src) {
+function templatePesan() {
   liif
     .sendMessages({
       type: "template",
       altText: "This is a buttons template",
       template: {
         type: "buttons",
-        thumbnailImageUrl: `${src}`,
+        thumbnailImageUrl: imgPesan.src,
         imageAspectRatio: "rectangle",
         imageSize: "cover",
         imageBackgroundColor: "#FFFFFF",
@@ -595,7 +605,7 @@ function templatePesan(src) {
         defaultAction: {
           type: "uri",
           label: "Lihat Bill",
-          uri: imageBill(),
+          uri: imgViewBill.src,
         },
         actions: [
           {
@@ -616,9 +626,13 @@ function templatePesan(src) {
 }
 
 function imageBill() {
-  let url;
-  domtoimage.toJpeg(bill.children[2], { quality: 0.95 }).then((dataUrl) => {
-    url = dataUrl;
+  domtoimage.toJpeg(bill, { quality: 0.95 }).then((dataUrl) => {
+    imgViewBill.src = dataUrl;
   });
-  return url;
+}
+
+function convertToImage(data) {
+  domtoimage.toPng(data).then((dataUrl) => {
+    imgPesan.src = dataUrl;
+  });
 }

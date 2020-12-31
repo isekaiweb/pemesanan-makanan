@@ -47,7 +47,9 @@ Lanjut
     btn: `<button class="btn btn-danger text-uppercase font-weight-bold">
 ok
 </button>`,
-  };
+  },
+  imgPesan = document.createElement("img"),
+  imgViewBill = document.createElement("img");
 
 containerFloatBtnPesanan.setAttribute("id", "float-btn-pesanan");
 containerFloatBtnPesanan.innerHTML = `<div class="container px-2">
@@ -96,3 +98,4 @@ bill.innerHTML = `
                                     Kirim Pesanan
                                   </button>
                               `;
+

@@ -149,6 +149,7 @@
   font-size: 4vmin;
   position: fixed;
   bottom: 3em;
+  right: 0.5em;
   color: var(--light);
   cursor: pointer;
   background: var(--success);
@@ -156,21 +157,11 @@
   border: none;
   padding: 0;
   transition: var(--cubic-500);
-  animation: swipe var(--cubic-500);
-}
-
-@keyframes swipe {
-  0% {
-    right: 0.5em;
-  }
-  100% {
-    right: -2.5em;
-  }
 }
 
 #tombol-browser svg {
-  width: 3em;
-  padding: 0.8em;
+  width: 4em;
+  padding: 1em;
 }
 
 /* bagian profil */
@@ -291,6 +282,7 @@
   position: absolute;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
+  background: var(--light) !important;
   bottom: 0;
   margin: 0;
   height: 90%;
@@ -444,6 +436,7 @@
 
 #bill {
   position: absolute;
+  background: var(--light) !important;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   bottom: 0;
@@ -717,30 +710,30 @@ input:focus,
   z-index: 999999;
   width: 100vw;
   height: 100vh;
-  font-size: 2vmin;
+
+  backdrop-filter: blur(5px);
   animation: popup var(--cubic-500) forwards;
-  transition: ease-in-out 500ms;
+  transition: var(--cubic-500);
 }
 
 .notif {
   background-color: var(--light);
   margin: 0 auto;
-  width: 30em;
+  width: 35em;
 
   transform: translateY(25vh);
 
   border-radius: 10px;
   padding: 2em;
   display: block;
-  /* transition: var(--cubic-500); */
 }
 
 @keyframes popup {
   0% {
-    font-size: 2.1vmin;
+    font-size: 2.5vmin;
   }
   100% {
-    font-size: 2vmin;
+    font-size: 2.3vmin;
   }
 }
 
@@ -756,11 +749,11 @@ input:focus,
 .notif > p {
   margin: 1em 0 2em 0;
   text-align: center;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 .notif > button {
-  font-size: 1.5em;
+  font-size: 2em;
 
   bottom: 2em;
   width: 100%;

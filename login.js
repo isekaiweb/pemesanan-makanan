@@ -78,24 +78,3 @@ document.querySelector(".btn-masuk").addEventListener("click", () => {
   liff.login();
 });
 
-function convertToImage() {
-  const data = document.querySelector(".not-login > div");
-  data.children[0].children[2].innerHTML = `aplikasi yang selalu menemani setiap kamu lapar, <br />
-    yuk langsung aja pesan`;
-  data.children[0].children[3].classList.add("d-none");
-
-  domtoimage
-    .toPng(data)
-    .then((dataUrl) => {
-      // templatePesan(dataUrl);
-      alert(dataUrl);
-    })
-    .catch((error) => {
-      alert("oops, something went wrong!", error);
-    })
-    .finally(() => {
-      data.children[0].children[2].innerHTML = `aplikasi yang selalu menemani setiap kamu lapar, <br />
-        yuk masuk dulu sebelum mesan`;
-      data.children[0].children[3].classList.remove("d-none");
-    });
-}
