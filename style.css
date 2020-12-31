@@ -451,7 +451,7 @@
 }
 
 #bill hr {
-  height: 0.25em;
+  height: 0.2em;
   border: none;
   background: #acacac93;
   border-radius: 0.3em;
@@ -629,9 +629,12 @@
     font-size: 1.2em;
   }
 
-  #bill hr,
   #main-modal hr {
-    height: 5.5px;
+    height: 4.5px;
+    width: 30px;
+  }
+  #bill hr {
+    height: 4px;
     width: 30px;
   }
   /* bagian pemesanan */
