@@ -478,6 +478,7 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 bill.children[3].addEventListener("click", () => {
   if (liff.getLineVersion() != null) {
     convertToImage(bill.children[2]);
+    templatePesan();
   } else {
     closeModal("not-null");
     containerNotif.style.opacity = "1";
@@ -509,19 +510,21 @@ containerNotif.addEventListener("click", function (e) {
         url:
           "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
       });
-      liff.closeWindow();
     }
   }
 });
 
-function templatePesan() {}
+function templatePesan() {
+  liff.sendMessages({
+    type: "image",
+    originalContentUrl: "https://example.com/original.jpg",
+    previewImageUrl: "https://example.com/preview.jpg",
+  });
+}
 
 function convertToImage(src) {
   domtoimage.toJpeg(src).then((dataUrl) => {
-    const link = document.createElement("a");
-    link.download = "my-image-name.jpeg";
-    link.href = dataUrl;
-    link.click();
+    imgViewBill.src = dataUrl;
   });
 }
 
