@@ -460,23 +460,35 @@ floatBtnPesanan.addEventListener("click", () => {
     liff
       .sendMessages([
         {
-          type: "text",
-          text: "$ LINE emoji $",
-          emojis: [
-            {
-              index: 0,
-              productId: "5ac1bfd5040ab15980c9b435",
-              emojiId: "001",
-            },
-            {
-              index: 13,
-              productId: "5ac1bfd5040ab15980c9b435",
-              emojiId: "002",
-            },
-          ],
+          type: "sticker",
+          packageId: "11537",
+          stickerId: "51626494",
         },
       ])
-      .then(() => liff.closeWindow())
+      .then(() =>
+        liff
+          .sendMessages([
+            {
+              type: "text",
+              text: `
+                Hai, ${
+                  document.querySelector("#nama-profil").textContent
+                } terimakasi telah melakukan pemesanan
+                ${totalJmlhMakanan}
+                ${totalJmlhMinuman}
+                  
+                Total Harga Rp ${setSatuan(hargaMakanan + hargaMinuman)}`,
+              emojis: [
+                {
+                  index: 0,
+                  productId: "5ac1bfd5040ab15980c9b435",
+                  emojiId: "229",
+                },
+              ],
+            },
+          ])
+          .then(() => liff.closeWindow())
+      )
       .catch((er) => alert(`ada masalah nih : ${er}`));
   }
 });
