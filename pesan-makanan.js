@@ -505,16 +505,12 @@ containerNotif.addEventListener("click", function (e) {
     }, 500);
   } else if (e.target.classList.contains("btn")) {
     liff.logout();
-    setTimeout(() => {
-      liff.closeWindow();
-      setTimeout(() => {
-        liff.openWindow({
-          url:
-            "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
-          external: true,
-        });
-      }, 50);
-    }, 50);
+    liff.closeWindow();
+    liff.openWindow({
+      url:
+        "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
+      external: true,
+    });
   }
 });
 
