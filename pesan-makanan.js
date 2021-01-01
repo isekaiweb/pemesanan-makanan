@@ -494,19 +494,20 @@ bill.children[3].addEventListener("click", () => {
 
 containerNotif.addEventListener("click", function (e) {
   if (e.target == this || e.target.classList.contains("btn")) {
+    if (e.target.textContent.trim().toLowerCase() == "lanjut") {
+      templatePesan();
+      fetch(imgViewBill.src)
+        .then((x) => x.blob())
+        .then((sc) => URL.createObjectURL(sc))
+        .then((s) => downloadImage(s));
+    }
+
     enableScroll();
     this.style.opacity = "0";
     setTimeout(() => {
       this.classList.remove("blur-container");
       this.remove();
-      fetch(imgViewBill.src)
-        .then((x) => x.blob())
-        .then((sc) => URL.createObjectURL(sc))
-        .then((s) => downloadImage(s));
     }, 500);
-    if (e.target.textContent.trim().toLowerCase() == "lanjut") {
-      templatePesan();
-    }
   }
 });
 
