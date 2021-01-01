@@ -461,8 +461,8 @@ floatBtnPesanan.addEventListener("click", () => {
       .sendMessages([
         {
           type: "sticker",
-          packageId: "1",
-          stickerId: "1",
+          packageId: "11537",
+          stickerId: "51626494",
         },
       ])
       .catch((er) => alert(`ada masalah nih : ${er}`));
