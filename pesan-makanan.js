@@ -516,11 +516,13 @@ containerNotif.addEventListener("click", function (e) {
 
 function templatePesan() {
   liff
-    .sendMessages({
-      type: "image",
-      originalContentUrl: "https://example.com/original.jpg",
-      previewImageUrl: "https://example.com/preview.jpg",
-    })
+    .sendMessages([
+      {
+        type: "image",
+        originalContentUrl: "https://example.com/original.jpg",
+        previewImageUrl: "https://example.com/preview.jpg",
+      },
+    ])
     .then(() => liff.closeWindow())
     .catch((er) => alert(er));
 }
