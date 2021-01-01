@@ -519,8 +519,8 @@ function templatePesan() {
     .sendMessages([
       {
         type: "image",
-        originalContentUrl: "https://example.com/original.jpg",
-        previewImageUrl: "https://example.com/preview.jpg",
+        originalContentUrl: `${imgViewBill.src}/700`,
+        previewImageUrl: `${imgViewBill.src}/460`,
       },
     ])
     .then(() => liff.closeWindow())
