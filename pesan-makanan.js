@@ -1,3 +1,8 @@
+window.addEventListener("load", () => {
+  eventElementBtnQuantity();
+  eventBtnExtendBrowser();
+});
+
 function setSatuan(data) {
   return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
@@ -139,11 +144,7 @@ document.querySelectorAll(".tombol").forEach((btn) => {
   </button>`;
 });
 
-window.addEventListener("load", () => {
-  //penambahan tombol eksternal browser
-  browserExternal();
-
-  // fungsi untuk penambahan quantity
+function eventElementBtnQuantity() {
   document.querySelectorAll(".tombol-tambah").forEach((e) =>
     e.addEventListener("click", function () {
       changeDisplay(this.parentElement.children);
@@ -182,7 +183,7 @@ window.addEventListener("load", () => {
       );
     });
   });
-});
+}
 
 function changeDisplay(children) {
   Array.from(children).forEach((e) => e.classList.toggle("d-none"));
@@ -231,27 +232,28 @@ function openModal() {
 }
 
 // fungsi close modal
-function closeModal() {
+function closeModal(e = null) {
   boxThis = undefined;
-  if (modal.children[0].children[0].classList.contains("close-now")) {
-    modal.style.removeProperty("background");
-    modal.children[0].children[0].classList.remove("close-now");
-    modal.children[0].children[0].classList.add("modal-change-size");
 
-    setTimeout(() => {
-      modal.children[0].classList.add("d-none");
-      modal.classList.add("d-none");
-      modal.remove();
-    }, 500);
+  modal.style.removeProperty("background");
+  modal.children[0].children[0].classList.remove("close-now");
+  modal.children[0].children[0].classList.add("modal-change-size");
 
-    setTimeout(() => {
-      // cek modal
-      if (modal.querySelector("#bill") != null) {
-        modal.children[0].replaceChild(mainModal, bill);
-      }
+  setTimeout(() => {
+    modal.children[0].classList.add("d-none");
+    modal.classList.add("d-none");
+    modal.remove();
+  }, 500);
+
+  setTimeout(() => {
+    // cek modal
+    if (modal.querySelector("#bill") != null) {
+      modal.children[0].replaceChild(mainModal, bill);
+    }
+    if (e == null) {
       enableScroll();
-    }, 600);
-  }
+    }
+  }, 600);
 }
 
 modal.addEventListener("click", (e) => {
@@ -447,12 +449,7 @@ function tambahkanFloatBtnPesanan() {
     containerFloatBtnPesanan.style.bottom = "-7.2em";
 
     setTimeout(() => {
-      if (
-        document.querySelector("#tombol-browser") != null &&
-        document.querySelector(".container-notif") == null
-      ) {
-        document.querySelector("#tombol-browser").style.bottom = "5em";
-      }
+      btnExtendBrowser.style.bottom = "6em";
       containerFloatBtnPesanan.style.bottom = "0";
     }, 500);
   }
@@ -460,9 +457,8 @@ function tambahkanFloatBtnPesanan() {
 
 // hapus element float btn
 function removeFloatBtnPesanan(timeout = 500) {
-  if (document.querySelector("#tombol-browser") != null) {
-    document.querySelector("#tombol-browser").style.bottom = "3em";
-  }
+  btnExtendBrowser.style.bottom = "3em";
+
   containerFloatBtnPesanan.style.bottom = "-7.2em";
   setTimeout(() => {
     containerFloatBtnPesanan.remove();
@@ -470,12 +466,9 @@ function removeFloatBtnPesanan(timeout = 500) {
 }
 
 document.querySelector("#icon-power").addEventListener("click", () => {
-  if (!liff.isInClient() && liff.getLineVersion() == null) {
+  if (!liff.isInClient()) {
     liff.logout();
     window.location.reload();
-  } else if (!liff.isInClient() && liff.getLineVersion() != null) {
-    liff.logout();
-    liff.closeWindow();
   } else {
     liff.closeWindow();
   }
@@ -483,127 +476,78 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 
 // fungsi kirim pesanan
 bill.children[3].addEventListener("click", () => {
+  closeModal("not-null");
+  containerNotif.style.opacity = "1";
   setTimeout(() => {
-    convertToImage(bill, imgViewBill);
-  }, 0);
-  setTimeout(() => {
-    disableScroll();
     if (liff.getLineVersion()) {
-      setNotifikasi(alertSuccess);
+      notif.innerHTML =
+        alertSuccess.icon + alertSuccess.pesan + alertSuccess.btn;
     } else {
-      setNotifikasi(alertFailed);
+      notif.innerHTML = alertFailed.icon + alertFailed.pesan + alertFailed.btn;
     }
-    const containerNotif = document.querySelector(".container-notif");
+    mainPage.parentElement.insertAdjacentElement("afterbegin", containerNotif);
     containerNotif.classList.add("blur-container");
-    containerNotif.addEventListener("click", function (e) {
-      if (
-        e.target == this ||
-        e.target.textContent.trim().toLowerCase() == "ok"
-      ) {
-        this.classList.remove("blur-container");
-        this.style.opacity = "0";
-        setTimeout(() => {
-          this.remove();
-          enableScroll();
-        }, 500);
-      } else if (e.target.textContent.trim().toLowerCase() == "lanjut") {
-        liff
-          .sendMessages([
-            {
-              type: "image",
-              originalContentUrl: "https://example.com/original.jpg",
-              previewImageUrl: "https://example.com/preview.jpg",
-            },
-          ])
-          .then(() => {
-            liff.closeWindow();
-          })
-          .catch((err) => {
-            alert(err);
-          });
-      }
-    });
-  }, 1000);
-
-  function setNotifikasi(notif) {
-    mainPage.parentElement.insertAdjacentHTML(
-      "afterbegin",
-      `<div class="container-notif">
-    <div class="notif">  
-       ${notif.icon}
-       ${notif.pesan}
-       ${notif.btn}
-   </div>
-  </div>`
-    );
-  }
+    disableScroll();
+  }, 700);
 });
 
-function browserExternal() {
-  if (liff.getOS() != "web" && liff.getLineVersion() != null) {
-    mainPage.insertAdjacentHTML(
-      "beforeend",
-      `<button id="tombol-browser">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 16 16"
-      >
-        <title>Open in Browser</title>
-        <path
-          fill-rule="evenodd"
-          d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"
-        />
-        <path
-          fill-rule="evenodd"
-          d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"
-        />
-      </svg>
-    </button>`
-    );
-    eventSwipeTombolExtendBrowser();
+containerNotif.addEventListener("click", function (e) {
+  if (e.target == this || e.target.classList.contains("btn")) {
+    enableScroll();
+    this.style.opacity = "0";
+    setTimeout(() => {
+      this.classList.remove("blur-container");
+      this.remove();
+    }, 500);
   }
-}
-function eventSwipeTombolExtendBrowser() {
-  const btnExtendBrowser = document.querySelector("#tombol-browser");
-
-  setTimeout(() => {
-    btnExtendBrowser.style.right = "-3em";
-  }, 1000);
-
-  let sr = 0,
-    mvr = 0;
-  btnExtendBrowser.addEventListener("touchstart", function (onstart) {
-    sr = onstart.touches[0].pageX;
-    this.addEventListener("touchmove", (onmove) => {
-      mvr = onmove.touches[0].pageX;
-    });
-  });
-
-  btnExtendBrowser.addEventListener("touchend", function () {
-    if (mvr == 0) {
-      if (this.style.right != "0.5em") {
-        this.style.right = "0.5em";
-      } else {
-        liff.openWindow({
-          url: "https://makan-dikita.herokuapp.com/",
-          external: true,
-        });
-      }
-    } else {
-      if (sr < mvr) {
-        this.style.right = "-3em";
-        sr = 0;
-        mvr = 0;
-      }
-    }
-  });
-}
+});
 
 function templatePesan() {}
 
 function convertToImage(src, img) {
-  domtoimage.toJpeg(src, { quality: 0.95 }).then((dataUrl) => {
+  domtoimage.toJpeg(src).then((dataUrl) => {
     img.src = dataUrl;
   });
+
+  domtoimage.toBlob(src).then((blob) => {
+    window.saveAs(blob, "my-node.png");
+  });
+}
+
+function eventBtnExtendBrowser() {
+  if (liff.getOS() != "web" && liff.getLineVersion() != null) {
+    mainPage.appendChild(btnExtendBrowser);
+
+    setTimeout(() => {
+      btnExtendBrowser.style.right = "-3.5em";
+    }, 1000);
+
+    let sr = 0,
+      mvr = 0;
+    btnExtendBrowser.addEventListener("touchstart", function (onstart) {
+      sr = onstart.touches[0].pageX;
+      this.addEventListener("touchmove", (onmove) => {
+        mvr = onmove.touches[0].pageX;
+      });
+    });
+
+    btnExtendBrowser.addEventListener("touchend", function () {
+      if (mvr == 0) {
+        if (this.style.right != "0.5em") {
+          this.style.right = "0.5em";
+        } else {
+          liff.openWindow({
+            url: liff.permanentLink.createUrl(),
+            external: true,
+          });
+        }
+      } else {
+        if (sr < mvr) {
+          this.style.right = "-3.5em";
+          sr = 0;
+          mvr = 0;
+        }
+      }
+    });
+  }
 }
