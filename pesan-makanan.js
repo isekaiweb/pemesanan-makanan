@@ -345,8 +345,7 @@ floatBtnPesanan.addEventListener("click", () => {
     hargaMinuman = 0,
     makanan = "",
     minuman = "",
-    totalJmlhMakanan = 0,
-    totalJmlhMinuman = 0;
+    isiPesan = "";
 
   clearTimeout(timeOutModal);
   floatBtnPesanan.style.transform = "translateY(-0.8em)";
@@ -355,6 +354,7 @@ floatBtnPesanan.addEventListener("click", () => {
     if (modal.querySelector("#bill") == null) {
       pesanan.forEach((menu) => {
         if (menu.qyt > 0) {
+          isiPesan += `- ${menu.nama} ${menu.qyt}\n`;
           if (menu.jenis.toLowerCase() == "makanan") {
             hargaMakanan += menu.harga * menu.qyt;
             elMakanan += buatElementMakanan(menu);
@@ -363,7 +363,6 @@ floatBtnPesanan.addEventListener("click", () => {
               elMakanan,
               setSatuan(hargaMakanan)
             );
-            totalJmlhMakanan += menu.qyt;
           } else {
             hargaMinuman += menu.harga * menu.qyt;
             elMinuman += buatElementMakanan(menu);
@@ -372,7 +371,6 @@ floatBtnPesanan.addEventListener("click", () => {
               elMinuman,
               setSatuan(hargaMinuman)
             );
-            totalJmlhMinuman += menu.qyt;
           }
         }
       });
@@ -410,6 +408,7 @@ floatBtnPesanan.addEventListener("click", () => {
 
   // fungsi kirim pesanan
   bill.children[3].addEventListener("click", () => {
+    console.log(isiPesan);
     if (liff.getLineVersion() != null) {
       try {
         templatePesan();
@@ -452,23 +451,16 @@ floatBtnPesanan.addEventListener("click", () => {
   });
 
   function templatePesan() {
-    alert("jalankan pesan");
-    totalJmlhMakanan =
-      totalJmlhMakanan > 0 ? `${parseInt(totalJmlhMakanan)} Makanan` : "";
-    totalJmlhMinuman =
-      totalJmlhMinuman > 0 ? `${parseInt(totalJmlhMinuman)} Minuman` : "";
     liff
       .sendMessages([
         {
           type: "text",
-          text: `Hai Dikita, Saya ${
+          text: `0x100031 Hai Dikita, Saya ${
             document.querySelector("#nama-profil").textContent
-          } Mau Pesan`,
-          sender: {
-            name: "Cony",
-          },
+          } Mau Pesan\n${isiPesan}`,
         },
       ])
+      .then(() => liff.closeWindow())
       .catch((er) => alert(`ada masalah nih : ${er}`));
   }
 });
