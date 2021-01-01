@@ -496,18 +496,21 @@ bill.children[3].addEventListener("click", () => {
 });
 
 containerNotif.addEventListener("click", function (e) {
-  if (e.target == this) {
+  if (e.target == this || e.target.classList.contains("btn")) {
+    if (e.target.classList.contains("btn")) {
+      liff.openWindow({
+        url:
+          "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
+      });
+      liff.closeWindow();
+      liff.logout();
+    }
     enableScroll();
     this.style.opacity = "0";
     setTimeout(() => {
       this.classList.remove("blur-container");
       this.remove();
     }, 500);
-  } else if (e.target.classList.contains("btn")) {
-    liff.openWindow({
-      url:
-        "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
-    });
   }
 });
 
