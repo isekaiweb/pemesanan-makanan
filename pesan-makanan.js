@@ -478,7 +478,6 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 bill.children[3].addEventListener("click", () => {
   if (liff.getLineVersion() != null) {
     convertToImage(bill.children[2]);
-    liff.closeWindow();
   } else {
     closeModal("not-null");
     containerNotif.style.opacity = "1";
@@ -492,7 +491,7 @@ bill.children[3].addEventListener("click", () => {
     setTimeout(() => {
       containerNotif.classList.add("blur-container");
       disableScroll();
-    }, 1000);
+    }, 800);
   }
 });
 
@@ -516,7 +515,7 @@ containerNotif.addEventListener("click", function (e) {
 function templatePesan() {}
 
 function convertToImage(src) {
-  domtoimage.toJpeg(src).then(function (dataUrl) {
+  domtoimage.toJpeg(src).then((dataUrl) => {
     const link = document.createElement("a");
     link.download = "my-image-name.jpeg";
     link.href = dataUrl;
