@@ -512,6 +512,7 @@ containerNotif.addEventListener("click", function (e) {
 
       liff.logout();
       window.location.reload();
+      liff.closeWindow();
     }
   }
 });
