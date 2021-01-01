@@ -408,7 +408,6 @@ floatBtnPesanan.addEventListener("click", () => {
 
   // fungsi kirim pesanan
   bill.children[3].addEventListener("click", () => {
-    console.log(isiPesan);
     if (liff.getLineVersion() != null) {
       try {
         templatePesan();
