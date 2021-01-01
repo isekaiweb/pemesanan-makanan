@@ -27,7 +27,7 @@ function mulaiAPP() {
         alertb4(liff.getOS());
       })
       .catch((err) => {
-        console.error("error", err);
+        alert("error", err);
       });
   } else {
     changeChild(section[0], section[2], section[1]);
