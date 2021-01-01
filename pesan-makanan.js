@@ -454,21 +454,20 @@ floatBtnPesanan.addEventListener("click", () => {
   function templatePesan() {
     alert("jalankan pesan");
     totalJmlhMakanan =
-      totalJmlhMakanan > 0 ? `${totalJmlhMakanan} Makanan` : "";
+      totalJmlhMakanan > 0 ? `${parseInt(totalJmlhMakanan)} Makanan` : "";
     totalJmlhMinuman =
-      totalJmlhMinuman > 0 ? `${totalJmlhMinuman} Minuman` : "";
+      totalJmlhMinuman > 0 ? `${parseInt(totalJmlhMinuman)} Minuman` : "";
     liff
       .sendMessages([
         {
           type: "text",
-          text: `$ Hai, ${document.querySelector("#nama-profil").textContent}
-        Kamu telah memesan :
-        ${totalJmlhMakanan}
-        ${totalJmlhMinuman}
-        
-        Total Harga yang harus dibayarkan = Rp ${setSatuan(
-          hargaMakanan + hargaMinuman
-        )}`,
+          text: `$Hai, ${
+            document.querySelector("#nama-profil").textContent
+          } terimakasi telah melakukan pemesanan
+                 ${totalJmlhMakanan}
+                 ${totalJmlhMinuman}
+                  
+                 Total Harga Rp ${setSatuan(hargaMakanan + hargaMinuman)}`,
           emojis: [
             {
               index: 0,
