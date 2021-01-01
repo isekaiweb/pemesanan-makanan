@@ -461,7 +461,7 @@ floatBtnPesanan.addEventListener("click", () => {
       .sendMessages([
         {
           type: "text",
-          text: `$ Hai, ${document.querySelector("nama-profil").textContent}
+          text: `$ Hai, ${document.querySelector("#nama-profil").textContent}
         Kamu telah memesan :
         ${totalJmlhMakanan}
         ${totalJmlhMinuman}
