@@ -476,54 +476,52 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 
 // fungsi kirim pesanan
 bill.children[3].addEventListener("click", () => {
-  convertToImage(bill.children[2], imgViewBill);
-  closeModal("not-null");
-  containerNotif.style.opacity = "1";
-  setTimeout(() => {
-    if (liff.getLineVersion()) {
-      notif.innerHTML =
-        alertSuccess.icon + alertSuccess.pesan + alertSuccess.btn;
-    } else {
-      notif.innerHTML = alertFailed.icon + alertFailed.pesan + alertFailed.btn;
-    }
-    mainPage.parentElement.insertAdjacentElement("afterbegin", containerNotif);
-    containerNotif.classList.add("blur-container");
-    disableScroll();
-  }, 700);
+  if (liff.getLineVersion() != null) {
+    convertToImage(bill.children[2]);
+    liff.closeWindow();
+  } else {
+    closeModal("not-null");
+    containerNotif.style.opacity = "1";
+    setTimeout(() => {
+      mainPage.parentElement.insertAdjacentElement(
+        "afterbegin",
+        containerNotif
+      );
+    }, 700);
+
+    setTimeout(() => {
+      containerNotif.classList.add("blur-container");
+      disableScroll();
+    }, 1000);
+  }
 });
 
 containerNotif.addEventListener("click", function (e) {
-  if (e.target == this || e.target.classList.contains("btn")) {
-    if (e.target.textContent.trim().toLowerCase() == "lanjut") {
-      templatePesan();
-      fetch(imgViewBill.src)
-        .then((x) => x.blob())
-        .then((sc) => URL.createObjectURL(sc))
-        .then((s) => downloadImage(s));
-    }
-
+  if (e.target == this) {
     enableScroll();
     this.style.opacity = "0";
     setTimeout(() => {
       this.classList.remove("blur-container");
       this.remove();
     }, 500);
+  } else if (e.target.classList.contains("btn")) {
+    liff.openWindow({
+      url:
+        "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
+      external: true,
+    });
   }
 });
 
 function templatePesan() {}
 
-function convertToImage(src, img) {
-  domtoimage.toJpeg(src).then((dataUrl) => {
-    img.src = dataUrl;
+function convertToImage(src) {
+  domtoimage.toJpeg(src).then(function (dataUrl) {
+    const link = document.createElement("a");
+    link.download = "my-image-name.jpeg";
+    link.href = dataUrl;
+    link.click();
   });
-}
-
-function downloadImage(url) {
-  const link = document.createElement("a");
-  link.href = url;
-  link.dowload = "bill.jpeg";
-  link.click();
 }
 
 function eventBtnExtendBrowser() {
@@ -532,7 +530,7 @@ function eventBtnExtendBrowser() {
 
     setTimeout(() => {
       btnExtendBrowser.style.right = "-3.5em";
-    }, 1000);
+    }, 2500);
 
     let sr = 0,
       mvr = 0;
