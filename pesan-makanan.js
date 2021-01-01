@@ -411,7 +411,11 @@ floatBtnPesanan.addEventListener("click", () => {
   // fungsi kirim pesanan
   bill.children[3].addEventListener("click", () => {
     if (liff.getLineVersion() != null) {
-      templatePesan();
+      try {
+        templatePesan();
+      } catch (er) {
+        alert(er);
+      }
     } else {
       closeModal("not-null");
       containerNotif.style.opacity = "1";
@@ -448,6 +452,7 @@ floatBtnPesanan.addEventListener("click", () => {
   });
 
   function templatePesan() {
+    alert("jalankan pesan");
     totalJmlhMakanan =
       totalJmlhMakanan > 0 ? `${totalJmlhMakanan} Makanan` : "";
     totalJmlhMinuman =
