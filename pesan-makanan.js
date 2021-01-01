@@ -460,9 +460,13 @@ floatBtnPesanan.addEventListener("click", () => {
     liff
       .sendMessages([
         {
-          type: "sticker",
-          packageId: "11537",
-          stickerId: "51626494",
+          type: "text",
+          text: `Hai Dikita, Saya ${
+            document.querySelector("#nama-profil").textContent
+          } Mau Pesan`,
+          sender: {
+            name: "Cony",
+          },
         },
       ])
       .catch((er) => alert(`ada masalah nih : ${er}`));
