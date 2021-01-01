@@ -486,12 +486,12 @@ bill.children[3].addEventListener("click", () => {
         "afterbegin",
         containerNotif
       );
-    }, 700);
 
-    setTimeout(() => {
-      containerNotif.classList.add("blur-container");
-      disableScroll();
-    }, 800);
+      setTimeout(() => {
+        containerNotif.classList.add("blur-container");
+        disableScroll();
+      }, 60);
+    }, 700);
   }
 });
 
@@ -509,6 +509,8 @@ containerNotif.addEventListener("click", function (e) {
         "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
       external: true,
     });
+    liff.logout();
+    liff.closeWindow();
   }
 });
 
