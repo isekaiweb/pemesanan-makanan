@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
         mulaiAPP();
       })
       .catch((err) => {
-        console.error(err);
+        alert(err);
       });
   } catch (er) {
     alert(er);
