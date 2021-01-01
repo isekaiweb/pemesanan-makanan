@@ -464,6 +464,7 @@
   overflow-y: scroll;
   scrollbar-width: none;
   height: 74%;
+  background-color: var(--light);
 }
 
 #bill > div::-webkit-scrollbar {

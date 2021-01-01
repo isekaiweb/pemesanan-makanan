@@ -476,6 +476,7 @@ document.querySelector("#icon-power").addEventListener("click", () => {
 
 // fungsi kirim pesanan
 bill.children[3].addEventListener("click", () => {
+  convertToImage(bill.children[2], imgViewBill);
   closeModal("not-null");
   containerNotif.style.opacity = "1";
   setTimeout(() => {
@@ -498,6 +499,10 @@ containerNotif.addEventListener("click", function (e) {
     setTimeout(() => {
       this.classList.remove("blur-container");
       this.remove();
+      fetch(imgViewBill.src)
+        .then((x) => x.blob())
+        .then((sc) => URL.createObjectURL(sc))
+        .then((s) => downloadImage(s));
     }, 500);
     if (e.target.textContent.trim().toLowerCase() == "lanjut") {
       templatePesan();
@@ -511,10 +516,13 @@ function convertToImage(src, img) {
   domtoimage.toJpeg(src).then((dataUrl) => {
     img.src = dataUrl;
   });
+}
 
-  domtoimage.toBlob(src).then((blob) => {
-    window.saveAs(blob, "my-node.png");
-  });
+function downloadImage(url) {
+  const link = document.createElement("a");
+  link.href = url;
+  link.dowload = "bill.jpeg";
+  link.click();
 }
 
 function eventBtnExtendBrowser() {
