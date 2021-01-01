@@ -339,17 +339,20 @@ const mainModal = modal.children[0].children[0];
 
 // fungsi click float btn pesanan
 floatBtnPesanan.addEventListener("click", () => {
+  let elMakanan = "",
+    hargaMakanan = 0,
+    elMinuman = "",
+    hargaMinuman = 0,
+    makanan = "",
+    minuman = "",
+    totalJmlhMakanan = 0,
+    totalJmlhMinuman = 0;
+
   clearTimeout(timeOutModal);
   floatBtnPesanan.style.transform = "translateY(-0.8em)";
   setTimeout(() => {
     floatBtnPesanan.style.removeProperty("transform");
     if (modal.querySelector("#bill") == null) {
-      let elMakanan = "",
-        hargaMakanan = 0,
-        elMinuman = "",
-        hargaMinuman = 0,
-        makanan = "",
-        minuman = "";
       pesanan.forEach((menu) => {
         if (menu.qyt > 0) {
           if (menu.jenis.toLowerCase() == "makanan") {
@@ -360,6 +363,7 @@ floatBtnPesanan.addEventListener("click", () => {
               elMakanan,
               setSatuan(hargaMakanan)
             );
+            totalJmlhMakanan += menu.qyt;
           } else {
             hargaMinuman += menu.harga * menu.qyt;
             elMinuman += buatElementMakanan(menu);
@@ -368,6 +372,7 @@ floatBtnPesanan.addEventListener("click", () => {
               elMinuman,
               setSatuan(hargaMinuman)
             );
+            totalJmlhMinuman += menu.qyt;
           }
         }
       });
@@ -401,6 +406,75 @@ floatBtnPesanan.addEventListener("click", () => {
               <span>${totalHarga}</span>
             </p>
           </div>`;
+  }
+
+  // fungsi kirim pesanan
+  bill.children[3].addEventListener("click", () => {
+    if (liff.getLineVersion() != null) {
+      templatePesan();
+    } else {
+      closeModal("not-null");
+      containerNotif.style.opacity = "1";
+      setTimeout(() => {
+        mainPage.parentElement.insertAdjacentElement(
+          "afterbegin",
+          containerNotif
+        );
+
+        setTimeout(() => {
+          containerNotif.classList.add("blur-container");
+          disableScroll();
+        }, 90);
+      }, 700);
+    }
+  });
+
+  containerNotif.addEventListener("click", function (e) {
+    if (e.target == this || e.target.classList.contains("btn")) {
+      enableScroll();
+      this.style.opacity = "0";
+      setTimeout(() => {
+        this.classList.remove("blur-container");
+        this.remove();
+      }, 500);
+
+      if (e.target.classList.contains("btn")) {
+        liff.openWindow({
+          url:
+            "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
+        });
+      }
+    }
+  });
+
+  function templatePesan() {
+    totalJmlhMakanan =
+      totalJmlhMakanan > 0 ? `${totalJmlhMakanan} Makanan` : "";
+    totalJmlhMinuman =
+      totalJmlhMinuman > 0 ? `${totalJmlhMinuman} Minuman` : "";
+    liff
+      .sendMessages([
+        {
+          type: "text",
+          text: `$ Hai, ${document.querySelector("nama-profil").textContent}
+        Kamu telah memesan :
+        ${totalJmlhMakanan}
+        ${totalJmlhMinuman}
+        
+        Total Harga yang harus dibayarkan = Rp ${setSatuan(
+          hargaMakanan + hargaMinuman
+        )}`,
+          emojis: [
+            {
+              index: 0,
+              productId: "5ac1bfd5040ab15980c9b435",
+              emojiId: "229",
+            },
+          ],
+        },
+      ])
+      .then(() => liff.closeWindow())
+      .catch((er) => alert(`ada masalah nih : ${er}`));
   }
 });
 
@@ -473,65 +547,6 @@ document.querySelector("#icon-power").addEventListener("click", () => {
     liff.closeWindow();
   }
 });
-
-// fungsi kirim pesanan
-bill.children[3].addEventListener("click", () => {
-  if (liff.getLineVersion() != null) {
-    convertToImage(bill.children[2]);
-    templatePesan();
-  } else {
-    closeModal("not-null");
-    containerNotif.style.opacity = "1";
-    setTimeout(() => {
-      mainPage.parentElement.insertAdjacentElement(
-        "afterbegin",
-        containerNotif
-      );
-
-      setTimeout(() => {
-        containerNotif.classList.add("blur-container");
-        disableScroll();
-      }, 90);
-    }, 700);
-  }
-});
-
-containerNotif.addEventListener("click", function (e) {
-  if (e.target == this || e.target.classList.contains("btn")) {
-    enableScroll();
-    this.style.opacity = "0";
-    setTimeout(() => {
-      this.classList.remove("blur-container");
-      this.remove();
-    }, 500);
-
-    if (e.target.classList.contains("btn")) {
-      liff.openWindow({
-        url:
-          "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
-      });
-    }
-  }
-});
-
-function templatePesan() {
-  liff
-    .sendMessages([
-      {
-        type: "image",
-        originalContentUrl: `${imgViewBill.src}/700`,
-        previewImageUrl: `${imgViewBill.src}/460`,
-      },
-    ])
-    .then(() => liff.closeWindow())
-    .catch((er) => alert(er));
-}
-
-function convertToImage(src) {
-  domtoimage.toJpeg(src).then((dataUrl) => {
-    imgViewBill.src = dataUrl;
-  });
-}
 
 function eventBtnExtendBrowser() {
   if (liff.getOS() != "web" && liff.getLineVersion() != null) {
