@@ -455,7 +455,7 @@ floatBtnPesanan.addEventListener("click", () => {
       .sendMessages([
         {
           type: "text",
-          text: `\uDBC0\uDC84 Hi Dikita, Saya ${[
+          text: `Hi Dikita, Saya ${[
             ...document.querySelector("#nama-profil").textContent,
           ]
             .slice(4)

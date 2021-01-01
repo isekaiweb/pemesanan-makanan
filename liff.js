@@ -1,15 +1,19 @@
 window.addEventListener("load", () => {
   const idLiff = "1655324717-zK2NJ5e3";
-  liff
-    .init({
-      liffId: idLiff,
-    })
-    .then(() => {
-      mulaiAPP();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  try {
+    liff
+      .init({
+        liffId: idLiff,
+      })
+      .then(() => {
+        mulaiAPP();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } catch (er) {
+    alert(er);
+  }
 });
 
 //cek apakah sudah login jika belum maka login
