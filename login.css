@@ -9,6 +9,7 @@ body {
   padding: 0;
   margin: 0;
   background-color: var(--black);
+  position: relative;
 }
 .not-login {
   position: relative;
@@ -126,10 +127,12 @@ body {
 /* footer */
 
 footer {
-  position: absolute;
   width: 100%;
+  transform: translateY(2vh);
+  position: absolute;
   margin-top: 2em;
   font-size: 2vmin;
+  border: 1px solid red;
 }
 
 footer p {

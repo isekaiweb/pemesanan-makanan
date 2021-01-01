@@ -509,10 +509,6 @@ containerNotif.addEventListener("click", function (e) {
         url:
           "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
       });
-
-      liff.logout();
-      window.location.reload();
-      liff.closeWindow();
     }
   }
 });
