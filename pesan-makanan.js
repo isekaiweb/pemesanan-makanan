@@ -499,6 +499,9 @@ containerNotif.addEventListener("click", function (e) {
       this.classList.remove("blur-container");
       this.remove();
     }, 500);
+    if (e.target.textContent.trim().toLowerCase() == "lanjut") {
+      templatePesan();
+    }
   }
 });
 
