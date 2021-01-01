@@ -490,7 +490,7 @@ bill.children[3].addEventListener("click", () => {
       setTimeout(() => {
         containerNotif.classList.add("blur-container");
         disableScroll();
-      }, 80);
+      }, 90);
     }, 700);
   }
 });
@@ -505,15 +505,16 @@ containerNotif.addEventListener("click", function (e) {
     }, 500);
   } else if (e.target.classList.contains("btn")) {
     liff.logout();
-    liff.closeWindow();
-
     setTimeout(() => {
-      liff.openWindow({
-        url:
-          "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
-        external: true,
-      });
-    },10);
+      liff.closeWindow();
+      setTimeout(() => {
+        liff.openWindow({
+          url:
+            "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
+          external: true,
+        });
+      }, 50);
+    }, 50);
   }
 });
 
