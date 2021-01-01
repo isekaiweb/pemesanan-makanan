@@ -504,13 +504,13 @@ containerNotif.addEventListener("click", function (e) {
       this.remove();
     }, 500);
   } else if (e.target.classList.contains("btn")) {
+    liff.logout();
+    liff.closeWindow();
     liff.openWindow({
       url:
         "https://line.me/R/oaMessage/@598xsauf/?https://liff.line.me/1655324717-zK2NJ5e3",
       external: true,
     });
-    liff.logout();
-    liff.closeWindow();
   }
 });
 
