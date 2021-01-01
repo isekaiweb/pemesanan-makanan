@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
       });
   } catch (er) {
     alert(`Terjadi kesalahan silahkan reload halaman ${er}`);
-    window.location.reload();
+    liff.closeWindow();
   }
 });
 
@@ -29,7 +29,7 @@ function mulaiAPP() {
       })
       .catch((er) => {
         alert(`Terjadi kesalahan silahkan reload halaman ${er}`);
-        window.location.reload();
+        liff.closeWindow()
       });
   } else {
     changeChild(section[0], section[2], section[1]);
