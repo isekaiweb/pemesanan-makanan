@@ -12,7 +12,8 @@ window.addEventListener("load", () => {
         alert(err);
       });
   } catch (er) {
-    alert(er);
+    alert(`Terjadi kesalahan silahkan reload halaman ${er}`);
+    window.location.reload();
   }
 });
 
@@ -26,8 +27,9 @@ function mulaiAPP() {
         getDataUser(profil);
         alertb4(liff.getOS());
       })
-      .catch((err) => {
-        alert("error", err);
+      .catch((er) => {
+        alert(`Terjadi kesalahan silahkan reload halaman ${er}`);
+        window.location.reload();
       });
   } else {
     changeChild(section[0], section[2], section[1]);
